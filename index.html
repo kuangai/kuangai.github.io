@@ -329,8 +329,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/java/" itemprop="url" rel="index">
-                    <span itemprop="name">java</span>
+                  <a href="/categories/redis/" itemprop="url" rel="index">
+                    <span itemprop="name">redis</span>
                   </a>
                 </span>
 
@@ -370,18 +370,17 @@
           
             <h4 id="简介："><a href="#简介：" class="headerlink" title="简介："></a>简介：</h4><blockquote>
 <pre><code>C语言编写、支持网络、可基于内存亦可持久化的日志型、key-value内存数据库，读写速度快， value数据类型丰富，string，hash，list，set及zset(sorted set)。redis 支持事务， 持久化， LUA脚本，LRU驱动事件，多种集群方案，也可用于分布式锁。</code></pre></blockquote>
-<h4 id="常用数据类型及操作"><a href="#常用数据类型及操作" class="headerlink" title="常用数据类型及操作"></a>常用数据类型及操作</h4><ul>
-<li>String    <blockquote>
+<h4 id="数据类型及操作"><a href="#数据类型及操作" class="headerlink" title="数据类型及操作"></a>数据类型及操作</h4><ul>
+<li><p>String    </p>
+<blockquote>
 <p>常用命令: set,get,decr,incr,mget，getset setex,setNx 等。<br>String数据结构是简单的key-value类型，value其实不仅可以是String，也可以是数字。    </p>
 </blockquote>
 </li>
-<li>Hash<blockquote>
+<li><p>Hash</p>
+<blockquote>
 <p>常用命令： hget,hset,hgetall 等。<br>hash 是一个 string 类型的 field 和 value 的映射表，hash 特别适合用于存储对象，后续操作的时候，你可以直接仅仅修改这个对象中的某个字段的值。 比如我们可以 hash 数据结构来存储用户信息，商品信息等等。比如下面我就用 hash 类型存放了我本人的一些信息：</p>
 </blockquote>
 </li>
-</ul>
-<p>key=JavaUser293847<br>value={<br>  “id”: 1,<br>  “name”: “SnailClimb”,<br>  “age”: 22,<br>  “location”: “Wuhan, Hubei”<br>}</p>
-<ul>
 <li><p>List</p>
 <blockquote>
 <p>常用命令: lpush,rpush,lpop,rpop,lrange等<br>list 就是链表，Redis list 的应用场景非常多，也是Redis最重要的数据结构之一，比如微博的关注列表，粉丝列表，消息列表等功能都可以用Redis的 list 结构来实现。<br>Redis list 的实现为一个双向链表，即可以支持反向查找和遍历，更方便操作，不过带来了部分额外的内存开销。<br>另外可以通过 lrange 命令，就是从某个元素开始读取多少个元素，可以基于 list 实现分页查询，这个很棒的一个功能，基于 redis 实现简单的高性能分页，可以做类似微博那种下拉不断分页的东西（一页一页的往下走），性能高。</p>
@@ -643,7 +642,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">2</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -654,7 +653,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">2</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
