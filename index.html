@@ -369,28 +369,15 @@
         
           
             <h2 id="Bloom-Filter布隆过滤器"><a href="#Bloom-Filter布隆过滤器" class="headerlink" title="Bloom Filter布隆过滤器"></a>Bloom Filter布隆过滤器</h2><p>是一种  <strong>概率型数据结构</strong> ，特点是<strong>高效地插入和查询</strong>，可以用来告诉你 “<strong>某样东西一定不存在或者可能存在</strong>”。</p>
-<ul>
-<li>实现原理</li>
-</ul>
-<p>创建一个bit数组，若干个hash函数。根据给定的值，使用多个不同的哈希函数生成多个哈希值，并对每个生成的哈希值指向的 bit 位置 置为 1。</p>
+<h4 id="实现原理"><a href="#实现原理" class="headerlink" title="实现原理"></a>实现原理</h4><p>创建一个bit数组，若干个hash函数。根据给定的值，使用多个不同的哈希函数生成多个哈希值，并对每个生成的哈希值指向的 bit 位置 置为 1。</p>
 <blockquote>
 <p> bit数组大小，hash函数个数选取  参考</p>
-<p>[<a href="https://zhuanlan.zhihu.com/p/43263751公式]" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/43263751公式]</a>: </p>
 </blockquote>
-<ul>
-<li>优点</li>
-</ul>
-<p>存储及查询速度快，占用空间小。</p>
-<ul>
-<li>缺点</li>
-</ul>
-<p>不支持删除，有一定概率误判（查询结果不一定准确）。</p>
-<ul>
-<li>使用场景</li>
-</ul>
-<p>可用于存储数据的全量集合，进行判断指定数据在全量集合中是否<strong>不存在</strong>或<strong>可能存在</strong></p>
+<h4 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h4><p>存储及查询速度快，占用空间小。</p>
+<h4 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h4><p>不支持删除，有一定概率误判（查询结果不一定准确）。</p>
+<h4 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h4><p>可用于存储数据的全量集合，进行判断指定数据在全量集合中是否<strong>不存在</strong>或<strong>可能存在</strong></p>
 <h2 id="Counting-Bloom-Filter"><a href="#Counting-Bloom-Filter" class="headerlink" title="Counting Bloom Filter"></a>Counting Bloom Filter</h2><p>将标准 Bloom Filter 位数组的每一位扩展为一个小的计数器（Counter），在插入元素时给对应的 k （k 为哈希函数个数）个 Counter 的值分别加 1，删除元素时给对应的 k 个 Counter 的值分别减 1。Counting Bloom Filter 通过多占用几倍的存储空间的代价， 给 Bloom Filter 增加了删除操作。</p>
-<p>参考文章：</p>
+<p>参考</p>
 <p><a href="https://www.jianshu.com/p/2104d11ee0a2" target="_blank" rel="noopener">https://www.jianshu.com/p/2104d11ee0a2</a></p>
 <p><a href="https://cloud.tencent.com/developer/article/1136056" target="_blank" rel="noopener">https://cloud.tencent.com/developer/article/1136056</a></p>
 
