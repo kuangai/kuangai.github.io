@@ -275,6 +275,399 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://kuangai.github.io/2020/04/17/%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8-%E4%B8%8E%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="wsc">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="study">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/04/17/%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8-%E4%B8%8E%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D/" itemprop="url">垃圾收集器 与内存分配</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-04-17T20:48:00+08:00">
+                2020-04-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/jvm/" itemprop="url" rel="index">
+                    <span itemprop="name">jvm</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="垃圾回收器与内存回收策略"><a href="#垃圾回收器与内存回收策略" class="headerlink" title="垃圾回收器与内存回收策略"></a>垃圾回收器与内存回收策略</h3><h4 id="对象已死？"><a href="#对象已死？" class="headerlink" title="对象已死？"></a>对象已死？</h4><ol>
+<li><p>引用计数算法</p>
+<blockquote>
+<p>给对象加一个计数器，引用一次计数器加1，引用失效时，计数器减1。任意时刻，计数器为0 的对象不再被使用。<strong>Java中没有使用此方式</strong>，此方式无法解决<strong>对象间相互循环引用</strong>的情况。</p>
+</blockquote>
+</li>
+<li><p>根搜索算法</p>
+<blockquote>
+<p>以GC roots 为根节点，向下搜索，搜所走过的路径成为引用链。当一个对象到GC roots没有人任何引用链相连（<strong>GC roots 导致个对象不可达</strong>），证明此对象是不可用的。</p>
+<p>Java中可作为GC roots的对象包括以下几种：</p>
+<ul>
+<li><p>虚拟机栈（栈帧中的本地变量表）中的而引用的对象</p>
+</li>
+<li><p>方法区中类静态属性引用的对象</p>
+</li>
+<li><p>方法区中常量引用的对象</p>
+</li>
+<li><p>本地方法栈中native方法引用的对象</p>
+</li>
+</ul>
+</blockquote>
+</li>
+<li><p>引用</p>
+<blockquote>
+<ul>
+<li><p>强引用</p>
+<p>类似 A a = new A（）；</p>
+<p>强引用还在，不会回收被引用的对象。</p>
+</li>
+<li><p>软引用</p>
+<p>还有用但非必须的对象。系统在发生内存溢出之前，会将这些对象列进回收范围，进行二次回收，</p>
+<p>回收完还是内存不足，才会抛出内存溢出异常。</p>
+<p>通过SoftReference关联软引用</p>
+</li>
+<li><p>弱引用</p>
+<p>被弱引用关联的对象只能生存到下一次垃圾收集之前。通过WeakReference关联软引用。</p>
+</li>
+<li><p>虚引用</p>
+<p>虚引用不影响垃圾收集，也不能通过虚引用获取对象。</p>
+<p>给对象设置虚引用关联唯一目的是希望对象被回收时收到一个系统通知。</p>
+</li>
+</ul>
+</blockquote>
+</li>
+<li><p>对象生死</p>
+<blockquote>
+<p>回收前至少经历<strong>两次标记</strong></p>
+<p>当对象与GC roots之间无引用链时，会比标记并<strong>筛选</strong>，筛选条件是是否需要执行finalize（）方法。</p>
+<p>当对象没有覆盖finalize()方法或者已经执行过一次后，不会执行。</p>
+<p>执行finalize（）方法后重新获得引用链后会在第二次进行标记时移除标记。</p>
+</blockquote>
+</li>
+<li><p>回收方法区</p>
+<blockquote>
+<ul>
+<li><p>废弃常量</p>
+<p>不存在引用的常量</p>
+</li>
+<li><p>无用的类</p>
+<p>所有实例已被回收</p>
+<p>加载该类的classloader已被回收</p>
+<p>该类对应的java.lang.Class对象没有在让你和地方被引用，无法在任何地方通过反射访问该类的方法。    </p>
+</li>
+</ul>
+</blockquote>
+</li>
+</ol>
+<h4 id="垃圾收集算法"><a href="#垃圾收集算法" class="headerlink" title="垃圾收集算法"></a>垃圾收集算法</h4><ol>
+<li>标记清楚算法</li>
+<li>复制算法</li>
+<li>标记整理</li>
+<li>分代收集</li>
+</ol>
+<h4 id="垃圾收集器"><a href="#垃圾收集器" class="headerlink" title="垃圾收集器"></a>垃圾收集器</h4><ol>
+<li><p>serial收集器</p>
+</li>
+<li><p>parnew收集器</p>
+</li>
+<li><p>parallel  scavenge收集器</p>
+</li>
+<li><p>serial  old 收集器</p>
+</li>
+<li><p>parallel old收集器</p>
+</li>
+<li><p>CMS 收集器</p>
+</li>
+<li><p>G1收集器</p>
+</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://kuangai.github.io/2020/04/16/jvm%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="wsc">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="study">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/04/16/jvm%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url">jvm内存模型学习笔记</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-04-16T21:45:00+08:00">
+                2020-04-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/jvm/" itemprop="url" rel="index">
+                    <span itemprop="name">jvm</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="运行时区域"><a href="#运行时区域" class="headerlink" title="运行时区域"></a>运行时区域</h2><h3 id="程序计数器"><a href="#程序计数器" class="headerlink" title="程序计数器"></a>程序计数器</h3><p>可以看作线程执行的字节码的行号指示器，记录执行的位置。字节码解释器通过改变计数器的值获取下一条要执行的指令。</p>
+<p>Java虚拟机多线程是通过线程切换并分配处理器执行时间的方式实现的。因此，为了使线程切换后恢复到正确的执行位置，每个线程需要一各程序计数器，记录执行位置，单独存储，互不影响。 </p>
+<p>执行java方法：计数器记录的是正在执行的虚拟机字节码指令的位置</p>
+<p>执行natvie方法：记录器为空（undefined）</p>
+<p>属于线程私有内存，占用空间较小，不会出现OOM</p>
+<h3 id="java虚拟机栈"><a href="#java虚拟机栈" class="headerlink" title="java虚拟机栈"></a>java虚拟机栈</h3><p>线程私有</p>
+<p>生命周期与线程与线程相同</p>
+<p>描述的是Java方法执行的内存模型，每个方法执行值会创建一个栈帧，用于存储  局部变量表，动态链接，方法出口，操作栈的等信息</p>
+<p>每个方法被调用到执行完成的过程对应一个栈帧在虚拟机栈中入栈和出战的过程。</p>
+<p>局部变量表存储编译期间可预知的基本数据类型（boolean,byte,short, int, char, float, long, double）,对象引用（不等同于对象本身，可能是指向对象起始地址的引用指针，或者指向一个代表对象句柄或者其他与此对象相关的地址），和returnAddress类型（指向了一条字节码指令的位置）。</p>
+<p>64位的long ，double类型的数据会占用两个局部变量的空间，其余数据类型只占用一个。</p>
+<p>局部变量表所分配的内存空间在编译期间完成分配，进入一个方法时，这个方法需要在帧中分配多大的内存空间是完全确定的。方法运行期间， 不会改变局部变量表的大小。</p>
+<p>线程请求的栈深度对于虚拟机所允许的深度时会出现栈溢出异常，如果虚拟机栈可以动态扩展，当扩展时无法申请到足够的内存时，会抛出OOM异常。</p>
+<h3 id="本地方法栈"><a href="#本地方法栈" class="headerlink" title="本地方法栈"></a>本地方法栈</h3><p>和虚拟机栈类似，也会抛出栈溢出和OOM异常 。是为虚拟机执行natvie方法服务的，虚拟机栈为执行Java方法服务。</p>
+<h3 id="Java堆"><a href="#Java堆" class="headerlink" title="Java堆"></a>Java堆</h3><p>虚拟机管理的内存中最大的一块</p>
+<p>被所有线程共享</p>
+<p>在虚拟机启动时创建</p>
+<p>用于存放对象实例</p>
+<p>垃圾回收器管理的主要区域</p>
+<p>从分代垃圾回收算法的角度可分为老年代，新生代等</p>
+<p>可处于物理上不连续的内存空间，可以时固定大小也可以是可扩展的（可扩展的通过-Xmx和-Xms空值）</p>
+<p>如果没有内存可供实例分配，也不能扩展时会抛出OOM</p>
+<h3 id="方法区"><a href="#方法区" class="headerlink" title="方法区"></a>方法区</h3><h3 id="运行是常量池"><a href="#运行是常量池" class="headerlink" title="运行是常量池"></a>运行是常量池</h3><h3 id="直接内存"><a href="#直接内存" class="headerlink" title="直接内存"></a>直接内存</h3>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://kuangai.github.io/2020/04/12/Mysql%E4%B8%BA%E4%BB%80%E4%B9%88%E7%94%A8B-s%E6%A0%91%E5%81%9A%E7%B4%A2%E5%BC%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -815,7 +1208,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-count">15</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -826,7 +1219,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -837,7 +1230,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>

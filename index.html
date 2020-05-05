@@ -275,6 +275,183 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://kuangai.github.io/2020/05/05/%E7%BC%93%E5%AD%98%E9%9B%AA%E5%B4%A9%EF%BC%8C%E7%BC%93%E5%AD%98%E7%A9%BF%E9%80%8F%EF%BC%8C%E7%BC%93%E5%AD%98%E5%87%BB%E7%A9%BF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="wsc">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="study">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/05/05/%E7%BC%93%E5%AD%98%E9%9B%AA%E5%B4%A9%EF%BC%8C%E7%BC%93%E5%AD%98%E7%A9%BF%E9%80%8F%EF%BC%8C%E7%BC%93%E5%AD%98%E5%87%BB%E7%A9%BF/" itemprop="url">缓存雪崩，缓存穿透，缓存击穿</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-05-05T09:20:00+08:00">
+                2020-05-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%BC%93%E5%AD%98/" itemprop="url" rel="index">
+                    <span itemprop="name">缓存</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="缓存穿透"><a href="#缓存穿透" class="headerlink" title="缓存穿透"></a>缓存穿透</h2><blockquote>
+<p>不断请求缓存和数据库中都不存在的数据。不断请求数据库，导致数据压力过大</p>
+</blockquote>
+<h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><ul>
+<li>布隆过滤器<br>将查询数据的全集存储到布隆过滤器中，请求之前执行过滤。</li>
+<li>cache null<br>查询数据库后发现没有对应数据，<strong>将空结果缓存</strong>，并设置过期时间（<strong>不能过长</strong>，以免影响正常数据），避免短时间内大量请求增加数据库压力。<br>大量空请求时浪费缓存资源</li>
+</ul>
+<h2 id="缓存击穿"><a href="#缓存击穿" class="headerlink" title="缓存击穿"></a>缓存击穿</h2><blockquote>
+<p>大量请求数据库中存在但缓存中不存在的某一热点数据（一般是缓存过期），不断请求数据库，导致数据压力过大</p>
+</blockquote>
+<h3 id="解决方案-1"><a href="#解决方案-1" class="headerlink" title="解决方案"></a>解决方案</h3><ul>
+<li>请求加锁</li>
+<li>缓存续期</li>
+<li>设置永不过期</li>
+</ul>
+<h2 id="缓存雪崩"><a href="#缓存雪崩" class="headerlink" title="缓存雪崩"></a>缓存雪崩</h2><blockquote>
+<p>同一时刻大量缓存失效，不断请求数据库，导致数据压力过大</p>
+</blockquote>
+<h3 id="解决方案-2"><a href="#解决方案-2" class="headerlink" title="解决方案"></a>解决方案</h3><ul>
+<li><p>请求加锁<br>在缓存失效后，通过加锁或者队列来控制读数据库写缓存的线程数量。比如对某个key只允许一个线程查询数据和写缓存，其他线程等待<br>关于加锁的几种方式可参考 <a href="https://www.cnblogs.com/dream-to-pku/p/9153999.html" target="_blank" rel="noopener">https://www.cnblogs.com/dream-to-pku/p/9153999.html</a></p>
+</li>
+<li><p>过期更新<br>缓存数据中保存过期时间，并将实际过期时间设置的更长。每次读取数据后检查是否过期，如果过期，则通知其他线程更新该缓存。当前请求返回旧数据给客户端，后续请求在缓存更新后返回正确的数据。</p>
+</li>
+<li><p>缓存预热<br>预先去更新缓存，在即将发生大并发访问前手动触发加载缓存</p>
+</li>
+<li><p>二级缓存<br>双缓存策略。A1为原始缓存，A2为拷贝缓存，A1失效时，可以访问A2，A1缓存失效时间设置为短期，A2设置为长期。</p>
+</li>
+<li><p>缓存续期<br>读缓存后，更新缓存过期时间，数据变更后，直接更新缓存。</p>
+</li>
+<li><p>定期更新缓存<br>缓存过期时间按设置为30分钟，每29分钟更新一次缓存</p>
+</li>
+<li><p>随即设置过期时间<br>缓存数据的过期时间设置随机，防止同一时间大量数据过期现象发生。</p>
+</li>
+<li><p>设置热点数据永远不过期</p>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://kuangai.github.io/2020/05/05/redis%E5%AE%9E%E7%8E%B0%E5%B8%83%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -382,6 +559,162 @@
 
 
 
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://kuangai.github.io/2020/05/04/%E5%B8%83%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="wsc">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="study">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/05/04/%E5%B8%83%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8/" itemprop="url">布隆过滤器</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-05-04T19:56:00+08:00">
+                2020-05-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index">
+                    <span itemprop="name">数据结构</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="Bloom-Filter布隆过滤器"><a href="#Bloom-Filter布隆过滤器" class="headerlink" title="Bloom Filter布隆过滤器"></a>Bloom Filter布隆过滤器</h2><p>是一种  <strong>概率型数据结构</strong> ，特点是<strong>高效地插入和查询</strong>，可以用来告诉你 “<strong>某样东西一定不存在或者可能存在</strong>”。</p>
+<h4 id="实现原理"><a href="#实现原理" class="headerlink" title="实现原理"></a>实现原理</h4><p>创建一个bit数组（就是数组的每个元素都只占用 1 bit 。每个元素只能是 0 或者 1），若干个hash函数。根据给定的值，使用多个不同的哈希函数生成多个哈希值，并对每个生成的哈希值指向的 bit 位置 置为 1。查询时同样使用多个hash函数计算后看对应的哈希值的位置是否全部是1，不是-不可能存在，是-可能存在。</p>
+<blockquote>
+<p> bit数组大小，hash函数个数选取  参考 <a href="https://zhuanlan.zhihu.com/p/43263751" target="_blank" rel="noopener">公式</a></p>
+</blockquote>
+<h4 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h4><p>存储及查询速度快，占用空间小。</p>
+<h4 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h4><p>不支持删除，有一定概率误判（查询结果不一定准确）。</p>
+<h4 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h4><p>可用于存储数据的全量集合，进行判断指定数据在全量集合中是否<strong>不存在</strong>或<strong>可能存在</strong>，如：<br>推荐系统去重<br>请求数据过滤<br>email地址过滤<br>解决缓存穿透的问题<br>爬虫url过滤</p>
+<h4 id="具体实现"><a href="#具体实现" class="headerlink" title="具体实现"></a>具体实现</h4><p>Guava中BloomFilter</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.example.study;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.google.common.hash.BloomFilter;</span><br><span class="line"><span class="keyword">import</span> com.google.common.hash.Funnels;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BloomFilterTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        BloomFilter&lt;Integer&gt; bloomFilter = BloomFilter.create(Funnels.integerFunnel(),<span class="number">1000000</span>,<span class="number">0.1</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">1000000</span>; i++) &#123;</span><br><span class="line">            bloomFilter.put(i);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">1010000</span>; i++)&#123;</span><br><span class="line">            <span class="keyword">if</span> (bloomFilter.mightContain(i)) &#123;</span><br><span class="line">                count++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(count);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Counting-Bloom-Filter"><a href="#Counting-Bloom-Filter" class="headerlink" title="Counting Bloom Filter"></a>Counting Bloom Filter</h2><p>将标准 Bloom Filter 位数组的每一位扩展为一个小的计数器（Counter），在插入元素时给对应的 k （k 为哈希函数个数）个 Counter 的值分别加 1，删除元素时给对应的 k 个 Counter 的值分别减 1。Counting Bloom Filter 通过多占用几倍的存储空间的代价， 给 Bloom Filter 增加了删除操作。</p>
+<p>参考</p>
+<p><a href="https://www.jianshu.com/p/2104d11ee0a2" target="_blank" rel="noopener">https://www.jianshu.com/p/2104d11ee0a2</a></p>
+<p><a href="https://cloud.tencent.com/developer/article/1136056" target="_blank" rel="noopener">https://cloud.tencent.com/developer/article/1136056</a></p>
 
           
         
@@ -1539,399 +1872,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://kuangai.github.io/2020/04/17/%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8-%E4%B8%8E%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="wsc">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="study">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/04/17/%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8-%E4%B8%8E%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D/" itemprop="url">垃圾收集器 与内存分配</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-04-17T20:48:00+08:00">
-                2020-04-17
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/jvm/" itemprop="url" rel="index">
-                    <span itemprop="name">jvm</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="垃圾回收器与内存回收策略"><a href="#垃圾回收器与内存回收策略" class="headerlink" title="垃圾回收器与内存回收策略"></a>垃圾回收器与内存回收策略</h3><h4 id="对象已死？"><a href="#对象已死？" class="headerlink" title="对象已死？"></a>对象已死？</h4><ol>
-<li><p>引用计数算法</p>
-<blockquote>
-<p>给对象加一个计数器，引用一次计数器加1，引用失效时，计数器减1。任意时刻，计数器为0 的对象不再被使用。<strong>Java中没有使用此方式</strong>，此方式无法解决<strong>对象间相互循环引用</strong>的情况。</p>
-</blockquote>
-</li>
-<li><p>根搜索算法</p>
-<blockquote>
-<p>以GC roots 为根节点，向下搜索，搜所走过的路径成为引用链。当一个对象到GC roots没有人任何引用链相连（<strong>GC roots 导致个对象不可达</strong>），证明此对象是不可用的。</p>
-<p>Java中可作为GC roots的对象包括以下几种：</p>
-<ul>
-<li><p>虚拟机栈（栈帧中的本地变量表）中的而引用的对象</p>
-</li>
-<li><p>方法区中类静态属性引用的对象</p>
-</li>
-<li><p>方法区中常量引用的对象</p>
-</li>
-<li><p>本地方法栈中native方法引用的对象</p>
-</li>
-</ul>
-</blockquote>
-</li>
-<li><p>引用</p>
-<blockquote>
-<ul>
-<li><p>强引用</p>
-<p>类似 A a = new A（）；</p>
-<p>强引用还在，不会回收被引用的对象。</p>
-</li>
-<li><p>软引用</p>
-<p>还有用但非必须的对象。系统在发生内存溢出之前，会将这些对象列进回收范围，进行二次回收，</p>
-<p>回收完还是内存不足，才会抛出内存溢出异常。</p>
-<p>通过SoftReference关联软引用</p>
-</li>
-<li><p>弱引用</p>
-<p>被弱引用关联的对象只能生存到下一次垃圾收集之前。通过WeakReference关联软引用。</p>
-</li>
-<li><p>虚引用</p>
-<p>虚引用不影响垃圾收集，也不能通过虚引用获取对象。</p>
-<p>给对象设置虚引用关联唯一目的是希望对象被回收时收到一个系统通知。</p>
-</li>
-</ul>
-</blockquote>
-</li>
-<li><p>对象生死</p>
-<blockquote>
-<p>回收前至少经历<strong>两次标记</strong></p>
-<p>当对象与GC roots之间无引用链时，会比标记并<strong>筛选</strong>，筛选条件是是否需要执行finalize（）方法。</p>
-<p>当对象没有覆盖finalize()方法或者已经执行过一次后，不会执行。</p>
-<p>执行finalize（）方法后重新获得引用链后会在第二次进行标记时移除标记。</p>
-</blockquote>
-</li>
-<li><p>回收方法区</p>
-<blockquote>
-<ul>
-<li><p>废弃常量</p>
-<p>不存在引用的常量</p>
-</li>
-<li><p>无用的类</p>
-<p>所有实例已被回收</p>
-<p>加载该类的classloader已被回收</p>
-<p>该类对应的java.lang.Class对象没有在让你和地方被引用，无法在任何地方通过反射访问该类的方法。    </p>
-</li>
-</ul>
-</blockquote>
-</li>
-</ol>
-<h4 id="垃圾收集算法"><a href="#垃圾收集算法" class="headerlink" title="垃圾收集算法"></a>垃圾收集算法</h4><ol>
-<li>标记清楚算法</li>
-<li>复制算法</li>
-<li>标记整理</li>
-<li>分代收集</li>
-</ol>
-<h4 id="垃圾收集器"><a href="#垃圾收集器" class="headerlink" title="垃圾收集器"></a>垃圾收集器</h4><ol>
-<li><p>serial收集器</p>
-</li>
-<li><p>parnew收集器</p>
-</li>
-<li><p>parallel  scavenge收集器</p>
-</li>
-<li><p>serial  old 收集器</p>
-</li>
-<li><p>parallel old收集器</p>
-</li>
-<li><p>CMS 收集器</p>
-</li>
-<li><p>G1收集器</p>
-</li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://kuangai.github.io/2020/04/16/jvm%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="wsc">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="study">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/04/16/jvm%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url">jvm内存模型学习笔记</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-04-16T21:45:00+08:00">
-                2020-04-16
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/jvm/" itemprop="url" rel="index">
-                    <span itemprop="name">jvm</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="运行时区域"><a href="#运行时区域" class="headerlink" title="运行时区域"></a>运行时区域</h2><h3 id="程序计数器"><a href="#程序计数器" class="headerlink" title="程序计数器"></a>程序计数器</h3><p>可以看作线程执行的字节码的行号指示器，记录执行的位置。字节码解释器通过改变计数器的值获取下一条要执行的指令。</p>
-<p>Java虚拟机多线程是通过线程切换并分配处理器执行时间的方式实现的。因此，为了使线程切换后恢复到正确的执行位置，每个线程需要一各程序计数器，记录执行位置，单独存储，互不影响。 </p>
-<p>执行java方法：计数器记录的是正在执行的虚拟机字节码指令的位置</p>
-<p>执行natvie方法：记录器为空（undefined）</p>
-<p>属于线程私有内存，占用空间较小，不会出现OOM</p>
-<h3 id="java虚拟机栈"><a href="#java虚拟机栈" class="headerlink" title="java虚拟机栈"></a>java虚拟机栈</h3><p>线程私有</p>
-<p>生命周期与线程与线程相同</p>
-<p>描述的是Java方法执行的内存模型，每个方法执行值会创建一个栈帧，用于存储  局部变量表，动态链接，方法出口，操作栈的等信息</p>
-<p>每个方法被调用到执行完成的过程对应一个栈帧在虚拟机栈中入栈和出战的过程。</p>
-<p>局部变量表存储编译期间可预知的基本数据类型（boolean,byte,short, int, char, float, long, double）,对象引用（不等同于对象本身，可能是指向对象起始地址的引用指针，或者指向一个代表对象句柄或者其他与此对象相关的地址），和returnAddress类型（指向了一条字节码指令的位置）。</p>
-<p>64位的long ，double类型的数据会占用两个局部变量的空间，其余数据类型只占用一个。</p>
-<p>局部变量表所分配的内存空间在编译期间完成分配，进入一个方法时，这个方法需要在帧中分配多大的内存空间是完全确定的。方法运行期间， 不会改变局部变量表的大小。</p>
-<p>线程请求的栈深度对于虚拟机所允许的深度时会出现栈溢出异常，如果虚拟机栈可以动态扩展，当扩展时无法申请到足够的内存时，会抛出OOM异常。</p>
-<h3 id="本地方法栈"><a href="#本地方法栈" class="headerlink" title="本地方法栈"></a>本地方法栈</h3><p>和虚拟机栈类似，也会抛出栈溢出和OOM异常 。是为虚拟机执行natvie方法服务的，虚拟机栈为执行Java方法服务。</p>
-<h3 id="Java堆"><a href="#Java堆" class="headerlink" title="Java堆"></a>Java堆</h3><p>虚拟机管理的内存中最大的一块</p>
-<p>被所有线程共享</p>
-<p>在虚拟机启动时创建</p>
-<p>用于存放对象实例</p>
-<p>垃圾回收器管理的主要区域</p>
-<p>从分代垃圾回收算法的角度可分为老年代，新生代等</p>
-<p>可处于物理上不连续的内存空间，可以时固定大小也可以是可扩展的（可扩展的通过-Xmx和-Xms空值）</p>
-<p>如果没有内存可供实例分配，也不能扩展时会抛出OOM</p>
-<h3 id="方法区"><a href="#方法区" class="headerlink" title="方法区"></a>方法区</h3><h3 id="运行是常量池"><a href="#运行是常量池" class="headerlink" title="运行是常量池"></a>运行是常量池</h3><h3 id="直接内存"><a href="#直接内存" class="headerlink" title="直接内存"></a>直接内存</h3>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1982,7 +1922,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-count">15</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1993,7 +1933,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -2004,7 +1944,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
