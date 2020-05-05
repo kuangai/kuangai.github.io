@@ -275,6 +275,314 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://kuangai.github.io/2020/05/05/%E4%BD%8D%E8%BF%90%E7%AE%97/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="wsc">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="study">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/05/05/%E4%BD%8D%E8%BF%90%E7%AE%97/" itemprop="url">Java使用byte数组实现bit array</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-05-05T15:13:00+08:00">
+                2020-05-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java/" itemprop="url" rel="index">
+                    <span itemprop="name">java</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index">
+                    <span itemprop="name">数据结构</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="基础知识位运算"><a href="#基础知识位运算" class="headerlink" title="基础知识位运算"></a>基础知识位运算</h2><h1 id="or-或"><a href="#or-或" class="headerlink" title="| or  或"></a>| or  或</h1><p>应用场景:<br>当需要点亮某一个值的时候,可以将1移位到那个地方,然后用原值与这个移位的1使用|操作,这样原值的其他所有位的值都得以保留,而且新的位置上面不管以前是0还是1,都会变成1<br>#&amp; and 与<br>应用场景:<br>如何判断一个数的某一个bit是不是1呢?</p>
+<p>设置a = 1,然后将这个1移位到相应的bit位上面,这个时候a除了当前的bit位是1,其他的位都是0,然后让a与原值进行&amp;操作.结果就是,所有其他的bit位都被忽略,只有这个需要的bit位的值被提取出来,如果这一位是0,结果==0;如果这一位是1,那么结果 !=0 (因为考虑到负数的存在,所以这个值是有可能小于0的).</p>
+<h1 id="not-非"><a href="#not-非" class="headerlink" title="~ not 非"></a>~ not 非</h1><p>应用场景:<br>假设你需要清空某一位,但是需要保留其他所有位的值,就可以将1移到需要清空的位置上,反转.这个时候,这个原来是1的bit为就变成0,而其他所有的bit位都是1了.再将这个数与其他值进行 &amp; 操作,就可以保证在<strong>清空这一位数的同时,其他所有bit位的值得以保留</strong>.</p>
+<p>具体实现参考：</p>
+<p><a href="https://blog.csdn.net/zimu666/article/details/8284906?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1" target="_blank" rel="noopener">https://blog.csdn.net/zimu666/article/details/8284906?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1</a></p>
+<p><a href="https://blog.csdn.net/zimu666/article/details/8295724" target="_blank" rel="noopener">https://blog.csdn.net/zimu666/article/details/8295724</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://kuangai.github.io/2020/05/05/%E5%8F%8D%E5%B0%84/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="wsc">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="study">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/05/05/%E5%8F%8D%E5%B0%84/" itemprop="url">反射</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-05-05T11:14:00+08:00">
+                2020-05-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java/" itemprop="url" rel="index">
+                    <span itemprop="name">java</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>在运行状态中，对于任意一个类，都能够知道这个类的所有属性和方法；对于任意一个对象，都能够调用它的任意一个方法和属性；这种动态获取的信息以及动态调用对象的方法的功能称为java语言的反射机制。</p>
+<p>反射原理<br><a href="https://www.jianshu.com/p/3ea4a6b57f87" target="_blank" rel="noopener">https://www.jianshu.com/p/3ea4a6b57f87</a></p>
+<h3 id="基本应用"><a href="#基本应用" class="headerlink" title="基本应用"></a>基本应用</h3><h4 id="获取类对象-（有3种方式）"><a href="#获取类对象-（有3种方式）" class="headerlink" title="获取类对象 （有3种方式）"></a>获取类对象 （有3种方式）</h4><p>Class.forName（）（常用）<br>Hero.class （需要导入类的包）<br>new Hero().getClass()</p>
+<h4 id="利用反射机制创建对象"><a href="#利用反射机制创建对象" class="headerlink" title="利用反射机制创建对象"></a>利用反射机制创建对象</h4><p>基本步骤<br>  与传统的通过new 来获取对象的方式不同反射机制，反射会先拿到Hero的“类对象”,然后通过类对象获取“构造器对象”再通过构造器对象创建一个对象，具体步骤：<br>1.获取类对象 Class class = Class.forName(“pojo.Hero”);<br>2.获取构造器对象 Constructor con = clazz.getConstructor(形参.class);<br>3 获取对象 Hero hero =con.newInstance(实参);</p>
+<h4 id="获取构造器对象方法："><a href="#获取构造器对象方法：" class="headerlink" title="获取构造器对象方法："></a>获取构造器对象方法：</h4><p>  1).批量的方法：<br>public Constructor[] getConstructors()：所有”公有的”构造方法<br>public Constructor[] getDeclaredConstructors()：获取所有的构造方法(包括私有、受保护、默认、公有)<br>  2).获取单个的方法:<br>public Constructor getConstructor(Class… parameterTypes): 获取单个的”公有的”构造方法<br>public Constructor getDeclaredConstructor(Class…parameterTypes)：获取”某个构造方法”可以是私有的，或受保护、默认、公有；</p>
+<h4 id="获取成员变量并使用"><a href="#获取成员变量并使用" class="headerlink" title="获取成员变量并使用"></a>获取成员变量并使用</h4><p>1.获取类的对象<br>2. 获取属性 Field f1 = 对象.getDeclaredField(“属性名”)<br>3. 修改属性 f1.set(h，实参)，注意这里的h是对象，不是类对象</p>
+<h4 id="getField和getDeclaredField的区别"><a href="#getField和getDeclaredField的区别" class="headerlink" title="getField和getDeclaredField的区别"></a>getField和getDeclaredField的区别</h4><p>   getField 只能获取public的，包括从父类继承来的字段。<br>   getDeclaredField 可以获取本类所有的字段，包括private的，但是 不能获取继承来的字段。 (注： 这里只能获取到private的字段，但并不能访问该private字段的值,除非加上setAccessible(true))；</p>
+<h4 id="获取成员方法并使用"><a href="#获取成员方法并使用" class="headerlink" title="获取成员方法并使用"></a>获取成员方法并使用</h4><p>先获取类的对象<br>再获取成员方法：<br>public Method getMethod(String name ，Class<?>… parameterTypes):获取"公有方法"；（包含了父类的方法也包含Object类）
+public Method getDeclaredMethods(String name ，Class<?>… parameterTypes) :获取成员方法，包括私有的(不包括继承的)<br>参数解释：<br>  name : 方法名；<br>  Class … : 形参的Class类型对象<br>调用方法<br>Method –&gt; public Object invoke(Object obj,Object… args):<br>参数说明：<br>  obj : 要调用方法的对象；<br>  args:调用方式时所传递的实参</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://kuangai.github.io/2020/05/05/%E7%BC%93%E5%AD%98%E9%9B%AA%E5%B4%A9%EF%BC%8C%E7%BC%93%E5%AD%98%E7%A9%BF%E9%80%8F%EF%BC%8C%E7%BC%93%E5%AD%98%E5%87%BB%E7%A9%BF/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1533,345 +1841,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://kuangai.github.io/2020/04/23/jconsole%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="wsc">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="study">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/04/23/jconsole%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5/" itemprop="url">jconsole远程连接</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-04-23T15:01:00+08:00">
-                2020-04-23
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/jvm/" itemprop="url" rel="index">
-                    <span itemprop="name">jvm</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="jconsole-远程连接"><a href="#jconsole-远程连接" class="headerlink" title="jconsole 远程连接"></a>jconsole 远程连接</h1><h3 id="war包启动"><a href="#war包启动" class="headerlink" title="war包启动"></a>war包启动</h3><p>tomcat/bin下catelina.sh 中增加启动参数如下</p>
-<p>ip，port修改为主机ip，port</p>
-<p>JAVA_OPTS=”-Djava.rmi.server.hostname=192.168.18.193 -Dcom.sun.management.jmxremote.port=8099 -Dcom.sun.management.jmxremote.rmi.port=8099 -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.authenticate=false”</p>
-<h3 id="jar包启动"><a href="#jar包启动" class="headerlink" title="jar包启动"></a>jar包启动</h3><p>java<br>-Djava.rmi.server.hostname=10.160.13.111  #  即本机ip<br>-Dcom.sun.management.jmxremote #允许JMX远程调用<br>-Dcom.sun.management.jmxremote.port=3214  #自定义jmx 端口号<br>-Dcom.sun.management.jmxremote.ssl=false  # 是否需要ssl 安全连接方式<br>-Dcom.sun.management.jmxremote.authenticate=false #是否需要秘钥<br> -jar test.jar  </p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://kuangai.github.io/2020/04/19/jvm%E5%B8%B8%E7%94%A8%E7%9B%91%E6%8E%A7%E5%B7%A5%E5%85%B7/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="wsc">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="study">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/04/19/jvm%E5%B8%B8%E7%94%A8%E7%9B%91%E6%8E%A7%E5%B7%A5%E5%85%B7/" itemprop="url">jvm常用监控工具</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-04-19T10:41:00+08:00">
-                2020-04-19
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/jvm/" itemprop="url" rel="index">
-                    <span itemprop="name">jvm</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="jdk-命令行工具"><a href="#jdk-命令行工具" class="headerlink" title="jdk 命令行工具"></a>jdk 命令行工具</h3><ul>
-<li><p>jsp</p>
-<p>可列出正在执行的虚拟机进程，并显示虚拟机执行的<strong>主类</strong>的名称，及这些进程的<strong>本地虚拟机的唯一ID</strong>。</p>
-<p>选项：</p>
-<blockquote>
-<p>-q    只列出本地id，省略主类名</p>
-<p>-m    输出虚拟机启动进程时传递给主类函数的参数</p>
-<p>-l    输出主类全名。如执行的时=是jar包，输出jar路径</p>
-<p>-v    输出虚拟机进程启动时jvm参数</p>
-</blockquote>
-</li>
-<li><p>jstat</p>
-<p>用于监控虚拟机<strong>运行时</strong>的各种<strong>状态信息</strong>。可以显示<strong>本地或远程</strong>虚拟机进程中的<strong>类装载，内存，垃圾收集，JIT编译</strong>等运行数据。运行期间定位虚拟机性能问题的首选命令行工具。</p>
-<p>命令格式： jshat     [option     vmid     [interval[s|ms]     [count]    ]    ]</p>
-<p>本地虚拟机进程vmid 与LVMID 一致，远程虚拟机进程 vmid 格式为：</p>
-<p>[protocol:] [//]  LVMID [@hostname[:port]/servername]</p>
-<p>interval 代表间隔 count 代表次数，省略说明只查一次</p>
-<p>常用选项：</p>
-<blockquote>
-<p>-class    监视类装载，卸载数量，总空间及类装载所消耗的时间</p>
-<p>-gc     监视堆状况，包括Eden区，2个survivor区，老年代，永久代等数量，已用空间，gc时间合计等信息</p>
-<p>-gcutil    与-gc基本相同，但输出主要关注已使用空间占总空间的百分比。</p>
-<p>-gccause    与-gcutil功能一样，但是会额外输出导致上一次gc产生的原因。</p>
-</blockquote>
-</li>
-<li><p>jinfo</p>
-<p>作用是实时的查看和调整虚拟机的各项参数</p>
-</li>
-<li><p>jmap</p>
-<p>可用于生成堆转储快照，查询finalize执行队列，java堆和永久代的详细信息</p>
-</li>
-<li><p>jhat</p>
-<p>分析生成的堆转储快照</p>
-</li>
-<li><p>jstack</p>
-<p>用于生成虚拟机当前时刻的线程快照，即当前虚拟机内每一条线程正在执行的方法堆栈集合。主要用于<strong>定位线程长时间停顿的原因</strong>，死锁，死循环，请求外部资源导致的等待。</p>
-<p>jstack     [option]     vmid</p>
-<p>选项：</p>
-<blockquote>
-<p>-F    当正常输出的请求不被响应时，强制输出线程堆栈</p>
-<p>-l    除线程堆栈外，显示关于锁的信息</p>
-<p>-m    如果调用本地方法的话，可以显示c/c++的堆栈</p>
-</blockquote>
-<p>java.lang.Thread的getAllStackTraces（）方法用于获取虚拟机中所有线程的StackTraceElement对象。可调用该方法在管理页面输出，通过浏览器来查看线程堆栈。</p>
-</li>
-</ul>
-<h3 id="jdk可视化工具"><a href="#jdk可视化工具" class="headerlink" title="jdk可视化工具"></a>jdk可视化工具</h3><p>位于jdk的bin目录下</p>
-<ul>
-<li><p>jConsole</p>
-</li>
-<li><p>VisualVM</p>
-</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1922,7 +1891,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">17</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1933,7 +1902,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -1944,7 +1913,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
