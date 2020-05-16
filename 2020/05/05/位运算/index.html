@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="位图,bit数组," />
+  <meta name="keywords" content="位运算," />
 
 
 
@@ -79,18 +79,17 @@
 
 
 
-<meta name="description" content="基础知识位运算| or  或应用场景:当需要点亮某一个值的时候,可以将1移位到那个地方,然后用原值与这个移位的1使用|操作,这样原值的其他所有位的值都得以保留,而且新的位置上面不管以前是0还是1,都会变成1 &amp; and 与应用场景:如何判断一个数的某一个bit是不是1呢? 设置a &#x3D; 1,然后将这个1移位到相应的bit位上面,这个时候a除了当前的bit位是1,其他的位都是0,然后让a与原值">
+<meta name="description" content="基础知识位运算【|&amp;~】| or  或应用场景:当需要点亮某一个值的时候,可以将1移位到那个地方,然后用原值与这个移位的1使用|操作,这样原值的其他所有位的值都得以保留,而且新的位置上面不管以前是0还是1,都会变成1 &amp; and 与应用场景:如何判断一个数的某一个bit是不是1呢? 设置a &#x3D; 1,然后将这个1移位到相应的bit位上面,这个时候a除了当前的bit位是1,其他的位都是">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Java使用byte数组实现bit array">
+<meta property="og:title" content="基础知识位运算">
 <meta property="og:url" content="https://kuangai.github.io/2020/05/05/%E4%BD%8D%E8%BF%90%E7%AE%97/index.html">
 <meta property="og:site_name" content="study">
-<meta property="og:description" content="基础知识位运算| or  或应用场景:当需要点亮某一个值的时候,可以将1移位到那个地方,然后用原值与这个移位的1使用|操作,这样原值的其他所有位的值都得以保留,而且新的位置上面不管以前是0还是1,都会变成1 &amp; and 与应用场景:如何判断一个数的某一个bit是不是1呢? 设置a &#x3D; 1,然后将这个1移位到相应的bit位上面,这个时候a除了当前的bit位是1,其他的位都是0,然后让a与原值">
+<meta property="og:description" content="基础知识位运算【|&amp;~】| or  或应用场景:当需要点亮某一个值的时候,可以将1移位到那个地方,然后用原值与这个移位的1使用|操作,这样原值的其他所有位的值都得以保留,而且新的位置上面不管以前是0还是1,都会变成1 &amp; and 与应用场景:如何判断一个数的某一个bit是不是1呢? 设置a &#x3D; 1,然后将这个1移位到相应的bit位上面,这个时候a除了当前的bit位是1,其他的位都是">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-05-05T07:13:00.000Z">
-<meta property="article:modified_time" content="2020-05-05T12:24:25.104Z">
+<meta property="article:modified_time" content="2020-05-16T10:26:51.668Z">
 <meta property="article:author" content="wsc">
-<meta property="article:tag" content="位图">
-<meta property="article:tag" content="bit数组">
+<meta property="article:tag" content="位运算">
 <meta name="twitter:card" content="summary">
 
 
@@ -127,7 +126,7 @@
 
 
 
-  <title>Java使用byte数组实现bit array | study</title>
+  <title>基础知识位运算 | study</title>
   
 
 
@@ -281,7 +280,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">Java使用byte数组实现bit array</h2>
+          <h2 class="post-title" itemprop="name headline">基础知识位运算</h2>
         
 
         <div class="post-meta">
@@ -316,19 +315,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/java/" itemprop="url" rel="index">
-                    <span itemprop="name">java</span>
-                  </a>
-                </span>
-
-                
-                
-                  , 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/java/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index">
-                    <span itemprop="name">数据结构</span>
+                  <a href="/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" itemprop="url" rel="index">
+                    <span itemprop="name">基础知识</span>
                   </a>
                 </span>
 
@@ -369,11 +357,11 @@
       
 
       
-        <h2 id="基础知识位运算"><a href="#基础知识位运算" class="headerlink" title="基础知识位运算"></a>基础知识位运算</h2><h1 id="or-或"><a href="#or-或" class="headerlink" title="| or  或"></a>| or  或</h1><p>应用场景:<br>当需要点亮某一个值的时候,可以将1移位到那个地方,然后用原值与这个移位的1使用|操作,这样原值的其他所有位的值都得以保留,而且新的位置上面不管以前是0还是1,都会变成1</p>
+        <h2 id="基础知识位运算【-amp-】"><a href="#基础知识位运算【-amp-】" class="headerlink" title="基础知识位运算【|&amp;~】"></a>基础知识位运算【|&amp;~】</h2><h1 id="or-或"><a href="#or-或" class="headerlink" title="| or  或"></a>| or  或</h1><p>应用场景:<br>当需要点亮某一个值的时候,可以将1移位到那个地方,然后用原值与这个移位的1使用|操作,这样原值的其他所有位的值都得以保留,而且新的位置上面不管以前是0还是1,都会变成1</p>
 <h1 id="amp-and-与"><a href="#amp-and-与" class="headerlink" title="&amp; and 与"></a>&amp; and 与</h1><p>应用场景:<br>如何判断一个数的某一个bit是不是1呢?</p>
 <p>设置a = 1,然后将这个1移位到相应的bit位上面,这个时候a除了当前的bit位是1,其他的位都是0,然后让a与原值进行&amp;操作.结果就是,所有其他的bit位都被忽略,只有这个需要的bit位的值被提取出来,如果这一位是0,结果==0;如果这一位是1,那么结果 !=0 (因为考虑到负数的存在,所以这个值是有可能小于0的).</p>
 <h1 id="not-非"><a href="#not-非" class="headerlink" title="~ not 非"></a>~ not 非</h1><p>应用场景:<br>假设你需要清空某一位,但是需要保留其他所有位的值,就可以将1移到需要清空的位置上,反转.这个时候,这个原来是1的bit为就变成0,而其他所有的bit位都是1了.再将这个数与其他值进行 &amp; 操作,就可以保证在<strong>清空这一位数的同时,其他所有bit位的值得以保留</strong>.</p>
-<p>具体实现参考：</p>
+<p>上述基础操作可应用于使用byte数组实现布隆过滤器<br>具体实现参考：</p>
 <p><a href="https://blog.csdn.net/zimu666/article/details/8284906?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1" target="_blank" rel="noopener">https://blog.csdn.net/zimu666/article/details/8284906?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1</a></p>
 <p><a href="https://blog.csdn.net/zimu666/article/details/8295724" target="_blank" rel="noopener">https://blog.csdn.net/zimu666/article/details/8295724</a></p>
 
@@ -393,9 +381,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/%E4%BD%8D%E5%9B%BE/" rel="tag"># 位图</a>
-          
-            <a href="/tags/bit%E6%95%B0%E7%BB%84/" rel="tag"># bit数组</a>
+            <a href="/tags/%E4%BD%8D%E8%BF%90%E7%AE%97/" rel="tag"># 位运算</a>
           
         </div>
       
@@ -497,7 +483,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-count">19</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -519,7 +505,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -568,7 +554,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基础知识位运算"><span class="nav-number">1.</span> <span class="nav-text">基础知识位运算</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#or-或"><span class="nav-number"></span> <span class="nav-text">| or  或</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#amp-and-与"><span class="nav-number"></span> <span class="nav-text">&amp; and 与</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#not-非"><span class="nav-number"></span> <span class="nav-text">~ not 非</span></a></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基础知识位运算【-amp-】"><span class="nav-number">1.</span> <span class="nav-text">基础知识位运算【|&amp;~】</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#or-或"><span class="nav-number"></span> <span class="nav-text">| or  或</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#amp-and-与"><span class="nav-number"></span> <span class="nav-text">&amp; and 与</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#not-非"><span class="nav-number"></span> <span class="nav-text">~ not 非</span></a></div>
             
 
           </div>

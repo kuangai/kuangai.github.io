@@ -275,6 +275,176 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://kuangai.github.io/2020/05/16/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E4%BD%8D%E8%BF%90%E7%AE%97-%E5%BC%82%E6%88%96/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="wsc">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="study">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/05/16/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E4%BD%8D%E8%BF%90%E7%AE%97-%E5%BC%82%E6%88%96/" itemprop="url">基础知识位运算-异或</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-05-16T18:22:00+08:00">
+                2020-05-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" itemprop="url" rel="index">
+                    <span itemprop="name">基础知识</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="异或运算"><a href="#异或运算" class="headerlink" title="异或运算"></a>异或运算</h2><h4 id="运算规则"><a href="#运算规则" class="headerlink" title="运算规则"></a>运算规则</h4><blockquote>
+<p>参与运算的两个值，如果两个相应bit位相同，则结果为0，否则为1。</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">0</span>^<span class="number">0</span> = <span class="number">0</span>，</span><br><span class="line"><span class="number">1</span>^<span class="number">0</span> = <span class="number">1</span>，</span><br><span class="line"><span class="number">0</span>^<span class="number">1</span> = <span class="number">1</span>，</span><br><span class="line"><span class="number">1</span>^<span class="number">1</span> = <span class="number">0</span></span><br></pre></td></tr></table></figure>
+<h4 id="3个特点："><a href="#3个特点：" class="headerlink" title="3个特点："></a>3个特点：</h4><p>（1） 0^0=0，0^1=1 0异或任何数＝任何数<br>（2） 1^0=1，1^1=0 1异或任何数－任何数取反<br>（3） 任何数异或自己＝把自己置0</p>
+<h4 id="常见用途"><a href="#常见用途" class="headerlink" title="常见用途"></a>常见用途</h4><p>（1） 使某些特定的位翻转（1-&gt;0,0-&gt;1）</p>
+<blockquote>
+<p>将特定的位异或1即可。<br>例如对数10100001的第2位和第3位翻转，则可以将该数与00000110进行按位异或运算。<br>10100001^00000110 = 10100111</p>
+</blockquote>
+<p>（2） 实现两个值的交换，而不必使用临时变量。</p>
+<blockquote>
+<p>例如交换两个整数a=10100001，b=00000110的值，可通过下列语句实现：</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a = a^b； 　　<span class="comment">//a=10100111</span></span><br><span class="line">b = b^a； 　　<span class="comment">//b=10100001</span></span><br><span class="line">a = a^b； 　　<span class="comment">//a=00000110</span></span><br></pre></td></tr></table></figure>
+
+<p>（3） 在汇编语言中经常用于将变量置零：</p>
+<blockquote>
+<p>异或自己</p>
+</blockquote>
+<p>（4） 快速判断两个值是否相等</p>
+<blockquote>
+<p>举例：</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">return</span> （（a ^ b） == <span class="number">0</span>）</span><br></pre></td></tr></table></figure>
+
+<p>(5)  加密</p>
+<blockquote>
+<p>加密 : 逐个字符跟secret字符异或运算。<br>  解密 : 密文再跟同一个字符异或运算</p>
+</blockquote>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://kuangai.github.io/2020/05/16/HashMap/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -369,6 +539,27 @@
         
           
             <p>原理讲解参考：<br><a href="https://blog.csdn.net/zhengwangzw/article/details/104889549" target="_blank" rel="noopener">https://blog.csdn.net/zhengwangzw/article/details/104889549</a><br><a href="https://segmentfault.com/a/1190000015812438?utm_source=tag-newest" target="_blank" rel="noopener">https://segmentfault.com/a/1190000015812438?utm_source=tag-newest</a><br><a href="https://www.javadoop.com/post/hashmap#toc_9" target="_blank" rel="noopener">https://www.javadoop.com/post/hashmap#toc_9</a></p>
+<h1 id="put-大致步骤"><a href="#put-大致步骤" class="headerlink" title="put 大致步骤"></a>put 大致步骤</h1><ol>
+<li><p>初始化</p>
+</li>
+<li><p>计算下标</p>
+</li>
+<li><p>判断下表第一个元素是否是待处理节点</p>
+</li>
+<li><p>判断是否是树节点</p>
+</li>
+<li><p>遍历链表获取待处理节点</p>
+</li>
+<li><p>处理待处理节点，并判断是否转换为树</p>
+</li>
+<li><p>size++,modCount++, –&gt;resize();</p>
+</li>
+</ol>
+<h1 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h1><ol>
+<li>存储元素的table数组第一次初始化是在<strong>第一次put</strong></li>
+<li>链表转换红黑树，需要满足链表长度<strong>大于8且元素个数大于64</strong>否则不是转换为树，而是扩容</li>
+<li>计算hash值时，高16位异或低16位，目的是** 混合原始哈希码的高位和低位，以此来加大低位随机性**</li>
+</ol>
 <h1 id="1-7与1-8中区别"><a href="#1-7与1-8中区别" class="headerlink" title="1.7与1.8中区别"></a>1.7与1.8中区别</h1><ol>
 <li><p>hash函数</p>
 </li>
@@ -386,7 +577,7 @@
 </li>
 <li><p>7 对所有元素重新hash</p>
 </li>
-<li><p>8 通过 对hash &amp; oldCap 判断最高位是否为0，确定元素插入<strong>原始位置</strong>还是<strong>原始位置+oldCap</strong></p>
+<li><p>8 通过 对<strong>hash &amp; oldCap</strong> 判断最高位是否为0，确定元素插入<strong>原始位置</strong>还是<strong>原始位置+oldCap</strong></p>
 </li>
 <li><p>链表插入</p>
 </li>
@@ -635,7 +826,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/05/05/%E4%BD%8D%E8%BF%90%E7%AE%97/" itemprop="url">Java使用byte数组实现bit array</a></h2>
+                <a class="post-title-link" href="/2020/05/05/%E4%BD%8D%E8%BF%90%E7%AE%97/" itemprop="url">基础知识位运算</a></h2>
         
 
         <div class="post-meta">
@@ -670,19 +861,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/java/" itemprop="url" rel="index">
-                    <span itemprop="name">java</span>
-                  </a>
-                </span>
-
-                
-                
-                  , 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/java/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index">
-                    <span itemprop="name">数据结构</span>
+                  <a href="/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" itemprop="url" rel="index">
+                    <span itemprop="name">基础知识</span>
                   </a>
                 </span>
 
@@ -720,11 +900,11 @@
       
         
           
-            <h2 id="基础知识位运算"><a href="#基础知识位运算" class="headerlink" title="基础知识位运算"></a>基础知识位运算</h2><h1 id="or-或"><a href="#or-或" class="headerlink" title="| or  或"></a>| or  或</h1><p>应用场景:<br>当需要点亮某一个值的时候,可以将1移位到那个地方,然后用原值与这个移位的1使用|操作,这样原值的其他所有位的值都得以保留,而且新的位置上面不管以前是0还是1,都会变成1</p>
+            <h2 id="基础知识位运算【-amp-】"><a href="#基础知识位运算【-amp-】" class="headerlink" title="基础知识位运算【|&amp;~】"></a>基础知识位运算【|&amp;~】</h2><h1 id="or-或"><a href="#or-或" class="headerlink" title="| or  或"></a>| or  或</h1><p>应用场景:<br>当需要点亮某一个值的时候,可以将1移位到那个地方,然后用原值与这个移位的1使用|操作,这样原值的其他所有位的值都得以保留,而且新的位置上面不管以前是0还是1,都会变成1</p>
 <h1 id="amp-and-与"><a href="#amp-and-与" class="headerlink" title="&amp; and 与"></a>&amp; and 与</h1><p>应用场景:<br>如何判断一个数的某一个bit是不是1呢?</p>
 <p>设置a = 1,然后将这个1移位到相应的bit位上面,这个时候a除了当前的bit位是1,其他的位都是0,然后让a与原值进行&amp;操作.结果就是,所有其他的bit位都被忽略,只有这个需要的bit位的值被提取出来,如果这一位是0,结果==0;如果这一位是1,那么结果 !=0 (因为考虑到负数的存在,所以这个值是有可能小于0的).</p>
 <h1 id="not-非"><a href="#not-非" class="headerlink" title="~ not 非"></a>~ not 非</h1><p>应用场景:<br>假设你需要清空某一位,但是需要保留其他所有位的值,就可以将1移到需要清空的位置上,反转.这个时候,这个原来是1的bit为就变成0,而其他所有的bit位都是1了.再将这个数与其他值进行 &amp; 操作,就可以保证在<strong>清空这一位数的同时,其他所有bit位的值得以保留</strong>.</p>
-<p>具体实现参考：</p>
+<p>上述基础操作可应用于使用byte数组实现布隆过滤器<br>具体实现参考：</p>
 <p><a href="https://blog.csdn.net/zimu666/article/details/8284906?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1" target="_blank" rel="noopener">https://blog.csdn.net/zimu666/article/details/8284906?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1</a></p>
 <p><a href="https://blog.csdn.net/zimu666/article/details/8295724" target="_blank" rel="noopener">https://blog.csdn.net/zimu666/article/details/8295724</a></p>
 
@@ -1720,169 +1900,6 @@ public Method getDeclaredMethods(String name ，Class<?>… parameterTypes) :获
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://kuangai.github.io/2020/05/04/final/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="wsc">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="study">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/05/04/final/" itemprop="url">final</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-05-04T12:06:00+08:00">
-                2020-05-04
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/java/" itemprop="url" rel="index">
-                    <span itemprop="name">java</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <ul>
-<li><p>修饰对象</p>
-<blockquote>
-<p>初始化后不再可变,即对象本身的引用是不可变的，对象的属性还是可变化的。</p>
-</blockquote>
-</li>
-<li><p>修饰基本类型变量</p>
-<blockquote>
-<p>初始化后不可再改变</p>
-</blockquote>
-</li>
-<li><p>修饰类</p>
-<blockquote>
-<p>不可被继承</p>
-</blockquote>
-</li>
-<li><p>修饰方法</p>
-<blockquote>
-<p>不可被重写</p>
-</blockquote>
-</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1933,7 +1950,7 @@ public Method getDeclaredMethods(String name ，Class<?>… parameterTypes) :获
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-count">19</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1955,7 +1972,7 @@ public Method getDeclaredMethods(String name ，Class<?>… parameterTypes) :获
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
