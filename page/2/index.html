@@ -275,6 +275,161 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://kuangai.github.io/2020/05/03/%E5%BC%82%E5%B8%B8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="wsc">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="study">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/05/03/%E5%BC%82%E5%B8%B8/" itemprop="url">异常</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-05-03T21:08:00+08:00">
+                2020-05-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%BC%82%E5%B8%B8/" itemprop="url" rel="index">
+                    <span itemprop="name">异常</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>java中异常分为两大类，Error，Exception 都继承 Throwable 类。</p>
+<h4 id="Error"><a href="#Error" class="headerlink" title="Error"></a>Error</h4><p>通常是程序正常情况不会出现的异常，大多数error会导致程序自身，jvm处于非正常状态。如OutOfMemoryError  ，不需要捕获一般由虚拟机自行处理。</p>
+<h4 id="Exception"><a href="#Exception" class="headerlink" title="Exception"></a>Exception</h4><p>属于程序运行过程中，可以预料的意外情况，一般需要捕获并处理。<br>Exception又可分为检查异常（除了非检查异常外的Exception及其子类），非检查异常（派生于Error类或RuntimeException类的所有异常）。<br>检查异常， 源代码里必须显式地进行捕获处理，这是编译期检查的一部分。</p>
+<p>非检查异常就是所谓的运行时异常，类似 NullPointerException、ArrayIndexOutOfBoundsException之类。具体根据需要来判断是否需要捕<br>获，并不会在编译期强制要求。</p>
+<h4 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h4><ul>
+<li><p>try，catch时避免try包住一整块代码，仅捕获有必要的代码块。</p>
+</li>
+<li><p>避免捕获通用异常？ 但是又会保留隐藏异常对程序有隐患？</p>
+</li>
+<li><p>尽量以日志输出异常堆栈信息，避免使用e.printStackTrace()</p>
+</li>
+<li><p>Java每实例化一个Exception，都会对当时的栈进行快照，这是一个相对比较重的操作。性能优化时可以考虑。</p>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://kuangai.github.io/2020/04/23/jconsole%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1547,7 +1702,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1569,7 +1724,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-count">21</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
