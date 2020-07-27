@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="jvm," />
+  <meta name="keywords" content="drop和delete," />
 
 
 
@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="运行时区域程序计数器可以看作线程执行的字节码的行号指示器，记录执行的位置。字节码解释器通过改变计数器的值获取下一条要执行的指令。 Java虚拟机多线程是通过线程切换并分配处理器执行时间的方式实现的。因此，为了使线程切换后恢复到正确的执行位置，每个线程需要一各程序计数器，记录执行位置，单独存储，互不影响。  执行java方法：计数器记录的是正在执行的虚拟机字节码指令的位置 执行natvie方法：记录">
+<meta name="description" content="（1）DELETE语句执行删除的过程是每次从表中删除一行，并且同时将该行的删除操作作为事务记录在日志中保存以便进行进行回滚操作。    TRUNCATE TABLE 则一次性地从表中删除所有的数据并不把单独的删除操作记录记入日志保存，删除行是不能恢复的。并且在删除的过程中不会激活与表有关的删除触发器。执行速度快。 （2）表和索引所占空间。    当表被TRUNCATE 后，这个表和索引所占用的空间">
 <meta property="og:type" content="article">
-<meta property="og:title" content="jvm内存模型学习笔记">
-<meta property="og:url" content="https://kuangai.github.io/2020/04/16/jvm%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:title" content="drop、truncate和delete的区别">
+<meta property="og:url" content="https://kuangai.github.io/2020/07/27/drop%E3%80%81truncate%E5%92%8Cdelete%E7%9A%84%E5%8C%BA%E5%88%AB/index.html">
 <meta property="og:site_name" content="study">
-<meta property="og:description" content="运行时区域程序计数器可以看作线程执行的字节码的行号指示器，记录执行的位置。字节码解释器通过改变计数器的值获取下一条要执行的指令。 Java虚拟机多线程是通过线程切换并分配处理器执行时间的方式实现的。因此，为了使线程切换后恢复到正确的执行位置，每个线程需要一各程序计数器，记录执行位置，单独存储，互不影响。  执行java方法：计数器记录的是正在执行的虚拟机字节码指令的位置 执行natvie方法：记录">
+<meta property="og:description" content="（1）DELETE语句执行删除的过程是每次从表中删除一行，并且同时将该行的删除操作作为事务记录在日志中保存以便进行进行回滚操作。    TRUNCATE TABLE 则一次性地从表中删除所有的数据并不把单独的删除操作记录记入日志保存，删除行是不能恢复的。并且在删除的过程中不会激活与表有关的删除触发器。执行速度快。 （2）表和索引所占空间。    当表被TRUNCATE 后，这个表和索引所占用的空间">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-04-16T13:45:00.000Z">
-<meta property="article:modified_time" content="2020-04-16T15:32:16.792Z">
+<meta property="article:published_time" content="2020-07-27T13:49:00.000Z">
+<meta property="article:modified_time" content="2020-07-27T13:51:53.485Z">
 <meta property="article:author" content="wsc">
-<meta property="article:tag" content="jvm">
+<meta property="article:tag" content="drop和delete">
 <meta name="twitter:card" content="summary">
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="https://kuangai.github.io/2020/04/16/jvm内存模型学习笔记/"/>
+  <link rel="canonical" href="https://kuangai.github.io/2020/07/27/drop、truncate和delete的区别/"/>
 
 
 
 
 
-  <title>jvm内存模型学习笔记 | study</title>
+  <title>drop、truncate和delete的区别 | study</title>
   
 
 
@@ -263,7 +263,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://kuangai.github.io/2020/04/16/jvm%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+    <link itemprop="mainEntityOfPage" href="https://kuangai.github.io/2020/07/27/drop%E3%80%81truncate%E5%92%8Cdelete%E7%9A%84%E5%8C%BA%E5%88%AB/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="wsc">
@@ -280,7 +280,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">jvm内存模型学习笔记</h2>
+          <h2 class="post-title" itemprop="name headline">drop、truncate和delete的区别</h2>
         
 
         <div class="post-meta">
@@ -292,8 +292,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-04-16T21:45:00+08:00">
-                2020-04-16
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-07-27T21:49:00+08:00">
+                2020-07-27
               </time>
             
 
@@ -315,8 +315,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/jvm/" itemprop="url" rel="index">
-                    <span itemprop="name">jvm</span>
+                  <a href="/categories/mysql/" itemprop="url" rel="index">
+                    <span itemprop="name">mysql</span>
                   </a>
                 </span>
 
@@ -357,29 +357,44 @@
       
 
       
-        <h2 id="运行时区域"><a href="#运行时区域" class="headerlink" title="运行时区域"></a>运行时区域</h2><h3 id="程序计数器"><a href="#程序计数器" class="headerlink" title="程序计数器"></a>程序计数器</h3><p>可以看作线程执行的字节码的行号指示器，记录执行的位置。字节码解释器通过改变计数器的值获取下一条要执行的指令。</p>
-<p>Java虚拟机多线程是通过线程切换并分配处理器执行时间的方式实现的。因此，为了使线程切换后恢复到正确的执行位置，每个线程需要一各程序计数器，记录执行位置，单独存储，互不影响。 </p>
-<p>执行java方法：计数器记录的是正在执行的虚拟机字节码指令的位置</p>
-<p>执行natvie方法：记录器为空（undefined）</p>
-<p>属于线程私有内存，占用空间较小，不会出现OOM</p>
-<h3 id="java虚拟机栈"><a href="#java虚拟机栈" class="headerlink" title="java虚拟机栈"></a>java虚拟机栈</h3><p>线程私有</p>
-<p>生命周期与线程与线程相同</p>
-<p>描述的是Java方法执行的内存模型，每个方法执行值会创建一个栈帧，用于存储  局部变量表，动态链接，方法出口，操作栈的等信息</p>
-<p>每个方法被调用到执行完成的过程对应一个栈帧在虚拟机栈中入栈和出战的过程。</p>
-<p>局部变量表存储编译期间可预知的基本数据类型（boolean,byte,short, int, char, float, long, double）,对象引用（不等同于对象本身，可能是指向对象起始地址的引用指针，或者指向一个代表对象句柄或者其他与此对象相关的地址），和returnAddress类型（指向了一条字节码指令的位置）。</p>
-<p>64位的long ，double类型的数据会占用两个局部变量的空间，其余数据类型只占用一个。</p>
-<p>局部变量表所分配的内存空间在编译期间完成分配，进入一个方法时，这个方法需要在帧中分配多大的内存空间是完全确定的。方法运行期间， 不会改变局部变量表的大小。</p>
-<p>线程请求的栈深度对于虚拟机所允许的深度时会出现栈溢出异常，如果虚拟机栈可以动态扩展，当扩展时无法申请到足够的内存时，会抛出OOM异常。</p>
-<h3 id="本地方法栈"><a href="#本地方法栈" class="headerlink" title="本地方法栈"></a>本地方法栈</h3><p>和虚拟机栈类似，也会抛出栈溢出和OOM异常 。是为虚拟机执行natvie方法服务的，虚拟机栈为执行Java方法服务。</p>
-<h3 id="Java堆"><a href="#Java堆" class="headerlink" title="Java堆"></a>Java堆</h3><p>虚拟机管理的内存中最大的一块</p>
-<p>被所有线程共享</p>
-<p>在虚拟机启动时创建</p>
-<p>用于存放对象实例</p>
-<p>垃圾回收器管理的主要区域</p>
-<p>从分代垃圾回收算法的角度可分为老年代，新生代等</p>
-<p>可处于物理上不连续的内存空间，可以时固定大小也可以是可扩展的（可扩展的通过-Xmx和-Xms空值）</p>
-<p>如果没有内存可供实例分配，也不能扩展时会抛出OOM</p>
-<h3 id="方法区"><a href="#方法区" class="headerlink" title="方法区"></a>方法区</h3><h3 id="运行是常量池"><a href="#运行是常量池" class="headerlink" title="运行是常量池"></a>运行是常量池</h3><h3 id="直接内存"><a href="#直接内存" class="headerlink" title="直接内存"></a>直接内存</h3>
+        <p>（1）DELETE语句执行删除的过程是每次从表中删除一行，并且同时将该行的删除操作作为事务记录在日志中保存以便进行进行回滚操作。</p>
+<p>   TRUNCATE TABLE 则一次性地从表中删除所有的数据并不把单独的删除操作记录记入日志保存，删除行是不能恢复的。并且在删除的过程中不会激活与表有关的删除触发器。执行速度快。</p>
+<p>（2）表和索引所占空间。</p>
+<p>   当表被TRUNCATE 后，这个表和索引所占用的空间会恢复到初始大小，</p>
+<p>   DELETE操作不会减少表或索引所占用的空间。</p>
+<p>   drop语句将表所占用的空间全释放掉。</p>
+<p>（3）一般而言，drop &gt; truncate &gt; delete</p>
+<p>（4）应用范围。</p>
+<pre><code>TRUNCATE 只能对TABLE；         DELETE可以是table和view</code></pre><p>（5）TRUNCATE 和DELETE只删除数据， DROP则删除整个表（结构和数据）。</p>
+<p>（6）truncate与不带where的delete ：只删除数据，而不删除表的结构（定义）drop语句将删除表的结构被依赖的约束（constrain),触发器（trigger)索引（index);依赖于该表的存储过程/函数将被保留，但其状态会变为：invalid。</p>
+<p>（7）delete语句为DML（data maintain Language),这个操作会被放到 rollback segment中,事务提交后才生效。如果有相应的 tigger,执行的时候将被触发。</p>
+<p>（8）truncate、drop是DLL（data define language),操作立即生效，原数据不放到 rollback segment中，不能回滚</p>
+<p>（9）在没有备份情况下，谨慎使用 drop 与 truncate。要删除部分数据行采用delete且注意结合where来约束影响范围。回滚段要足够大。要删除表用drop;若想保留表而将表中数据删除，如果于事务无关，用truncate即可实现。如果和事务有关，或老师想触发trigger,还是用delete。</p>
+<p>（10） Truncate table 表名 速度快,而且效率高,因为:<br>truncate table 在功能上与不带 WHERE 子句的 DELETE 语句相同：二者均删除表中的全部行。但 TRUNCATE TABLE 比 DELETE 速度快，且使用的系统和事务日志资源少。DELETE 语句每次删除一行，并在事务日志中为所删除的每行记录一项。TRUNCATE TABLE 通过释放存储表数据所用的数据页来删除数据，并且只在事务日志中记录页的释放。 </p>
+<p>（11） TRUNCATE TABLE 删除表中的所有行，但表结构及其列、约束、索引等保持不变。新行标识所用的计数值重置为该列的种子。如果想保留标识计数值，请改用 DELETE。如果要删除表定义及其数据，请使用 DROP TABLE 语句。 </p>
+<p>（12） 对于由 FOREIGN KEY 约束引用的表，不能使用 TRUNCATE TABLE，而应使用不带 WHERE 子句的 DELETE 语句。由于 TRUNCATE TABLE 不记录在日志中，所以它不能激活触发器。</p>
+<p>一、delete</p>
+<p>1、delete是DML，执行delete操作时，每次从表中删除一行，并且同时将该行的的删除操作记录在redo和undo表空间中以便进行回滚（rollback）和重做操作，但要注意表空间要足够大，需要手动提交（commit）操作才能生效，可以通过rollback撤消操作。</p>
+<p>2、delete可根据条件删除表中满足条件的数据，如果不指定where子句，那么删除表中所有记录。</p>
+<p>3、delete语句不影响表所占用的extent，高水线(high watermark)保持原位置不变。</p>
+<p>二、truncate</p>
+<p>1、truncate是DDL，会隐式提交，所以，不能回滚，不会触发触发器。</p>
+<p>2、truncate会删除表中所有记录，并且将重新设置高水线和所有的索引，缺省情况下将空间释放到minextents个extent，除非使用reuse storage，。不会记录日志，所以执行速度很快，但不能通过rollback撤消操作（如果一不小心把一个表truncate掉，也是可以恢复的，只是不能通过rollback来恢复）。</p>
+<p>3、对于外键（foreignkey ）约束引用的表，不能使用 truncate table，而应使用不带 where 子句的 delete 语句。</p>
+<p>4、truncatetable不能用于参与了索引视图的表。</p>
+<p>三、drop</p>
+<p>1、drop是DDL，会隐式提交，所以，不能回滚，不会触发触发器。</p>
+<p>2、drop语句删除表结构及所有数据，并将表所占用的空间全部释放。</p>
+<p>3、drop语句将删除表的结构所依赖的约束，触发器，索引，依赖于该表的存储过程/函数将保留,但是变为invalid状态。</p>
+<p>总结：</p>
+<p>1、在速度上，一般来说，drop&gt; truncate &gt; delete。</p>
+<p>2、在使用drop和truncate时一定要注意，虽然可以恢复，但为了减少麻烦，还是要慎重。</p>
+<p>3、如果想删除部分数据用delete，注意带上where子句，回滚段要足够大；</p>
+<p>   如果想删除表，当然用drop； </p>
+<p>   如果想保留表而将所有数据删除，如果和事务无关，用truncate即可；</p>
+<p>   如果和事务有关，或者想触发trigger，还是用delete；</p>
+<p>   如果是整理表内部的碎片，可以用truncate跟上reuse stroage，再重新导入/插入数据。</p>
+
       
     </div>
     
@@ -396,7 +411,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/jvm/" rel="tag"># jvm</a>
+            <a href="/tags/drop%E5%92%8Cdelete/" rel="tag"># drop和delete</a>
           
         </div>
       
@@ -409,8 +424,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/04/12/Mysql%E4%B8%BA%E4%BB%80%E4%B9%88%E7%94%A8B-s%E6%A0%91%E5%81%9A%E7%B4%A2%E5%BC%95/" rel="next" title="Mysql为什么用B+树做索引">
-                <i class="fa fa-chevron-left"></i> Mysql为什么用B+树做索引
+              <a href="/2020/05/17/%E5%AD%A6%E4%B9%A0%E5%BF%83%E5%BE%97/" rel="next" title="学习心得">
+                <i class="fa fa-chevron-left"></i> 学习心得
               </a>
             
           </div>
@@ -418,10 +433,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2020/04/17/%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8-%E4%B8%8E%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D/" rel="prev" title="垃圾收集器 与内存分配">
-                垃圾收集器 与内存分配 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -473,17 +484,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Table of Contents
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Overview
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -559,22 +561,6 @@
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#运行时区域"><span class="nav-number">1.</span> <span class="nav-text">运行时区域</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#程序计数器"><span class="nav-number">1.1.</span> <span class="nav-text">程序计数器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#java虚拟机栈"><span class="nav-number">1.2.</span> <span class="nav-text">java虚拟机栈</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#本地方法栈"><span class="nav-number">1.3.</span> <span class="nav-text">本地方法栈</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java堆"><span class="nav-number">1.4.</span> <span class="nav-text">Java堆</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方法区"><span class="nav-number">1.5.</span> <span class="nav-text">方法区</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#运行是常量池"><span class="nav-number">1.6.</span> <span class="nav-text">运行是常量池</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#直接内存"><span class="nav-number">1.7.</span> <span class="nav-text">直接内存</span></a></li></ol></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       

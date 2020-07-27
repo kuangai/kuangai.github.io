@@ -82,7 +82,7 @@
 <meta name="description" content="网站描述">
 <meta property="og:type" content="website">
 <meta property="og:title" content="study">
-<meta property="og:url" content="https://kuangai.github.io/tags/%E5%86%85%E5%AD%98%E5%9B%9E%E6%94%B6%E7%AE%97%E6%B3%95/index.html">
+<meta property="og:url" content="https://kuangai.github.io/page/3/index.html">
 <meta property="og:site_name" content="study">
 <meta property="og:description" content="网站描述">
 <meta property="og:locale" content="zh_CN">
@@ -131,13 +131,13 @@
 
 
 
-  <link rel="canonical" href="https://kuangai.github.io/tags/内存回收算法/"/>
+  <link rel="canonical" href="https://kuangai.github.io/page/3/"/>
 
 
 
 
 
-  <title>Tag: 内存回收算法 | study</title>
+  <title>study - forever</title>
   
 
 
@@ -156,7 +156,8 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left 
+  page-home">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -259,55 +260,208 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-
-  
-  
-  
-  <div class="post-block tag">
-
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h2>内存回收算法<small>Tag</small>
-        </h2>
-      </div>
-
+  <section id="posts" class="posts-expand">
+    
       
-        
+
+  
+
+  
+  
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://kuangai.github.io/2020/04/08/hello-world/">
 
-      <h3 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="wsc">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="study">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2020/04/17/%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8-%E4%B8%8E%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D/" itemprop="url">
-              
-                <span itemprop="name">垃圾收集器 与内存分配</span>
-              
-            </a>
         
-      </h3>
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/04/08/hello-world/" itemprop="url">Linux的IO模型</a></h2>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2020-04-17T20:48:00+08:00"
-              content="2020-04-17" >
-          04-17
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-04-08T17:30:00+08:00">
+                2020-04-08
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    </div>
+      
 
+      
+        
+          
+            <h4 id="IO执行的两个阶段"><a href="#IO执行的两个阶段" class="headerlink" title="IO执行的两个阶段"></a>IO执行的两个阶段</h4><p>在Linux中，对于一次读取IO的操作，数据并不会直接拷贝到程序的程序缓冲区。通常包括两个阶段： (1)等待数据准备好，到达内核缓冲区；<br>(2)从内核向进程复制数据。</p>
+<h5 id="五种IO模型"><a href="#五种IO模型" class="headerlink" title="五种IO模型"></a>五种IO模型</h5><blockquote>
+<p>阻塞式I/O<br>非阻塞式I/O<br>I/O复用（select，poll，epoll等）<br>信号驱动式I/O（SIGIO）<br>异步I/O（POSIX的aio_系列函数）</p>
+</blockquote>
+<h4 id="阻塞式I-O模型"><a href="#阻塞式I-O模型" class="headerlink" title="阻塞式I/O模型"></a>阻塞式I/O模型</h4><blockquote>
+<p>在IO执行的两个阶段中，进程都处于blocked(阻塞)状态，在等待数据返回的过程中不能做其他的工作，只能阻塞的等在那里. </p>
+</blockquote>
+<ul>
+<li>优缺点：</li>
+</ul>
+<blockquote>
+<p>优点是简单，实时性高，响应及时无延时，但缺点也很明显，需要阻塞等待，性能差；</p>
+</blockquote>
+<h4 id="非阻塞式I-O"><a href="#非阻塞式I-O" class="headerlink" title="非阻塞式I/O"></a>非阻塞式I/O</h4><blockquote>
+<p>在非阻塞状态下，IO执行的等待阶段并不是完全的阻塞的，但是第二个阶段依然处于一个阻塞状态。<br>同步非阻塞方式相比同步阻塞方式：</p>
+</blockquote>
+<ul>
+<li>优点</li>
+</ul>
+<blockquote>
+<p>能够在等待任务完成的时间里干其他活了（包括提交其他任务，也就是 “后台” 可以有多个任务在同时执行）。    </p>
+</blockquote>
+<ul>
+<li>缺点</li>
+</ul>
+<blockquote>
+<p>任务完成的响应延迟增大了，因为每过一段时间才去轮询一次read操作，而任务可能在两次轮询之间的任意时间完成。这会导致整体数据吞吐量的降低。 </p>
+</blockquote>
+<h4 id="I-O多路复用（select，poll，epol）"><a href="#I-O多路复用（select，poll，epol）" class="headerlink" title="I/O多路复用（select，poll，epol）"></a>I/O多路复用（select，poll，epol）</h4><blockquote>
+<p>单个进程就可以同时处理多个网络连接的IO。它的基本原理就是不再由应用程序自己监视连接，取而代之由内核替应用程序监视文件描述符。<br>IO复用的优势并不是对于单个连接能处理得更快，而是单个进程就可以同时处理多个网络连接的IO。</p>
+</blockquote>
+<blockquote>
+<p>IO多路复用是阻塞在select，epoll这样的系统调用之上，而没有阻塞在真正的I/O系统调用</p>
+</blockquote>
+<ul>
+<li>优势</li>
+</ul>
+<blockquote>
+<p>与传统的多线程/多进程模型比，I/O多路复用的最大优势是系统开销小，系统不需要创建新的额外进程或者线程，也不需要维护这些进程和线程的运行，降底了系统的维护工作量，节省了系统资源。</p>
+</blockquote>
+<ul>
+<li>主要应用场景：</li>
+</ul>
+<blockquote>
+<p>服务器需要同时处理多个处于监听状态或者多个连接状态的套接字；<br>服务器需要同时处理多种网络协议的套接字，如同时处理TCP和UDP请求；<br>服务器需要监听多个端口或处理多种服务；<br>服务器需要同时处理用户输入和网络连接。</p>
+</blockquote>
+<h4 id="信号驱动式I-O"><a href="#信号驱动式I-O" class="headerlink" title="信号驱动式I/O"></a>信号驱动式I/O</h4><blockquote>
+<p>允许Socket进行信号驱动IO,并注册一个信号处理函数，进程继续运行并不阻塞。当数据准备好时，进程会收到一个SIGIO信号，可以在信号处理函数中调用I/O操作函数处理数据.<strong>阻塞在IO操作的第二阶段</strong></p>
+</blockquote>
+<h4 id="异步I-O模型"><a href="#异步I-O模型" class="headerlink" title="异步I/O模型"></a>异步I/O模型</h4><blockquote>
+<pre><code>上述四种IO模型都是同步的。相对于同步IO，异步IO不是顺序执行。用户进程进行aio_read系统调用之后，就可以去处理其他的逻辑了，无论内核数据是否准备好，都会直接返回给用户进程，不会对进程造成阻塞。等到数据准备好了，内核直接复制数据到进程空间，然后从内核向进程发送通知，此时数据已经在用户空间了,可以对数据进行处理了.</code></pre><p>   在 Linux 中，通知的方式是 “信号”，分为三种情况：<br>　　①、如果这个进程正在用户态处理其他逻辑，那就强行打断，调用事先注册的信号处理函数，这个函数可以决定何时以及如何处理这个异步任务。由于信号处理函数是突然闯进来的，因此跟中断处理程序一样，有很多事情是不能做的，因此保险起见，一般是把事件 “登记” 一下放进队列，然后返回该进程原来在做的事。<br>　　②、如果这个进程正在内核态处理，例如以同步阻塞方式读写磁盘，那就把这个通知挂起来了，等到内核态的事情忙完了，快要回到用户态的时候，再触发信号通知。<br>　　③、如果这个进程现在被挂起了，例如陷入睡眠，那就把这个进程唤醒，等待CPU调度，触发信号通知。</p>
+</blockquote>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
   </div>
   
   
   
+  </article>
+
+
+    
+  </section>
 
   
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/page/2/">&lt;i class&#x3D;&quot;fa fa-angle-left&quot;&gt;&lt;&#x2F;i&gt;</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
+  </nav>
+
 
 
           </div>
