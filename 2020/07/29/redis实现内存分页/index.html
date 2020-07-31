@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/header.jpg?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/header.jpg?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="内存分页,redis分页," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="redis实现分页的方法每个主题下的用户的评论组装好写入Redis中，每个主题会有一个topicId，每一条评论会和topicId关联起来，大致的数据模型如下：{ topicId: ‘xxxxxxxx’, comments: [ { username: ‘niuniu’, createDate: 1447747334791, content: ‘在Redis中分页’, commentId: ‘xx">
+<meta property="og:type" content="article">
+<meta property="og:title" content="redis实现内存分页">
+<meta property="og:url" content="https://kuangai.github.io/2020/07/29/redis%E5%AE%9E%E7%8E%B0%E5%86%85%E5%AD%98%E5%88%86%E9%A1%B5/index.html">
+<meta property="og:site_name" content="study">
+<meta property="og:description" content="redis实现分页的方法每个主题下的用户的评论组装好写入Redis中，每个主题会有一个topicId，每一条评论会和topicId关联起来，大致的数据模型如下：{ topicId: ‘xxxxxxxx’, comments: [ { username: ‘niuniu’, createDate: 1447747334791, content: ‘在Redis中分页’, commentId: ‘xx">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-07-29T11:28:00.000Z">
+<meta property="article:modified_time" content="2020-07-29T11:30:08.328Z">
+<meta property="article:author" content="wsc">
+<meta property="article:tag" content="内存分页">
+<meta property="article:tag" content="redis分页">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://kuangai.github.io/2020/07/29/redis实现内存分页/"/>
+
+
+
+
+
+  <title>redis实现内存分页 | study</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">study</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">forever</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-首页">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-归档">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-分类">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-标签">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-关于">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://kuangai.github.io/2020/07/29/redis%E5%AE%9E%E7%8E%B0%E5%86%85%E5%AD%98%E5%88%86%E9%A1%B5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="wsc">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="study">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">redis实现内存分页</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-07-29T19:28:00+08:00">
+                2020-07-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/redis/" itemprop="url" rel="index">
+                    <span itemprop="name">redis</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>阅读数
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="redis实现分页的方法"><a href="#redis实现分页的方法" class="headerlink" title="redis实现分页的方法"></a>redis实现分页的方法</h2><p>每个主题下的用户的评论组装好写入Redis中，每个主题会有一个topicId，每一条评论会和topicId关联起来，大致的数据模型如下：<br>{ topicId: ‘xxxxxxxx’, comments: [ { username: ‘niuniu’, createDate: 1447747334791, content: ‘在Redis中分页’, commentId: ‘xxxxxxx’, reply: [ { content: ‘yyyyyy’ username: ‘niuniu’ }, … ] }, … ]}<br>将评论数据从MySQL查询出来组装好存到Redis后，以后每次就可以从Redis获取组装好的评论数据，从上面的数据模型可以看出数据都是key-value型数据，无疑要采用hash进行存储，但是每次拿取评论数据时需要分页而且还要按createDate字段进行排序，hash肯定是不能做到分页和排序的。</p>
+<p>那么，就挨个看一下Redis所支持的数据类型：</p>
+<p>1、String: 主要用于存储字符串，显然不支持分页和排序。<br>2、Hash: 主要用于存储key-value型数据，评论模型中全是key-value型数据，所以在这里Hash无疑会用到。<br>3、List: 主要用于存储一个列表，列表中的每一个元素按元素的插入时的顺序进行保存，如果我们将评论模型按createDate排好序后再插入List中，似乎就能做到排序了，而且再利用List中的LRANGE key start stop指令还能做到分页。嗯，到这里List似乎满足了我们分页和排序的要求，但是评论还会被删除，就需要更新Redis中的数据，如果每次删除评论后都将Redis中的数据全部重新写入一次，显然不够优雅，效率也会大打折扣，如果能删除指定的数据无疑会更好，而List中涉及到删除数据的就只有LPOP和RPOP这两条指令，但LPOP和RPOP只能删除列表头和列表尾的数据，不能删除指定位置的数据,(备注：其实还有 LREM命令可以做到删除，但是非常不方便)，而且当存在接口高并发访问时，这个list可能会无限延长，且里面的数据会存在很多重复，这就会影响到正常的业务，所以List也不太适合。</p>
+<p>4、Set: 主要存储无序集合，无序！排除。<br>5、SortedSet: 主要存储有序集合，SortedSet的添加元素指令ZADD key score member [[score,member]…]会给每个添加的元素member绑定一个用于排序的值score，SortedSet就会根据score值的大小对元素进行排序，在这里就可以将createDate当作score用于排序，SortedSet中的指令ZREVRANGE key start stop又可以返回指定区间内的成员，可以用来做分页，SortedSet的指令ZREM key member可以根据key移除指定的成员，能满足删评论的要求，所以，SortedSet在这里是最适合的（时间复杂度O(log(N))）。</p>
+<p>所以，需要用到的数据类型有SortSet和Hash，SortSet用于做分页排序，Hash用于存储具体的键值对数据。SortSet结构中将每个主题的topicId作为set的key，将与该主题关联的评论的createDate和commentId分别作为set的score和member，commentId的顺序就根据createDate的大小进行排列。<br>当需要查询某个主题某一页的评论时，就可主题的topicId通过指令zrevrange topicId (page-1)×10 (page-1)×10+perPage这样就能找出某个主题下某一页的按时间排好顺序的所有评论的commintId。page为查询第几页的页码，perPage为每页显示的条数。<br>当找到所有评论的commentId后，就可以把这些commentId作为key去Hash结构中去查询该条评论对应的内容。<br>这样就利用SortSet和Hash两种结构在Redis中达到了分页和排序的目的。</p>
+<p>当然，也可以直接只使用SrotedSet类型，而不使用Hash类型，直接将评论存放在member中。<br>但为什么要将评论和排序放到不同的类型里？其中的好处是，可以对评论设置不同的排序类型，比如按时间的正反序，点赞的正反序，查看次数的正反序等。而这样只需要维护不同的SrotedSet排序，不需要维护多套评论的内容了。</p>
+<p>下面是示例：</p>
+<p>需要引用下面两个jar包</p>
+<p>采用的jedis-2.8.1.jar</p>
+<p>因为JedisPool引用了第三方类库，需要再加入 commons-pool2-2.4.2.jar</p>
+<p>代码如下：</p>
+<p>复制代码<br> public static void main(String[] args)<br>    {<br>        for (int i = 1; i &lt;= 100; i += 1) {<br>            // 初始化CommentId索引 SortSet<br>            RedisClient.zadd(“topicId”, i, “commentId” + i);<br>            // 初始化Comment数据 Hash<br>            RedisClient.hset(“Comment_Key”, “commentId” + i, “comment content “+ i +” …….”);<br>        }<br>        // 倒序取 从0条开始取 5条 Id 数据<br>        Set<String> sets = RedisClient.zrevrangebyscore(“topicId”, “100”, “1”, 0, 10);<br>        String[] items = new String[]{};<br>        System.out.println(sets.toString());<br>        // 根据id取comment数据<br>        List<String> list = RedisClient.hmget(“Comment_Key”, sets.toArray(items));<br>        for (String str : list) {<br>            System.out.println(str);<br>        }</p>
+<pre><code>}</code></pre><p>复制代码<br>其中的RedisClient类的代码如下：</p>
+<p>复制代码<br>import java.util.LinkedHashSet;<br>import java.util.List;<br>import java.util.Set;</p>
+<p>import redis.clients.jedis.Jedis;<br>import redis.clients.jedis.JedisCommands;<br>import redis.clients.jedis.JedisPool;<br>import redis.clients.jedis.JedisPoolConfig;</p>
+<p>/**</p>
+<ul>
+<li><p>Redis 客户端</p>
+</li>
+<li><p>/<br>public class RedisClient {</p>
+<p>  private static JedisPool jedisPool;</p>
+<p>  static {</p>
+<pre><code>JedisPoolConfig config = new JedisPoolConfig();
+
+config.setMaxTotal(123);
+config.setMaxTotal(1024);
+config.setMaxIdle(10);
+config.setMaxWaitMillis(1000);
+config.setTestOnBorrow(true);
+config.setTestOnReturn(true);
+
+String ip = &quot;192.168.80.128&quot;;
+int port = 6379;
+int timeOut = 2000;
+String password=&quot;jdd.com&quot;;
+
+jedisPool = new JedisPool(config,ip,port,timeOut,password);</code></pre><p>  }</p>
+<p>  public static String set(String key, String value) {</p>
+<pre><code>Jedis jedis = jedisPool.getResource();
+String result = jedis.set(key, value);
+jedis.close();
+return result;</code></pre><p>  }</p>
+<p>  public static String get(String key) {</p>
+<pre><code>Jedis jedis = jedisPool.getResource();
+String result = jedis.get(key);
+jedis.close();
+return result;</code></pre><p>  }</p>
+<p>  public static Long hset(String key, String item, String value) {</p>
+<pre><code>Jedis jedis = jedisPool.getResource();
+Long result = jedis.hset(key, item, value);
+jedis.close();
+return result;</code></pre><p>  }</p>
+<p>  public static String hget(String key, String item) {</p>
+<pre><code>Jedis jedis = jedisPool.getResource();
+String result = jedis.hget(key, item);
+jedis.close();
+return result;</code></pre><p>  }</p>
+<p>  /**</p>
+<ul>
+<li><p>Redis Hmget 命令用于返回哈希表中，一个或多个给定字段的值。</p>
+</li>
+<li><p>如果指定的字段不存在于哈希表，那么返回一个 nil 值。</p>
+</li>
+<li></li>
+<li><p>@param key</p>
+</li>
+<li><p>@param item</p>
+</li>
+<li><p>@return 一个包含多个给定字段关联值的表，表值的排列顺序和指定字段的请求顺序一样。</p>
+</li>
+<li><p>/<br>public static List<String> hmget(String key, String… item) {<br>  Jedis jedis = jedisPool.getResource();<br>  List<String> result = jedis.hmget(key, item);<br>  jedis.close();<br>  return result;<br>}</p>
+<p>public static Long incr(String key) {<br>  Jedis jedis = jedisPool.getResource();<br>  Long result = jedis.incr(key);<br>  jedis.close();<br>  return result;<br>}</p>
+<p>public static Long decr(String key) {<br>  Jedis jedis = jedisPool.getResource();<br>  Long result = jedis.decr(key);<br>  jedis.close();<br>  return result;<br>}</p>
+<p>public static Long expire(String key, int second) {<br>  Jedis jedis = jedisPool.getResource();<br>  Long result = jedis.expire(key, second);<br>  jedis.close();<br>  return result;<br>}</p>
+<p>public static Long ttl(String key) {<br>  Jedis jedis = jedisPool.getResource();<br>  Long result = jedis.ttl(key);<br>  jedis.close();<br>  return result;<br>}</p>
+<p>public static Long hdel(String key, String item) {<br>  Jedis jedis = jedisPool.getResource();<br>  Long result = jedis.hdel(key, item);<br>  jedis.close();<br>  return result;<br>}</p>
+<p>public static Long del(String key) {<br>  Jedis jedis = jedisPool.getResource();<br>  Long result = jedis.del(key);<br>  jedis.close();<br>  return result;<br>}</p>
+<p>public static Long rpush(String key, String… strings) {<br>  Jedis jedis = jedisPool.getResource();<br>  Long result = jedis.rpush(key, strings);<br>  jedis.close();<br>  return result;<br>}</p>
+<p>/**</p>
+</li>
+<li><p>Redis Lrange 返回列表中指定区间内的元素，区间以偏移量 START 和 END 指定。 其中 0 表示列表的第一个元素， 1 表示列表的第二个元素，以此类推。</p>
+</li>
+<li><p>你也可以使用负数下标，以 -1 表示列表的最后一个元素， -2 表示列表的倒数第二个元素，以此类推。</p>
+</li>
+<li></li>
+<li><p>@param string</p>
+</li>
+<li><p>@param start</p>
+</li>
+<li><p>@param end</p>
+</li>
+<li><p>@return</p>
+</li>
+<li><p>/<br>public static List<String> lrange(String key, int start, int end) {<br>  Jedis jedis = jedisPool.getResource();<br>  List<String> result = jedis.lrange(key, start, end);<br>  jedis.close();<br>  return result;<br>}</p>
+<p>/**</p>
+</li>
+<li><p>从列表中从头部开始移除count个匹配的值。如果count为零，所有匹配的元素都被删除。如果count是负数，内容从尾部开始删除。</p>
+</li>
+<li></li>
+<li><p>@param string</p>
+</li>
+<li><p>@param string2</p>
+</li>
+<li><p>@param i</p>
+</li>
+<li><p>/<br>public static Long lrem(String key, Long count, String value) {<br>  Jedis jedis = jedisPool.getResource();<br>  Long result = jedis.lrem(key, count, value);<br>  jedis.close();<br>  return result;<br>}</p>
+<p>/**</p>
+</li>
+<li><p>Redis Zadd 命令用于将一个或多个成员元素及其分数值加入到有序集当中。</p>
+</li>
+<li><p>如果某个成员已经是有序集的成员，那么更新这个成员的分数值，并通过重新插入这个成员元素，来保证该成员在正确的位置上。</p>
+</li>
+<li><p>分数值可以是整数值或双精度浮点数。</p>
+</li>
+<li><p>如果有序集合 key 不存在，则创建一个空的有序集并执行 ZADD 操作。</p>
+</li>
+<li><p>当 key 存在但不是有序集类型时，返回一个错误。</p>
+</li>
+<li></li>
+<li><p>@param string</p>
+</li>
+<li><p>@param i</p>
+</li>
+<li><p>@param string2</p>
+</li>
+<li><p>@return 被成功添加的新成员的数量，不包括那些被更新的、已经存在的成员。</p>
+</li>
+<li><p>/<br>public static Long zadd(String key, double score, String member) {<br>  Jedis jedis = jedisPool.getResource();<br>  Long result = jedis.zadd(key, score, member);<br>  jedis.close();<br>  return result;<br>}</p>
+<p>/**</p>
+</li>
+<li><p>Redis Zrevrangebyscore 返回有序集中指定分数区间内的所有的成员。有序集成员按分数值递减(从大到小)的次序排列。</p>
+</li>
+<li><p>具有相同分数值的成员按字典序的逆序(reverse lexicographical order )排列。</p>
+</li>
+<li><p>除了成员按分数值递减的次序排列这一点外， ZREVRANGEBYSCORE 命令的其他方面和 ZRANGEBYSCORE 命令一样。</p>
+</li>
+<li></li>
+<li><p>@param key</p>
+</li>
+<li><p>@param max</p>
+</li>
+<li><p>@param min</p>
+</li>
+<li><p>@param offset</p>
+</li>
+<li><p>@param count</p>
+</li>
+<li><p>@return 指定区间内，带有分数值(可选)的有序集成员的列表。</p>
+</li>
+<li><p>/<br>public static Set<String> zrevrangebyscore(String key, String max, String min, int offset, int count) {<br>  Jedis jedis = jedisPool.getResource();<br>  Set<String> result =  jedis.zrevrangeByScore(key, max, min, offset, count);<br>  jedis.close();<br>  return result;<br>}<br>}</p>
+</li>
+</ul>
+</li>
+</ul>
+<p><a href="https://www.cnblogs.com/afeng2010/p/10042790.html" target="_blank" rel="noopener">https://www.cnblogs.com/afeng2010/p/10042790.html</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E5%86%85%E5%AD%98%E5%88%86%E9%A1%B5/" rel="tag"># 内存分页</a>
+          
+            <a href="/tags/redis%E5%88%86%E9%A1%B5/" rel="tag"># redis分页</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/07/29/LRU%E7%AE%97%E6%B3%95/" rel="next" title="LRU算法">
+                <i class="fa fa-chevron-left"></i> LRU算法
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/07/29/Untitled/" rel="prev" title="redis4.0之RDB-AOF混合持久化">
+                redis4.0之RDB-AOF混合持久化 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">wsc</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="http://www.cnblogs.com/xingyunblog" target="_blank" title="博客园">
+                      
+                        <i class="fa fa-fw fa-globe"></i>博客园</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/hadues" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-globe"></i>CSDN</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#redis实现分页的方法"><span class="nav-number">1.</span> <span class="nav-text">redis实现分页的方法</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">wsc</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>访问人数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

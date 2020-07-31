@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/header.jpg?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/header.jpg?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="aof和rdb," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="转载：https:&#x2F;&#x2F;developer.aliyun.com&#x2F;article&#x2F;193034简介： redis有两种持久化的方式——RDB和AOF，RDB是一份内存快照，AOF则为可回放的命令日志，他们两个各有特点也相互独立。4.0开始允许使用RDB-AOF混合持久化的方式，结合了两者的优点，通过aof-use-rdb-preamble配置项可以打开混合开关。前言redis有两种持久化的方式——R">
+<meta property="og:type" content="article">
+<meta property="og:title" content="redis4.0之RDB-AOF混合持久化">
+<meta property="og:url" content="https://kuangai.github.io/2020/07/29/Untitled/index.html">
+<meta property="og:site_name" content="study">
+<meta property="og:description" content="转载：https:&#x2F;&#x2F;developer.aliyun.com&#x2F;article&#x2F;193034简介： redis有两种持久化的方式——RDB和AOF，RDB是一份内存快照，AOF则为可回放的命令日志，他们两个各有特点也相互独立。4.0开始允许使用RDB-AOF混合持久化的方式，结合了两者的优点，通过aof-use-rdb-preamble配置项可以打开混合开关。前言redis有两种持久化的方式——R">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-07-29T12:18:00.000Z">
+<meta property="article:modified_time" content="2020-07-29T12:21:42.874Z">
+<meta property="article:author" content="wsc">
+<meta property="article:tag" content="aof和rdb">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://kuangai.github.io/2020/07/29/Untitled/"/>
+
+
+
+
+
+  <title>redis4.0之RDB-AOF混合持久化 | study</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">study</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">forever</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-首页">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-归档">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-分类">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-标签">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-关于">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://kuangai.github.io/2020/07/29/Untitled/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="wsc">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="study">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">redis4.0之RDB-AOF混合持久化</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-07-29T20:18:00+08:00">
+                2020-07-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/redis/" itemprop="url" rel="index">
+                    <span itemprop="name">redis</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>阅读数
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>转载：<a href="https://developer.aliyun.com/article/193034" target="_blank" rel="noopener">https://developer.aliyun.com/article/193034</a><br>简介： redis有两种持久化的方式——RDB和AOF，RDB是一份内存快照，AOF则为可回放的命令日志，他们两个各有特点也相互独立。4.0开始允许使用RDB-AOF混合持久化的方式，结合了两者的优点，通过aof-use-rdb-preamble配置项可以打开混合开关。<br>前言<br>redis有两种持久化的方式——RDB和AOF其中RDB是一份内存快照AOF则为可回放的命令日志他们两个各有特点也相互独立。4.0开始允许使用RDB-AOF混合持久化的方式结合了两者的优点通过aof-use-rdb-preamble配置项可以打开混合开关。</p>
+<p>RDB V.S. AOF</p>
+<ol>
+<li><p>RDB<br>RDB文件本质上是一份内存快照保存了创建RDB文件那个时间点的redis全量数据具有数据文件小创建、恢复快的优点但是由于快照的特性无法保存创建RDB之后的增量数据。</p>
+</li>
+<li><p>AOF<br>AOF文件本质上是一份执行日志保存所有对redis进行更改的命令增量数据也就随命令写入AOF文件刷盘的策略由配置项appendfsync控制可以选择”everysec”或”always”。</p>
+</li>
+</ol>
+<p>AOF文件基本上是human-readable的文本所以其体积相对较大在从AOF文件恢复数据时就是做日志回放执行AOF文件中记录的所有命令所以相对RDB而言恢复耗时较长。</p>
+<p>随着redis的运行AOF文件会不断膨胀由aofrewrite机制来防止磁盘空间被撑满详见上一篇文章《redis4.0之利用管道优化aofrewrite》。</p>
+<p>RDB-AOF混合持久化<br>细细想来aofrewrite时也是先写一份全量数据到新AOF文件中再追加增量只不过全量数据是以redis命令的格式写入。那么是否可以先以RDB格式写入全量数据再追加增量日志呢这样既可以提高aofrewrite和恢复速度也可以减少文件大小还可以保证数据的完毕性整合RDB和AOF的优点那么现在4.0实现了这一特性——RDB-AOF混合持久化。</p>
+<p>aofrewrite<br>综上所述RDB-AOF混合持久化体现在aofrewrite时那么我们就从这里开始来看4.0是如何实现的</p>
+<p>回忆下aofrewrite的过程</p>
+<p>无论是serverCron触发或者执行BGREWRITEAOF命令最终redis都会走到rewriteAppendOnlyFileBackground()</p>
+<p>rewriteAppendOnlyFileBackground函数会fork子进程子进程进入rewriteAppendOnlyFile函数来生成新的AOF文件混合持久化就从这里开始<br>int rewriteAppendOnlyFile(char *filename) {<br>    …<br>    if (server.aof_use_rdb_preamble) {<br>        int error;<br>        if (rdbSaveRio(&amp;aof,&amp;error,RDB_SAVE_AOF_PREAMBLE,NULL) == C_ERR) {<br>            errno = error;<br>            goto werr;<br>        }<br>    } else {<br>        if (rewriteAppendOnlyFileRio(&amp;aof) == C_ERR) goto werr;<br>    }<br>    …<br>}<br>可以看到当混合持久化开关打开时就会进入rdbSaveRio函数先以RDB格式来保存全量数据</p>
+<p>前文说道子进程在做aofrewrite时会通过管道从父进程读取增量数据并缓存下来</p>
+<p>那么在以RDB格式保存全量数据时也会从管道读取数据并不会造成管道阻塞<br>int rdbSaveRio(rio *rdb, int *error, int flags, rdbSaveInfo *rsi) {<br>    …<br>    snprintf(magic,sizeof(magic),”REDIS%04d”,RDB_VERSION);<br>    if (rdbWriteRaw(rdb,magic,9) == -1) goto werr;<br>    if (rdbSaveInfoAuxFields(rdb,flags,rsi) == -1) goto werr;<br>首先把RDB的版本注意不是redis的版本和辅助域写入文件<br>    for (j = 0; j &lt; server.dbnum; j++) {<br>        redisDb *db = server.db+j;<br>        dict *d = db-&gt;dict;<br>        if (dictSize(d) == 0) continue;<br>        di = dictGetSafeIterator(d);<br>        if (!di) return C_ERR;</p>
+<pre><code>/* Write the SELECT DB opcode */
+if (rdbSaveType(rdb,RDB_OPCODE_SELECTDB) == -1) goto werr;
+if (rdbSaveLen(rdb,j) == -1) goto werr;
+
+/* Write the RESIZE DB opcode. We trim the size to UINT32_MAX, which
+ * is currently the largest type we are able to represent in RDB sizes.
+ * However this does not limit the actual size of the DB to load since
+ * these sizes are just hints to resize the hash tables. */
+uint32_t db_size, expires_size;
+db_size = (dictSize(db-&gt;dict) &lt;= UINT32_MAX) ?
+                        dictSize(db-&gt;dict) :
+                        UINT32_MAX;
+expires_size = (dictSize(db-&gt;expires) &lt;= UINT32_MAX) ?
+                        dictSize(db-&gt;expires) :
+                        UINT32_MAX;
+if (rdbSaveType(rdb,RDB_OPCODE_RESIZEDB) == -1) goto werr;
+if (rdbSaveLen(rdb,db_size) == -1) goto werr;
+if (rdbSaveLen(rdb,expires_size) == -1) goto werr;</code></pre><p>然后遍历DB先把dbnum和db_size、expires_size写入文件<br>        /* Iterate this DB writing every entry */<br>        while((de = dictNext(di)) != NULL) {<br>            sds keystr = dictGetKey(de);<br>            robj key, *o = dictGetVal(de);<br>            long long expire;</p>
+<pre><code>        initStaticStringObject(key,keystr);
+        expire = getExpire(db,&amp;key);
+        if (rdbSaveKeyValuePair(rdb,&amp;key,o,expire,now) == -1) goto werr;
+
+        /* When this RDB is produced as part of an AOF rewrite, move
+         * accumulated diff from parent to child while rewriting in
+         * order to have a smaller final write. */
+        if (flags &amp; RDB_SAVE_AOF_PREAMBLE &amp;&amp;
+            rdb-&gt;processed_bytes &gt; processed+AOF_READ_DIFF_INTERVAL_BYTES)
+        {
+            processed = rdb-&gt;processed_bytes;
+            aofReadDiffFromParent();
+        }
+    }
+    dictReleaseIterator(di);
+}
+di = NULL; /* So that we don&apos;t release it again on error. */</code></pre><p>在当前DB中遍历所有的key把key-value对及过期时间如果有设置的话写入文件</p>
+<p>这里小插曲一下在rdbSaveKeyValuePair函数中会判断expire是否已经到了过期时间如果已经过期就不会写入文件</p>
+<p>同时如果flags标记了RDB_SAVE_AOF_PREAMBLE的话说明是在aofrewrite且开启了RDB-AOF混合开关此时就会从父进程去读取增量数据了<br>    /* EOF opcode */<br>    if (rdbSaveType(rdb,RDB_OPCODE_EOF) == -1) goto werr;</p>
+<pre><code>/* CRC64 checksum. It will be zero if checksum computation is disabled, the
+ * loading code skips the check in this case. */
+cksum = rdb-&gt;cksum;
+memrev64ifbe(&amp;cksum);
+if (rioWrite(rdb,&amp;cksum,8) == 0) goto werr;
+return C_OK;</code></pre><p>}<br>最后把代表RDB格式结束的RDB_OPCODE_EOF标记和校验和写入文件<br>RDB-AOF混合持久化的RDB部分到此结束rdbSaveRio函数运行完后返回rewriteAppendOnlyFile继续把增量数据写入AOF文件。</p>
+<p>也就是说AOF文件的前半段是RDB格式的全量数据后半段是redis命令格式的增量数据。</p>
+<p>数据恢复<br>当appendonly配置项为no时redis启动后会去加载RDB文件以RDB格式来解析RDB文件自然没有问题。</p>
+<p>而appendonly配置项为yes时redis启动后会加载AOF文件来恢复数据如果持久化时开启了RDB-AOF混合开关那么AOF文件的前半段就是RDB格式此时要如何正确加载数据呢</p>
+<p>一切数据都逃不过协议二字不以正确的协议存储和解析那就是乱码既然允许RDB-AOF混合持久化就要能够识别并恢复数据这一节我们来介绍如何以正确的姿势来恢复数据。</p>
+<p>加载AOF文件的入口为loadAppendOnlyFile</p>
+<p>int loadAppendOnlyFile(char <em>filename) {<br>    …<br>    /</em> Check if this AOF file has an RDB preamble. In that case we need to<br>     * load the RDB file and later continue loading the AOF tail. <em>/<br>    char sig[5]; /</em> “REDIS” <em>/<br>    if (fread(sig,1,5,fp) != 5 || memcmp(sig,”REDIS”,5) != 0) {<br>        /</em> No RDB preamble, seek back at 0 offset. <em>/<br>        if (fseek(fp,0,SEEK_SET) == -1) goto readerr;<br>    } else {<br>        /</em> RDB preamble. Pass loading the RDB functions. */<br>        rio rdb;</p>
+<pre><code>    serverLog(LL_NOTICE,&quot;Reading RDB preamble from AOF file...&quot;);
+    if (fseek(fp,0,SEEK_SET) == -1) goto readerr;
+    rioInitWithFile(&amp;rdb,fp);
+    if (rdbLoadRio(&amp;rdb,NULL) != C_OK) {
+        serverLog(LL_WARNING,&quot;Error reading the RDB preamble of the AOF file, AOF loading aborted&quot;);
+        goto readerr;
+    } else {
+        serverLog(LL_NOTICE,&quot;Reading the remaining AOF tail...&quot;);
+    }
+}
+...</code></pre><p>}<br>打开AOF文件之后首先读取5个字符如果是”REDIS”那么就说明这是一个混合持久化的AOF文件正确的RDB格式一定是以”REDIS”开头而纯AOF格式则一定以”*”开头此时就会进入rdbLoadRio函数来加载数据。</p>
+<p>rdbLoadRio函数此处就不详细展开了就是以约定好的协议解析文件内容直至遇到RDB_OPCODE_EOF结束标记返回loadAppendOnlyFile函数继续以AOF格式解析文件直到结束整个加载过程完成。</p>
+<p>附录</p>
+<ol>
+<li>RDB格式的文件<br>我们先向redis写入一些数据并生成RDB文件</li>
+</ol>
+<p>$redis-cli<br>127.0.0.1:6379&gt; set foo bar<br>OK<br>127.0.0.1:6379&gt; expire foo 60<br>(integer) 1<br>127.0.0.1:6379&gt; select 2<br>OK<br>127.0.0.1:6379[2]&gt; set foo bar<br>OK<br>127.0.0.1:6379[2]&gt; bgsave<br>Background saving started<br>看下RDB文件内容</p>
+<p>$cat dump.rdb<br>REDIS0008    redis-ver4.0.1<br>redis-bits@ctimeYused-mem<br>                                aof-preamblerepl-id(484f9d49a700c4b9b136f0fd40d2d6e5a8460438<br>                                                                                               repl-offa;^foobarfoobar^KJ_U<br>OMG…一堆乱码隐约可以看到一些和redis相关的字符串为了更直观的感受下RDB的内容我们用redis自带的工具redis-check-rdb来看下</p>
+<p>redis-check-rdb dump.rdb<br>[offset 0] Checking RDB file dump.rdb<br>[offset 26] AUX FIELD redis-ver = ‘4.0.1’<br>[offset 40] AUX FIELD redis-bits = ‘64’<br>[offset 52] AUX FIELD ctime = ‘1504234774’<br>[offset 67] AUX FIELD used-mem = ‘2139016’<br>[offset 83] AUX FIELD aof-preamble = ‘0’<br>[offset 133] AUX FIELD repl-id = ‘484f9d49a700c4b9b136f0fd40d2d6e5a8460438’<br>[offset 148] AUX FIELD repl-offset = ‘0’<br>[offset 150] Selecting DB ID 0<br>[offset 173] Selecting DB ID 2<br>[offset 194] Checksum OK<br>[offset 194] \o/ RDB looks OK! \o/<br>[info] 2 keys read<br>[info] 1 expires<br>[info] 0 already expired<br>这下就好看多了首先可以看到是一些AUX FIELD辅助域4.0特有用来配合全新的主从同步方式PSYNC2后面会专门来介绍PSYNC2然后可以看到DB0和DB2是有内容的Checksum也OK最后是说一共有2个key其中一个设置了过期时间到目前为止还都没有过期。</p>
+<ol start="2">
+<li>AOF格式的文件<br>同样的数据我们来看下在AOF文件中是如何保存的</li>
+</ol>
+<p>$cat appendonly.aof<br>*2<br>$6<br>SELECT<br>$1<br>0<br>*3<br>$3<br>set<br>$3<br>foo<br>$3<br>bar<br>*3<br>$9<br>PEXPIREAT<br>$3<br>foo<br>$13<br>1504255377087<br>*2<br>$6<br>SELECT<br>$1<br>2<br>*3<br>$3<br>set<br>$3<br>foo<br>$3<br>bar<br>很明显就是一条一条redis命令。</p>
+<ol start="3">
+<li>RDB-AOF混和持久化的文件<br>最后来看下RDB-AOF混和持久化的文件。</li>
+</ol>
+<p>首先打开混合开关执行BGREWRITEAOF生成RDB-AOF混合文件再追加写入一些数据</p>
+<p>$redis-cli<br>127.0.0.1:6379&gt; config set aof-use-rdb-preamble yes<br>OK<br>127.0.0.1:6379&gt; BGREWRITEAOF<br>Background append only file rewriting started<br>127.0.0.1:6379&gt; set foo bar<br>OK<br>127.0.0.1:6379&gt; quit<br>再来看下此时AOF文件内容</p>
+<p>$cat appendonly.aof<br>REDIS0008    redis-ver4.0.1<br>redis-bits@ctimeYused-memP<br>                                  aof-preamblerepl-id(484f9d49a700c4b9b136f0fd40d2d6e5a8460438<br>                                                                                                 repl-offsetfoobar?I    Y*2<br>$6<br>SELECT<br>$1<br>0<br>*3<br>$3<br>set<br>$3<br>foo<br>$3<br>bar<br>显而易见前半段是RDB格式的全量数据后半段是redis命令格式的增量数据。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/aof%E5%92%8Crdb/" rel="tag"># aof和rdb</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/07/29/redis%E5%AE%9E%E7%8E%B0%E5%86%85%E5%AD%98%E5%88%86%E9%A1%B5/" rel="next" title="redis实现内存分页">
+                <i class="fa fa-chevron-left"></i> redis实现内存分页
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/07/29/AOF%E6%8C%81%E4%B9%85%E5%8C%96/" rel="prev" title="AOF持久化">
+                AOF持久化 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">wsc</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="http://www.cnblogs.com/xingyunblog" target="_blank" title="博客园">
+                      
+                        <i class="fa fa-fw fa-globe"></i>博客园</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/hadues" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-globe"></i>CSDN</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">wsc</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>访问人数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

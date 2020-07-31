@@ -275,6 +275,1715 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://kuangai.github.io/2020/07/31/MySQL%E7%9A%84in%E5%92%8Cexist/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="wsc">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="study">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/07/31/MySQL%E7%9A%84in%E5%92%8Cexist/" itemprop="url">MySQL的in和exist</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-07-31T16:08:00+08:00">
+                2020-07-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/mysql/" itemprop="url" rel="index">
+                    <span itemprop="name">mysql</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="in"><a href="#in" class="headerlink" title="in"></a>in</h1><p>先执行in里的语句，后执行外层语句。<br>相当于使用外层与内层语句关联查询。<br>可以用到索引</p>
+<h1 id="exist"><a href="#exist" class="headerlink" title="exist"></a>exist</h1><p>先执行外层语句，再遍历外层结果集，对每一行执行exist里的语句。<br>相当于循环。<br>可以用到索引</p>
+<ul>
+<li>外层结果集小—使用exist</li>
+<li>内层结果集小—使用in</li>
+</ul>
+<h1 id="not-in"><a href="#not-in" class="headerlink" title="not in"></a>not in</h1><p>不走索引</p>
+<h1 id="not-exists"><a href="#not-exists" class="headerlink" title="not exists"></a>not exists</h1><p>可走索引</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://kuangai.github.io/2020/07/29/AOF%E6%8C%81%E4%B9%85%E5%8C%96/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="wsc">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="study">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/07/29/AOF%E6%8C%81%E4%B9%85%E5%8C%96/" itemprop="url">AOF持久化</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-07-29T21:08:00+08:00">
+                2020-07-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/redis/" itemprop="url" rel="index">
+                    <span itemprop="name">redis</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>转：<a href="https://cloud.tencent.com/developer/article/1582654" target="_blank" rel="noopener">https://cloud.tencent.com/developer/article/1582654</a></p>
+<p>RDB持久化是将进程数据写入文件，而AOF持久化(即Append Only File持久化)，则是将Redis执行的每次写命令记录到单独的日志文件中（有点像MySQL的binlog）；当Redis重启时再次执行AOF文件中的命令来恢复数据。<br>与RDB相比，AOF的实时性更好，因此已成为主流的持久化方案。</p>
+<ol>
+<li>开启AOF<br>Redis服务器默认开启RDB，关闭AOF；要开启AOF，需要在配置文件中配置：</li>
+</ol>
+<p>appendonly yes<br>2. 执行流程<br>由于需要记录Redis的每条写命令，因此AOF不需要触发，下面介绍AOF的执行流程。<br> AOF的执行流程包括：<br> 命令追加(append)：将Redis的写命令追加到缓冲区aof_buf；<br> 文件写入(write)和文件同步(sync)：根据不同的同步策略将aof_buf中的内容同步到硬盘；<br> 文件重写(rewrite)：定期重写AOF文件，达到压缩的目的。</p>
+<p>1) 命令追加(append)<br>Redis先将写命令追加到缓冲区，而不是直接写入文件，主要是为了避免每次有写命令都直接写入硬盘，导致硬盘IO成为Redis负载的瓶颈。<br> 命令追加的格式是Redis命令请求的协议格式，它是一种纯文本格式，具有兼容性好、可读性强、容易处理、操作简单避免二次开销等优点；具体格式略。在AOF文件中，除了用于指定数据库的select命令（如select 0 为选中0号数据库）是由Redis添加的，其他都是客户端发送来的写命令。</p>
+<p>2) 文件写入(write)和文件同步(sync)<br>Redis提供了多种AOF缓存区的同步文件策略，策略涉及到操作系统的write函数和fsync函数，说明如下：<br> 为了提高文件写入效率，在现代操作系统中，当用户调用write函数将数据写入文件时，操作系统通常会将数据暂存到一个内存缓冲区里，当缓冲区被填满或超过了指定时限后，才真正将缓冲区的数据写入到硬盘里。这样的操作虽然提高了效率，但也带来了安全问题：如果计算机停机，内存缓冲区中的数据会丢失；因此系统同时提供了fsync、fdatasync等同步函数，可以强制操作系统立刻将缓冲区中的数据写入到硬盘里，从而确保数据的安全性。</p>
+<p>AOF缓存区的同步文件策略由参数appendfsync控制，各个值的含义如下：<br> always：命令写入aof_buf后立即调用系统fsync操作同步到AOF文件，fsync完成后线程返回。这种情况下，每次有写命令都要同步到AOF文件，硬盘IO成为性能瓶颈，Redis只能支持大约几百TPS写入，严重降低了Redis的性能；即便是使用固态硬盘（SSD），每秒大约也只能处理几万个命令，而且会大大降低SSD的寿命。<br> no：命令写入aof_buf后调用系统write操作，不对AOF文件做fsync同步；同步由操作系统负责，通常同步周期为30秒。这种情况下，文件同步的时间不可控，且缓冲区中堆积的数据会很多，数据安全性无法保证。<br> everysec：命令写入aof_buf后调用系统write操作，write完成后线程返回；fsync同步文件操作由专门的线程每秒调用一次。everysec是前述两种策略的折中，是性能和数据安全性的平衡，因此是Redis的默认配置，也是我们推荐的配置。</p>
+<p>3) 文件重写(rewrite)<br>随着时间流逝，Redis服务器执行的写命令越来越多，AOF文件也会越来越大；过大的AOF文件不仅会影响服务器的正常运行，也会导致数据恢复需要的时间过长。</p>
+<p>文件重写是指定期重写AOF文件，减小AOF文件的体积。需要注意的是，AOF重写是把Redis进程内的数据转化为写命令，同步到新的AOF文件；不会对旧的AOF文件进行任何读取、写入操作!</p>
+<p>关于文件重写需要注意的另一点是：对于AOF持久化来说，文件重写虽然是强烈推荐的，但并不是必须的；即使没有文件重写，数据也可以被持久化并在Redis启动的时候导入；因此在一些实现中，会关闭自动的文件重写，然后通过定时任务在每天的某一时刻定时执行。</p>
+<p>文件重写之所以能够压缩AOF文件，原因在于：<br> 过期的数据不再写入文件<br> 无效的命令不再写入文件：如有些数据被重复设值(set mykey v1, set mykey v2)、有些数据被删除了(sadd myset v1, del myset)等等<br> 多条命令可以合并为一个：如sadd myset v1, sadd myset v2, sadd myset v3可以合并为sadd myset v1 v2 v3。不过为了防止单条命令过大造成客户端缓冲区溢出，对于list、set、hash、zset类型的key，并不一定只使用一条命令；而是以某个常量为界将命令拆分为多条。这个常量在redis.h/REDIS_AOF_REWRITE_ITEMS_PER_CMD中定义，不可更改，3.0版本中值是64。</p>
+<p>文件重写的触发<br>文件重写的触发<br> 文件重写的触发，分为手动触发和自动触发：<br> 手动触发：直接调用bgrewriteaof命令，该命令的执行与bgsave有些类似：都是fork子进程进行具体的工作，且都只有在fork时阻塞。</p>
+<p>自动触发：根据auto-aof-rewrite-min-size和auto-aof-rewrite-percentage参数，以及aof_current_size和aof_base_size状态确定触发时机。<br> auto-aof-rewrite-min-size：执行AOF重写时，文件的最小体积，默认值为64MB。<br> auto-aof-rewrite-percentage：执行AOF重写时，当前AOF大小(即aof_current_size)和上一次重写时AOF大小(aof_base_size)的比值。<br> 其中，参数可以通过config get命令查看：</p>
+<p>这里写图片描述</p>
+<p>状态可以通过info persistence查看：</p>
+<p>这里写图片描述</p>
+<p>只有当auto-aof-rewrite-min-size和auto-aof-rewrite-percentage两个参数同时满足时，才会自动触发AOF重写，即bgrewriteaof操作。</p>
+<p>这里写图片描述</p>
+<p>关于文件重写的流程，有两点需要特别注意：<br> (1)重写由父进程fork子进程进行；<br> (2)重写期间Redis执行的写命令，需要追加到新的AOF文件中，为此Redis引入了aof_rewrite_buf缓存。</p>
+<p>对照上图，文件重写的流程如下：<br>Redis父进程首先判断当前是否存在正在执行 bgsave/bgrewriteaof的子进程，如果存在则bgrewriteaof命令直接返回，如果存在bgsave命令则等bgsave执行完成后再执行。前面曾介绍过，这个主要是基于性能方面的考虑。<br>父进程执行fork操作创建子进程，这个过程中父进程是阻塞的。<br> 3.1) 父进程fork后，bgrewriteaof命令返回”Background append only file rewrite started”信息并不再阻塞父进程，并可以响应其他命令。Redis的所有写命令依然写入AOF缓冲区，并根据appendfsync策略同步到硬盘，保证原有AOF机制的正确。<br> 3.2) 由于fork操作使用写时复制技术，子进程只能共享fork操作时的内存数据。由于父进程依然在响应命令，因此Redis使用AOF重写缓冲区(图中的aof_rewrite_buf)保存这部分数据，防止新AOF文件生成期间丢失这部分数据。也就是说，bgrewriteaof执行期间，Redis的写命令同时追加到aof_buf和aof_rewirte_buf两个缓冲区。<br>子进程根据内存快照，按照命令合并规则写入到新的AOF文件。<br> 5.1) 子进程写完新的AOF文件后，向父进程发信号，父进程更新统计信息，具体可以通过info persistence查看。<br> 5.2) 父进程把AOF重写缓冲区的数据写入到新的AOF文件，这样就保证了新AOF文件所保存的数据库状态和服务器当前状态一致。<br> 5.3) 使用新的AOF文件替换老文件，完成AOF重写。<br>3. 启动时加载<br>前面提到过，当AOF开启时，Redis启动时会优先载入AOF文件来恢复数据；只有当AOF关闭时，才会载入RDB文件恢复数据。<br> 当AOF开启，且AOF文件存在时，Redis启动日志：</p>
+<p>这里写图片描述</p>
+<p>当AOF开启，但AOF文件不存在时，即使RDB文件存在也不会加载(更早的一些版本可能会加载，但3.0不会)，Redis启动日志如下：</p>
+<p>文件校验<br>与载入RDB文件类似，Redis载入AOF文件时，会对AOF文件进行校验，如果文件损坏，则日志中会打印错误，Redis启动失败。但如果是AOF文件结尾不完整(机器突然宕机等容易导致文件尾部不完整)，且aof-load-truncated参数开启，则日志中会输出警告，Redis忽略掉AOF文件的尾部，启动成功。aof-load-truncated参数默认是开启的：</p>
+<p>伪客户端<br>因为Redis的命令只能在客户端上下文中执行，而载入AOF文件时命令是直接从文件中读取的，并不是由客户端发送；因此Redis服务器在载入AOF文件之前，会创建一个没有网络连接的客户端，之后用它来执行AOF文件中的命令，命令执行的效果与带网络连接的客户端完全一样。</p>
+<p>AOF常用配置总结<br>下面是AOF常用的配置项，以及默认值；前面介绍过的这里不再详细介绍。<br> appendonly no：是否开启AOF<br> appendfilename “appendonly.aof”：AOF文件名<br> dir ./：RDB文件和AOF文件所在目录<br> appendfsync everysec：fsync持久化策略<br> no-appendfsync-on-rewrite no：AOF重写期间是否禁止fsync；如果开启该选项，可以减轻文件重写时CPU和硬盘的负载（尤其是硬盘），但是可能会丢失AOF重写期间的数据；需要在负载和安全性之间进行平衡<br> auto-aof-rewrite-percentage 100：文件重写触发条件之一<br> auto-aof-rewrite-min-size 64mb：文件重写触发提交之一<br> aof-load-truncated yes：如果AOF文件结尾损坏，Redis启动时是否仍载入AOF文件</p>
+<p>方案选择与常见问题（重点）<br>在介绍持久化策略之前，首先要明白无论是RDB还是AOF，持久化的开启都是要付出性能方面代价的：对于RDB持久化，一方面是bgsave在进行fork操作时Redis主进程会阻塞，另一方面，子进程向硬盘写数据也会带来IO压力；对于AOF持久化，向硬盘写数据的频率大大提高(everysec策略下为秒级)，IO压力更大，甚至可能造成AOF追加阻塞问题（后面会详细介绍这种阻塞），此外，AOF文件的重写与RDB的bgsave类似，会有fork时的阻塞和子进程的IO压力问题。相对来说，由于AOF向硬盘中写数据的频率更高，因此对Redis主进程性能的影响会更大。</p>
+<p>实际生产环境中，根据数据量、应用对数据的安全要求、预算限制等不同情况，会有各种各样的持久化策略；如完全不使用任何持久化、使用RDB或AOF的一种，或同时开启RDB和AOF持久化等。此外，持久化的选择必须与Redis的主从策略一起考虑，因为主从复制与持久化同样具有数据备份的功能，而且主机master和从机slave可以独立的选择持久化方案。</p>
+<p>下面分场景来讨论持久化策略的选择，下面的讨论也只是作为参考，实际方案可能更复杂更具多样性。<br> （1）如果Redis中的数据完全丢弃也没有关系（如Redis完全用作DB层数据的cache），那么无论是单机，还是主从架构，都可以不进行任何持久化。<br> （2）在单机环境下（对于个人开发者，这种情况可能比较常见），如果可以接受十几分钟或更多的数据丢失，选择RDB对Redis的性能更加有利；如果只能接受秒级别的数据丢失，应该选择AOF。<br> （3）但在多数情况下，我们都会配置主从环境，slave的存在既可以实现数据的热备，也可以进行读写分离分担Redis读请求，以及在master宕掉后继续提供服务。</p>
+<p>在这种情况下，一种可行的做法是：<br> master：完全关闭持久化（包括RDB和AOF），这样可以让master的性能达到最好<br> slave：关闭RDB，开启AOF（如果对数据安全要求不高，开启RDB关闭AOF也可以），并定时对持久化文件进行备份（如备份到其他文件夹，并标记好备份的时间）；然后关闭AOF的自动重写，然后添加定时任务，在每天Redis闲时（如凌晨12点）调用bgrewriteaof。</p>
+<p>这里需要解释一下，为什么开启了主从复制，可以实现数据的热备份，还需要设置持久化呢？因为在一些特殊情况下，主从复制仍然不足以保证数据的安全，例如：<br> master和slave进程同时停止：考虑这样一种场景，如果master和slave在同一栋大楼或同一个机房，则一次停电事故就可能导致master和slave机器同时关机，Redis进程停止；如果没有持久化，则面临的是数据的完全丢失。<br> master误重启：考虑这样一种场景，master服务因为故障宕掉了，如果系统中有自动拉起机制（即检测到服务停止后重启该服务）将master自动重启，由于没有持久化文件，那么master重启后数据是空的，slave同步数据也变成了空的；如果master和slave都没有持久化，同样会面临数据的完全丢失。需要注意的是，即便是使用了哨兵(关于哨兵后面会有文章介绍)进行自动的主从切换，也有可能在哨兵轮询到master之前，便被自动拉起机制重启了。因此，应尽量避免“自动拉起机制”和“不做持久化”同时出现。<br> （4）异地灾备：上述讨论的几种持久化策略，针对的都是一般的系统故障，如进程异常退出、宕机、断电等，这些故障不会损坏硬盘。但是对于一些可能导致硬盘损坏的灾难情况，如火灾地震，就需要进行异地灾备。例如对于单机的情形，可以定时将RDB文件或重写后的AOF文件，通过scp拷贝到远程机器，如阿里云、AWS等；对于主从的情形，可以定时在master上执行bgsave，然后将RDB文件拷贝到远程机器，或者在slave上执行bgrewriteaof重写AOF文件后，将AOF文件拷贝到远程机器上。一般来说，由于RDB文件文件小、恢复快，因此灾难恢复常用RDB文件；异地备份的频率根据数据安全性的需要及其他条件来确定，但最好不要低于一天一次。</p>
+<p>（4）异地灾备：上述讨论的几种持久化策略，针对的都是一般的系统故障，如进程异常退出、宕机、断电等，这些故障不会损坏硬盘。但是对于一些可能导致硬盘损坏的灾难情况，如火灾地震，就需要进行异地灾备。例如对于单机的情形，可以定时将RDB文件或重写后的AOF文件，通过scp拷贝到远程机器，如阿里云、AWS等；对于主从的情形，可以定时在master上执行bgsave，然后将RDB文件拷贝到远程机器，或者在slave上执行bgrewriteaof重写AOF文件后，将AOF文件拷贝到远程机器上。一般来说，由于RDB文件文件小、恢复快，因此灾难恢复常用RDB文件；异地备份的频率根据数据安全性的需要及其他条件来确定，但最好不要低于一天一次。</p>
+<p>fork阻塞：CPU的阻塞<br>在Redis的实践中，众多因素限制了Redis单机的内存不能过大，例如：<br> 当面对请求的暴增，需要从库扩容时，Redis内存过大会导致扩容时间太长；<br> 当主机宕机时，切换主机后需要挂载从库，Redis内存过大导致挂载速度过慢；<br> 以及持久化过程中的fork操作，下面详细说明。<br> 首先说明一下fork操作：<br> 父进程通过fork操作可以创建子进程；子进程创建后，父子进程共享代码段，不共享进程的数据空间，但是子进程会获得父进程的数据空间的副本。在操作系统fork的实际实现中，基本都采用了写时复制技术，即在父/子进程试图修改数据空间之前，父子进程实际上共享数据空间；但是当父/子进程的任何一个试图修改数据空间时，操作系统会为修改的那一部分(内存的一页)制作一个副本。<br> 虽然fork时，子进程不会复制父进程的数据空间，但是会复制内存页表（页表相当于内存的索引、目录）；父进程的数据空间越大，内存页表越大，fork时复制耗时也会越多。</p>
+<p>在Redis中，无论是RDB持久化的bgsave，还是AOF重写的bgrewriteaof，都需要fork出子进程来进行操作。如果Redis内存过大，会导致fork操作时复制内存页表耗时过多；而Redis主进程在进行fork时，是完全阻塞的，也就意味着无法响应客户端的请求，会造成请求延迟过大。<br> 对于不同的硬件、不同的操作系统，fork操作的耗时会有所差别，一般来说，如果Redis单机内存达到了10GB，fork时耗时可能会达到百毫秒级别（如果使用Xen虚拟机，这个耗时可能达到秒级别）。因此，一般来说Redis单机内存一般要限制在10GB以内；不过这个数据并不是绝对的，可以通过观察线上环境fork的耗时来进行调整。观察的方法如下：执行命令info stats，查看latest_fork_usec的值，单位为微秒。<br> 为了减轻fork操作带来的阻塞问题，除了控制Redis单机内存的大小以外，还可以适度放宽AOF重写的触发条件、选用物理机或高效支持fork操作的虚拟化技术等，例如使用Vmware或KVM虚拟机，不要使用Xen虚拟机。</p>
+<p>AOF追加阻塞：硬盘的阻塞<br>前面提到过，在AOF中，如果AOF缓冲区的文件同步策略为everysec，则：在主线程中，命令写入aof_buf后调用系统write操作，write完成后主线程返回；fsync同步文件操作由专门的文件同步线程每秒调用一次。<br> 这种做法的问题在于，如果硬盘负载过高，那么fsync操作可能会超过1s；如果Redis主线程持续高速向aof_buf写入命令，硬盘的负载可能会越来越大，IO资源消耗更快；如果此时Redis进程异常退出，丢失的数据也会越来越多，可能远超过1s。<br> 为此，Redis的处理策略是这样的：主线程每次进行AOF会对比上次fsync成功的时间；如果距上次不到2s，主线程直接返回；如果超过2s，则主线程阻塞直到fsync同步完成。因此，如果系统硬盘负载过大导致fsync速度太慢，会导致Redis主线程的阻塞；此外，使用everysec配置，AOF最多可能丢失2s的数据，而不是1s。</p>
+<p>AOF追加阻塞问题定位的方法：<br> （1）监控info Persistence中的aof_delayed_fsync：当AOF追加阻塞发生时（即主线程等待fsync而阻塞），该指标累加。<br> （2）AOF阻塞时的Redis日志：<br> Asynchronous AOF fsync is taking too long (disk is busy?). Writing the AOF buffer without waiting for fsync to complete, this may slow down Redis.<br> （3）如果AOF追加阻塞频繁发生，说明系统的硬盘负载太大；可以考虑更换IO速度更快的硬盘，或者通过IO监控分析工具对系统的IO负载进行分析，如iostat（系统级io）、iotop（io版的top）、pidstat等。</p>
+<p>总结<br>本文主要内容可以总结如下：<br> 1、持久化在Redis高可用中的作用：数据备份，与主从复制相比强调的是由内存到硬盘的备份。<br> 2、RDB持久化：将数据快照备份到硬盘；介绍了其触发条件（包括手动出发和自动触发）、执行流程、RDB文件等，特别需要注意的是文件保存操作由fork出的子进程来进行。<br> 3、AOF持久化：将执行的写命令备份到硬盘（类似于MySQL的binlog），介绍了其开启方法、执行流程等，特别需要注意的是文件同步策略的选择（everysec）、文件重写的流程。<br> 4、一些现实的问题：包括如何选择持久化策略，以及需要注意的fork阻塞、AOF追加阻塞等。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://kuangai.github.io/2020/07/29/Untitled/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="wsc">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="study">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/07/29/Untitled/" itemprop="url">redis4.0之RDB-AOF混合持久化</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-07-29T20:18:00+08:00">
+                2020-07-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/redis/" itemprop="url" rel="index">
+                    <span itemprop="name">redis</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>转载：<a href="https://developer.aliyun.com/article/193034" target="_blank" rel="noopener">https://developer.aliyun.com/article/193034</a><br>简介： redis有两种持久化的方式——RDB和AOF，RDB是一份内存快照，AOF则为可回放的命令日志，他们两个各有特点也相互独立。4.0开始允许使用RDB-AOF混合持久化的方式，结合了两者的优点，通过aof-use-rdb-preamble配置项可以打开混合开关。<br>前言<br>redis有两种持久化的方式——RDB和AOF其中RDB是一份内存快照AOF则为可回放的命令日志他们两个各有特点也相互独立。4.0开始允许使用RDB-AOF混合持久化的方式结合了两者的优点通过aof-use-rdb-preamble配置项可以打开混合开关。</p>
+<p>RDB V.S. AOF</p>
+<ol>
+<li><p>RDB<br>RDB文件本质上是一份内存快照保存了创建RDB文件那个时间点的redis全量数据具有数据文件小创建、恢复快的优点但是由于快照的特性无法保存创建RDB之后的增量数据。</p>
+</li>
+<li><p>AOF<br>AOF文件本质上是一份执行日志保存所有对redis进行更改的命令增量数据也就随命令写入AOF文件刷盘的策略由配置项appendfsync控制可以选择”everysec”或”always”。</p>
+</li>
+</ol>
+<p>AOF文件基本上是human-readable的文本所以其体积相对较大在从AOF文件恢复数据时就是做日志回放执行AOF文件中记录的所有命令所以相对RDB而言恢复耗时较长。</p>
+<p>随着redis的运行AOF文件会不断膨胀由aofrewrite机制来防止磁盘空间被撑满详见上一篇文章《redis4.0之利用管道优化aofrewrite》。</p>
+<p>RDB-AOF混合持久化<br>细细想来aofrewrite时也是先写一份全量数据到新AOF文件中再追加增量只不过全量数据是以redis命令的格式写入。那么是否可以先以RDB格式写入全量数据再追加增量日志呢这样既可以提高aofrewrite和恢复速度也可以减少文件大小还可以保证数据的完毕性整合RDB和AOF的优点那么现在4.0实现了这一特性——RDB-AOF混合持久化。</p>
+<p>aofrewrite<br>综上所述RDB-AOF混合持久化体现在aofrewrite时那么我们就从这里开始来看4.0是如何实现的</p>
+<p>回忆下aofrewrite的过程</p>
+<p>无论是serverCron触发或者执行BGREWRITEAOF命令最终redis都会走到rewriteAppendOnlyFileBackground()</p>
+<p>rewriteAppendOnlyFileBackground函数会fork子进程子进程进入rewriteAppendOnlyFile函数来生成新的AOF文件混合持久化就从这里开始<br>int rewriteAppendOnlyFile(char *filename) {<br>    …<br>    if (server.aof_use_rdb_preamble) {<br>        int error;<br>        if (rdbSaveRio(&amp;aof,&amp;error,RDB_SAVE_AOF_PREAMBLE,NULL) == C_ERR) {<br>            errno = error;<br>            goto werr;<br>        }<br>    } else {<br>        if (rewriteAppendOnlyFileRio(&amp;aof) == C_ERR) goto werr;<br>    }<br>    …<br>}<br>可以看到当混合持久化开关打开时就会进入rdbSaveRio函数先以RDB格式来保存全量数据</p>
+<p>前文说道子进程在做aofrewrite时会通过管道从父进程读取增量数据并缓存下来</p>
+<p>那么在以RDB格式保存全量数据时也会从管道读取数据并不会造成管道阻塞<br>int rdbSaveRio(rio *rdb, int *error, int flags, rdbSaveInfo *rsi) {<br>    …<br>    snprintf(magic,sizeof(magic),”REDIS%04d”,RDB_VERSION);<br>    if (rdbWriteRaw(rdb,magic,9) == -1) goto werr;<br>    if (rdbSaveInfoAuxFields(rdb,flags,rsi) == -1) goto werr;<br>首先把RDB的版本注意不是redis的版本和辅助域写入文件<br>    for (j = 0; j &lt; server.dbnum; j++) {<br>        redisDb *db = server.db+j;<br>        dict *d = db-&gt;dict;<br>        if (dictSize(d) == 0) continue;<br>        di = dictGetSafeIterator(d);<br>        if (!di) return C_ERR;</p>
+<pre><code>/* Write the SELECT DB opcode */
+if (rdbSaveType(rdb,RDB_OPCODE_SELECTDB) == -1) goto werr;
+if (rdbSaveLen(rdb,j) == -1) goto werr;
+
+/* Write the RESIZE DB opcode. We trim the size to UINT32_MAX, which
+ * is currently the largest type we are able to represent in RDB sizes.
+ * However this does not limit the actual size of the DB to load since
+ * these sizes are just hints to resize the hash tables. */
+uint32_t db_size, expires_size;
+db_size = (dictSize(db-&gt;dict) &lt;= UINT32_MAX) ?
+                        dictSize(db-&gt;dict) :
+                        UINT32_MAX;
+expires_size = (dictSize(db-&gt;expires) &lt;= UINT32_MAX) ?
+                        dictSize(db-&gt;expires) :
+                        UINT32_MAX;
+if (rdbSaveType(rdb,RDB_OPCODE_RESIZEDB) == -1) goto werr;
+if (rdbSaveLen(rdb,db_size) == -1) goto werr;
+if (rdbSaveLen(rdb,expires_size) == -1) goto werr;</code></pre><p>然后遍历DB先把dbnum和db_size、expires_size写入文件<br>        /* Iterate this DB writing every entry */<br>        while((de = dictNext(di)) != NULL) {<br>            sds keystr = dictGetKey(de);<br>            robj key, *o = dictGetVal(de);<br>            long long expire;</p>
+<pre><code>        initStaticStringObject(key,keystr);
+        expire = getExpire(db,&amp;key);
+        if (rdbSaveKeyValuePair(rdb,&amp;key,o,expire,now) == -1) goto werr;
+
+        /* When this RDB is produced as part of an AOF rewrite, move
+         * accumulated diff from parent to child while rewriting in
+         * order to have a smaller final write. */
+        if (flags &amp; RDB_SAVE_AOF_PREAMBLE &amp;&amp;
+            rdb-&gt;processed_bytes &gt; processed+AOF_READ_DIFF_INTERVAL_BYTES)
+        {
+            processed = rdb-&gt;processed_bytes;
+            aofReadDiffFromParent();
+        }
+    }
+    dictReleaseIterator(di);
+}
+di = NULL; /* So that we don&apos;t release it again on error. */</code></pre><p>在当前DB中遍历所有的key把key-value对及过期时间如果有设置的话写入文件</p>
+<p>这里小插曲一下在rdbSaveKeyValuePair函数中会判断expire是否已经到了过期时间如果已经过期就不会写入文件</p>
+<p>同时如果flags标记了RDB_SAVE_AOF_PREAMBLE的话说明是在aofrewrite且开启了RDB-AOF混合开关此时就会从父进程去读取增量数据了<br>    /* EOF opcode */<br>    if (rdbSaveType(rdb,RDB_OPCODE_EOF) == -1) goto werr;</p>
+<pre><code>/* CRC64 checksum. It will be zero if checksum computation is disabled, the
+ * loading code skips the check in this case. */
+cksum = rdb-&gt;cksum;
+memrev64ifbe(&amp;cksum);
+if (rioWrite(rdb,&amp;cksum,8) == 0) goto werr;
+return C_OK;</code></pre><p>}<br>最后把代表RDB格式结束的RDB_OPCODE_EOF标记和校验和写入文件<br>RDB-AOF混合持久化的RDB部分到此结束rdbSaveRio函数运行完后返回rewriteAppendOnlyFile继续把增量数据写入AOF文件。</p>
+<p>也就是说AOF文件的前半段是RDB格式的全量数据后半段是redis命令格式的增量数据。</p>
+<p>数据恢复<br>当appendonly配置项为no时redis启动后会去加载RDB文件以RDB格式来解析RDB文件自然没有问题。</p>
+<p>而appendonly配置项为yes时redis启动后会加载AOF文件来恢复数据如果持久化时开启了RDB-AOF混合开关那么AOF文件的前半段就是RDB格式此时要如何正确加载数据呢</p>
+<p>一切数据都逃不过协议二字不以正确的协议存储和解析那就是乱码既然允许RDB-AOF混合持久化就要能够识别并恢复数据这一节我们来介绍如何以正确的姿势来恢复数据。</p>
+<p>加载AOF文件的入口为loadAppendOnlyFile</p>
+<p>int loadAppendOnlyFile(char <em>filename) {<br>    …<br>    /</em> Check if this AOF file has an RDB preamble. In that case we need to<br>     * load the RDB file and later continue loading the AOF tail. <em>/<br>    char sig[5]; /</em> “REDIS” <em>/<br>    if (fread(sig,1,5,fp) != 5 || memcmp(sig,”REDIS”,5) != 0) {<br>        /</em> No RDB preamble, seek back at 0 offset. <em>/<br>        if (fseek(fp,0,SEEK_SET) == -1) goto readerr;<br>    } else {<br>        /</em> RDB preamble. Pass loading the RDB functions. */<br>        rio rdb;</p>
+<pre><code>    serverLog(LL_NOTICE,&quot;Reading RDB preamble from AOF file...&quot;);
+    if (fseek(fp,0,SEEK_SET) == -1) goto readerr;
+    rioInitWithFile(&amp;rdb,fp);
+    if (rdbLoadRio(&amp;rdb,NULL) != C_OK) {
+        serverLog(LL_WARNING,&quot;Error reading the RDB preamble of the AOF file, AOF loading aborted&quot;);
+        goto readerr;
+    } else {
+        serverLog(LL_NOTICE,&quot;Reading the remaining AOF tail...&quot;);
+    }
+}
+...</code></pre><p>}<br>打开AOF文件之后首先读取5个字符如果是”REDIS”那么就说明这是一个混合持久化的AOF文件正确的RDB格式一定是以”REDIS”开头而纯AOF格式则一定以”*”开头此时就会进入rdbLoadRio函数来加载数据。</p>
+<p>rdbLoadRio函数此处就不详细展开了就是以约定好的协议解析文件内容直至遇到RDB_OPCODE_EOF结束标记返回loadAppendOnlyFile函数继续以AOF格式解析文件直到结束整个加载过程完成。</p>
+<p>附录</p>
+<ol>
+<li>RDB格式的文件<br>我们先向redis写入一些数据并生成RDB文件</li>
+</ol>
+<p>$redis-cli<br>127.0.0.1:6379&gt; set foo bar<br>OK<br>127.0.0.1:6379&gt; expire foo 60<br>(integer) 1<br>127.0.0.1:6379&gt; select 2<br>OK<br>127.0.0.1:6379[2]&gt; set foo bar<br>OK<br>127.0.0.1:6379[2]&gt; bgsave<br>Background saving started<br>看下RDB文件内容</p>
+<p>$cat dump.rdb<br>REDIS0008    redis-ver4.0.1<br>redis-bits@ctimeYused-mem<br>                                aof-preamblerepl-id(484f9d49a700c4b9b136f0fd40d2d6e5a8460438<br>                                                                                               repl-offa;^foobarfoobar^KJ_U<br>OMG…一堆乱码隐约可以看到一些和redis相关的字符串为了更直观的感受下RDB的内容我们用redis自带的工具redis-check-rdb来看下</p>
+<p>redis-check-rdb dump.rdb<br>[offset 0] Checking RDB file dump.rdb<br>[offset 26] AUX FIELD redis-ver = ‘4.0.1’<br>[offset 40] AUX FIELD redis-bits = ‘64’<br>[offset 52] AUX FIELD ctime = ‘1504234774’<br>[offset 67] AUX FIELD used-mem = ‘2139016’<br>[offset 83] AUX FIELD aof-preamble = ‘0’<br>[offset 133] AUX FIELD repl-id = ‘484f9d49a700c4b9b136f0fd40d2d6e5a8460438’<br>[offset 148] AUX FIELD repl-offset = ‘0’<br>[offset 150] Selecting DB ID 0<br>[offset 173] Selecting DB ID 2<br>[offset 194] Checksum OK<br>[offset 194] \o/ RDB looks OK! \o/<br>[info] 2 keys read<br>[info] 1 expires<br>[info] 0 already expired<br>这下就好看多了首先可以看到是一些AUX FIELD辅助域4.0特有用来配合全新的主从同步方式PSYNC2后面会专门来介绍PSYNC2然后可以看到DB0和DB2是有内容的Checksum也OK最后是说一共有2个key其中一个设置了过期时间到目前为止还都没有过期。</p>
+<ol start="2">
+<li>AOF格式的文件<br>同样的数据我们来看下在AOF文件中是如何保存的</li>
+</ol>
+<p>$cat appendonly.aof<br>*2<br>$6<br>SELECT<br>$1<br>0<br>*3<br>$3<br>set<br>$3<br>foo<br>$3<br>bar<br>*3<br>$9<br>PEXPIREAT<br>$3<br>foo<br>$13<br>1504255377087<br>*2<br>$6<br>SELECT<br>$1<br>2<br>*3<br>$3<br>set<br>$3<br>foo<br>$3<br>bar<br>很明显就是一条一条redis命令。</p>
+<ol start="3">
+<li>RDB-AOF混和持久化的文件<br>最后来看下RDB-AOF混和持久化的文件。</li>
+</ol>
+<p>首先打开混合开关执行BGREWRITEAOF生成RDB-AOF混合文件再追加写入一些数据</p>
+<p>$redis-cli<br>127.0.0.1:6379&gt; config set aof-use-rdb-preamble yes<br>OK<br>127.0.0.1:6379&gt; BGREWRITEAOF<br>Background append only file rewriting started<br>127.0.0.1:6379&gt; set foo bar<br>OK<br>127.0.0.1:6379&gt; quit<br>再来看下此时AOF文件内容</p>
+<p>$cat appendonly.aof<br>REDIS0008    redis-ver4.0.1<br>redis-bits@ctimeYused-memP<br>                                  aof-preamblerepl-id(484f9d49a700c4b9b136f0fd40d2d6e5a8460438<br>                                                                                                 repl-offsetfoobar?I    Y*2<br>$6<br>SELECT<br>$1<br>0<br>*3<br>$3<br>set<br>$3<br>foo<br>$3<br>bar<br>显而易见前半段是RDB格式的全量数据后半段是redis命令格式的增量数据。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://kuangai.github.io/2020/07/29/redis%E5%AE%9E%E7%8E%B0%E5%86%85%E5%AD%98%E5%88%86%E9%A1%B5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="wsc">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="study">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/07/29/redis%E5%AE%9E%E7%8E%B0%E5%86%85%E5%AD%98%E5%88%86%E9%A1%B5/" itemprop="url">redis实现内存分页</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-07-29T19:28:00+08:00">
+                2020-07-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/redis/" itemprop="url" rel="index">
+                    <span itemprop="name">redis</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="redis实现分页的方法"><a href="#redis实现分页的方法" class="headerlink" title="redis实现分页的方法"></a>redis实现分页的方法</h2><p>每个主题下的用户的评论组装好写入Redis中，每个主题会有一个topicId，每一条评论会和topicId关联起来，大致的数据模型如下：<br>{ topicId: ‘xxxxxxxx’, comments: [ { username: ‘niuniu’, createDate: 1447747334791, content: ‘在Redis中分页’, commentId: ‘xxxxxxx’, reply: [ { content: ‘yyyyyy’ username: ‘niuniu’ }, … ] }, … ]}<br>将评论数据从MySQL查询出来组装好存到Redis后，以后每次就可以从Redis获取组装好的评论数据，从上面的数据模型可以看出数据都是key-value型数据，无疑要采用hash进行存储，但是每次拿取评论数据时需要分页而且还要按createDate字段进行排序，hash肯定是不能做到分页和排序的。</p>
+<p>那么，就挨个看一下Redis所支持的数据类型：</p>
+<p>1、String: 主要用于存储字符串，显然不支持分页和排序。<br>2、Hash: 主要用于存储key-value型数据，评论模型中全是key-value型数据，所以在这里Hash无疑会用到。<br>3、List: 主要用于存储一个列表，列表中的每一个元素按元素的插入时的顺序进行保存，如果我们将评论模型按createDate排好序后再插入List中，似乎就能做到排序了，而且再利用List中的LRANGE key start stop指令还能做到分页。嗯，到这里List似乎满足了我们分页和排序的要求，但是评论还会被删除，就需要更新Redis中的数据，如果每次删除评论后都将Redis中的数据全部重新写入一次，显然不够优雅，效率也会大打折扣，如果能删除指定的数据无疑会更好，而List中涉及到删除数据的就只有LPOP和RPOP这两条指令，但LPOP和RPOP只能删除列表头和列表尾的数据，不能删除指定位置的数据,(备注：其实还有 LREM命令可以做到删除，但是非常不方便)，而且当存在接口高并发访问时，这个list可能会无限延长，且里面的数据会存在很多重复，这就会影响到正常的业务，所以List也不太适合。</p>
+<p>4、Set: 主要存储无序集合，无序！排除。<br>5、SortedSet: 主要存储有序集合，SortedSet的添加元素指令ZADD key score member [[score,member]…]会给每个添加的元素member绑定一个用于排序的值score，SortedSet就会根据score值的大小对元素进行排序，在这里就可以将createDate当作score用于排序，SortedSet中的指令ZREVRANGE key start stop又可以返回指定区间内的成员，可以用来做分页，SortedSet的指令ZREM key member可以根据key移除指定的成员，能满足删评论的要求，所以，SortedSet在这里是最适合的（时间复杂度O(log(N))）。</p>
+<p>所以，需要用到的数据类型有SortSet和Hash，SortSet用于做分页排序，Hash用于存储具体的键值对数据。SortSet结构中将每个主题的topicId作为set的key，将与该主题关联的评论的createDate和commentId分别作为set的score和member，commentId的顺序就根据createDate的大小进行排列。<br>当需要查询某个主题某一页的评论时，就可主题的topicId通过指令zrevrange topicId (page-1)×10 (page-1)×10+perPage这样就能找出某个主题下某一页的按时间排好顺序的所有评论的commintId。page为查询第几页的页码，perPage为每页显示的条数。<br>当找到所有评论的commentId后，就可以把这些commentId作为key去Hash结构中去查询该条评论对应的内容。<br>这样就利用SortSet和Hash两种结构在Redis中达到了分页和排序的目的。</p>
+<p>当然，也可以直接只使用SrotedSet类型，而不使用Hash类型，直接将评论存放在member中。<br>但为什么要将评论和排序放到不同的类型里？其中的好处是，可以对评论设置不同的排序类型，比如按时间的正反序，点赞的正反序，查看次数的正反序等。而这样只需要维护不同的SrotedSet排序，不需要维护多套评论的内容了。</p>
+<p>下面是示例：</p>
+<p>需要引用下面两个jar包</p>
+<p>采用的jedis-2.8.1.jar</p>
+<p>因为JedisPool引用了第三方类库，需要再加入 commons-pool2-2.4.2.jar</p>
+<p>代码如下：</p>
+<p>复制代码<br> public static void main(String[] args)<br>    {<br>        for (int i = 1; i &lt;= 100; i += 1) {<br>            // 初始化CommentId索引 SortSet<br>            RedisClient.zadd(“topicId”, i, “commentId” + i);<br>            // 初始化Comment数据 Hash<br>            RedisClient.hset(“Comment_Key”, “commentId” + i, “comment content “+ i +” …….”);<br>        }<br>        // 倒序取 从0条开始取 5条 Id 数据<br>        Set<String> sets = RedisClient.zrevrangebyscore(“topicId”, “100”, “1”, 0, 10);<br>        String[] items = new String[]{};<br>        System.out.println(sets.toString());<br>        // 根据id取comment数据<br>        List<String> list = RedisClient.hmget(“Comment_Key”, sets.toArray(items));<br>        for (String str : list) {<br>            System.out.println(str);<br>        }</p>
+<pre><code>}</code></pre><p>复制代码<br>其中的RedisClient类的代码如下：</p>
+<p>复制代码<br>import java.util.LinkedHashSet;<br>import java.util.List;<br>import java.util.Set;</p>
+<p>import redis.clients.jedis.Jedis;<br>import redis.clients.jedis.JedisCommands;<br>import redis.clients.jedis.JedisPool;<br>import redis.clients.jedis.JedisPoolConfig;</p>
+<p>/**</p>
+<ul>
+<li><p>Redis 客户端</p>
+</li>
+<li><p>/<br>public class RedisClient {</p>
+<p>  private static JedisPool jedisPool;</p>
+<p>  static {</p>
+<pre><code>JedisPoolConfig config = new JedisPoolConfig();
+
+config.setMaxTotal(123);
+config.setMaxTotal(1024);
+config.setMaxIdle(10);
+config.setMaxWaitMillis(1000);
+config.setTestOnBorrow(true);
+config.setTestOnReturn(true);
+
+String ip = &quot;192.168.80.128&quot;;
+int port = 6379;
+int timeOut = 2000;
+String password=&quot;jdd.com&quot;;
+
+jedisPool = new JedisPool(config,ip,port,timeOut,password);</code></pre><p>  }</p>
+<p>  public static String set(String key, String value) {</p>
+<pre><code>Jedis jedis = jedisPool.getResource();
+String result = jedis.set(key, value);
+jedis.close();
+return result;</code></pre><p>  }</p>
+<p>  public static String get(String key) {</p>
+<pre><code>Jedis jedis = jedisPool.getResource();
+String result = jedis.get(key);
+jedis.close();
+return result;</code></pre><p>  }</p>
+<p>  public static Long hset(String key, String item, String value) {</p>
+<pre><code>Jedis jedis = jedisPool.getResource();
+Long result = jedis.hset(key, item, value);
+jedis.close();
+return result;</code></pre><p>  }</p>
+<p>  public static String hget(String key, String item) {</p>
+<pre><code>Jedis jedis = jedisPool.getResource();
+String result = jedis.hget(key, item);
+jedis.close();
+return result;</code></pre><p>  }</p>
+<p>  /**</p>
+<ul>
+<li><p>Redis Hmget 命令用于返回哈希表中，一个或多个给定字段的值。</p>
+</li>
+<li><p>如果指定的字段不存在于哈希表，那么返回一个 nil 值。</p>
+</li>
+<li></li>
+<li><p>@param key</p>
+</li>
+<li><p>@param item</p>
+</li>
+<li><p>@return 一个包含多个给定字段关联值的表，表值的排列顺序和指定字段的请求顺序一样。</p>
+</li>
+<li><p>/<br>public static List<String> hmget(String key, String… item) {<br>  Jedis jedis = jedisPool.getResource();<br>  List<String> result = jedis.hmget(key, item);<br>  jedis.close();<br>  return result;<br>}</p>
+<p>public static Long incr(String key) {<br>  Jedis jedis = jedisPool.getResource();<br>  Long result = jedis.incr(key);<br>  jedis.close();<br>  return result;<br>}</p>
+<p>public static Long decr(String key) {<br>  Jedis jedis = jedisPool.getResource();<br>  Long result = jedis.decr(key);<br>  jedis.close();<br>  return result;<br>}</p>
+<p>public static Long expire(String key, int second) {<br>  Jedis jedis = jedisPool.getResource();<br>  Long result = jedis.expire(key, second);<br>  jedis.close();<br>  return result;<br>}</p>
+<p>public static Long ttl(String key) {<br>  Jedis jedis = jedisPool.getResource();<br>  Long result = jedis.ttl(key);<br>  jedis.close();<br>  return result;<br>}</p>
+<p>public static Long hdel(String key, String item) {<br>  Jedis jedis = jedisPool.getResource();<br>  Long result = jedis.hdel(key, item);<br>  jedis.close();<br>  return result;<br>}</p>
+<p>public static Long del(String key) {<br>  Jedis jedis = jedisPool.getResource();<br>  Long result = jedis.del(key);<br>  jedis.close();<br>  return result;<br>}</p>
+<p>public static Long rpush(String key, String… strings) {<br>  Jedis jedis = jedisPool.getResource();<br>  Long result = jedis.rpush(key, strings);<br>  jedis.close();<br>  return result;<br>}</p>
+<p>/**</p>
+</li>
+<li><p>Redis Lrange 返回列表中指定区间内的元素，区间以偏移量 START 和 END 指定。 其中 0 表示列表的第一个元素， 1 表示列表的第二个元素，以此类推。</p>
+</li>
+<li><p>你也可以使用负数下标，以 -1 表示列表的最后一个元素， -2 表示列表的倒数第二个元素，以此类推。</p>
+</li>
+<li></li>
+<li><p>@param string</p>
+</li>
+<li><p>@param start</p>
+</li>
+<li><p>@param end</p>
+</li>
+<li><p>@return</p>
+</li>
+<li><p>/<br>public static List<String> lrange(String key, int start, int end) {<br>  Jedis jedis = jedisPool.getResource();<br>  List<String> result = jedis.lrange(key, start, end);<br>  jedis.close();<br>  return result;<br>}</p>
+<p>/**</p>
+</li>
+<li><p>从列表中从头部开始移除count个匹配的值。如果count为零，所有匹配的元素都被删除。如果count是负数，内容从尾部开始删除。</p>
+</li>
+<li></li>
+<li><p>@param string</p>
+</li>
+<li><p>@param string2</p>
+</li>
+<li><p>@param i</p>
+</li>
+<li><p>/<br>public static Long lrem(String key, Long count, String value) {<br>  Jedis jedis = jedisPool.getResource();<br>  Long result = jedis.lrem(key, count, value);<br>  jedis.close();<br>  return result;<br>}</p>
+<p>/**</p>
+</li>
+<li><p>Redis Zadd 命令用于将一个或多个成员元素及其分数值加入到有序集当中。</p>
+</li>
+<li><p>如果某个成员已经是有序集的成员，那么更新这个成员的分数值，并通过重新插入这个成员元素，来保证该成员在正确的位置上。</p>
+</li>
+<li><p>分数值可以是整数值或双精度浮点数。</p>
+</li>
+<li><p>如果有序集合 key 不存在，则创建一个空的有序集并执行 ZADD 操作。</p>
+</li>
+<li><p>当 key 存在但不是有序集类型时，返回一个错误。</p>
+</li>
+<li></li>
+<li><p>@param string</p>
+</li>
+<li><p>@param i</p>
+</li>
+<li><p>@param string2</p>
+</li>
+<li><p>@return 被成功添加的新成员的数量，不包括那些被更新的、已经存在的成员。</p>
+</li>
+<li><p>/<br>public static Long zadd(String key, double score, String member) {<br>  Jedis jedis = jedisPool.getResource();<br>  Long result = jedis.zadd(key, score, member);<br>  jedis.close();<br>  return result;<br>}</p>
+<p>/**</p>
+</li>
+<li><p>Redis Zrevrangebyscore 返回有序集中指定分数区间内的所有的成员。有序集成员按分数值递减(从大到小)的次序排列。</p>
+</li>
+<li><p>具有相同分数值的成员按字典序的逆序(reverse lexicographical order )排列。</p>
+</li>
+<li><p>除了成员按分数值递减的次序排列这一点外， ZREVRANGEBYSCORE 命令的其他方面和 ZRANGEBYSCORE 命令一样。</p>
+</li>
+<li></li>
+<li><p>@param key</p>
+</li>
+<li><p>@param max</p>
+</li>
+<li><p>@param min</p>
+</li>
+<li><p>@param offset</p>
+</li>
+<li><p>@param count</p>
+</li>
+<li><p>@return 指定区间内，带有分数值(可选)的有序集成员的列表。</p>
+</li>
+<li><p>/<br>public static Set<String> zrevrangebyscore(String key, String max, String min, int offset, int count) {<br>  Jedis jedis = jedisPool.getResource();<br>  Set<String> result =  jedis.zrevrangeByScore(key, max, min, offset, count);<br>  jedis.close();<br>  return result;<br>}<br>}</p>
+</li>
+</ul>
+</li>
+</ul>
+<p><a href="https://www.cnblogs.com/afeng2010/p/10042790.html" target="_blank" rel="noopener">https://www.cnblogs.com/afeng2010/p/10042790.html</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://kuangai.github.io/2020/07/29/LRU%E7%AE%97%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="wsc">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="study">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/07/29/LRU%E7%AE%97%E6%B3%95/" itemprop="url">LRU算法</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-07-29T19:25:00+08:00">
+                2020-07-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/redis/" itemprop="url" rel="index">
+                    <span itemprop="name">redis</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/redis/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>1.1. 原理<br>LRU（Least recently used，最近最少使用）算法根据数据的历史访问记录来进行淘汰数据，其核心思想是“如果数据最近被访问过，那么将来被访问的几率也更高”。</p>
+<p>1.2. 实现<br>最常见的实现是使用一个链表保存缓存数据，详细算法实现如下：</p>
+<ol>
+<li><p>新数据插入到链表头部；</p>
+</li>
+<li><p>每当缓存命中（即缓存数据被访问），则将数据移到链表头部；</p>
+</li>
+<li><p>当链表满的时候，将链表尾部的数据丢弃。</p>
+</li>
+</ol>
+<p>1.3. 分析<br>【命中率】</p>
+<p>当存在热点数据时，LRU的效率很好，但偶发性的、周期性的批量操作会导致LRU命中率急剧下降，缓存污染情况比较严重。</p>
+<p>【复杂度】</p>
+<p>实现简单。</p>
+<p>【代价】</p>
+<p>命中时需要遍历链表，找到命中的数据块索引，然后需要将数据移到头部。</p>
+<p>LRU-K<br>2.1. 原理<br>LRU-K中的K代表最近使用的次数，因此LRU可以认为是LRU-1。LRU-K的主要目的是为了解决LRU算法“缓存污染”的问题，其核心思想是将“最近使用过1次”的判断标准扩展为“最近使用过K次”。</p>
+<p>2.2. 实现<br>相比LRU，LRU-K需要多维护一个队列，用于记录所有缓存数据被访问的历史。只有当数据的访问次数达到K次的时候，才将数据放入缓存。当需要淘汰数据时，LRU-K会淘汰第K次访问时间距当前时间最大的数据。详细实现如下：</p>
+<ol>
+<li><p>数据第一次被访问，加入到访问历史列表；</p>
+</li>
+<li><p>如果数据在访问历史列表里后没有达到K次访问，则按照一定规则（FIFO，LRU）淘汰；</p>
+</li>
+<li><p>当访问历史队列中的数据访问次数达到K次后，将数据索引从历史队列删除，将数据移到缓存队列中，并缓存此数据，缓存队列重新按照时间排序；</p>
+</li>
+<li><p>缓存数据队列中被再次访问后，重新排序；</p>
+</li>
+<li><p>需要淘汰数据时，淘汰缓存队列中排在末尾的数据，即：淘汰“倒数第K次访问离现在最久”的数据。</p>
+</li>
+</ol>
+<p>LRU-K具有LRU的优点，同时能够避免LRU的缺点，实际应用中LRU-2是综合各种因素后最优的选择，LRU-3或者更大的K值命中率会高，但适应性差，需要大量的数据访问才能将历史访问记录清除掉。</p>
+<p>2.3. 分析<br>【命中率】</p>
+<p>LRU-K降低了“缓存污染”带来的问题，命中率比LRU要高。</p>
+<p>【复杂度】</p>
+<p>LRU-K队列是一个优先级队列，算法复杂度和代价比较高。</p>
+<p>【代价】</p>
+<p>由于LRU-K还需要记录那些被访问过、但还没有放入缓存的对象，因此内存消耗会比LRU要多；当数据量很大的时候，内存消耗会比较可观。</p>
+<p>LRU-K需要基于时间进行排序（可以需要淘汰时再排序，也可以即时排序），CPU消耗比LRU要高。</p>
+<p> Two queues（2Q）<br>3.1. 原理<br>Two queues（以下使用2Q代替）算法类似于LRU-2，不同点在于2Q将LRU-2算法中的访问历史队列（注意这不是缓存数据的）改为一个FIFO缓存队列，即：2Q算法有两个缓存队列，一个是FIFO队列，一个是LRU队列。</p>
+<p>3.2. 实现<br>当数据第一次访问时，2Q算法将数据缓存在FIFO队列里面，当数据第二次被访问时，则将数据从FIFO队列移到LRU队列里面，两个队列各自按照自己的方法淘汰数据。详细实现如下：</p>
+<ol>
+<li><p>新访问的数据插入到FIFO队列；</p>
+</li>
+<li><p>如果数据在FIFO队列中一直没有被再次访问，则最终按照FIFO规则淘汰；</p>
+</li>
+<li><p>如果数据在FIFO队列中被再次访问，则将数据移到LRU队列头部；</p>
+</li>
+<li><p>如果数据在LRU队列再次被访问，则将数据移到LRU队列头部；</p>
+</li>
+<li><p>LRU队列淘汰末尾的数据。</p>
+</li>
+</ol>
+<p>注：上图中FIFO队列比LRU队列短，但并不代表这是算法要求，实际应用中两者比例没有硬性规定。</p>
+<p>3.3. 分析<br>【命中率】</p>
+<p>2Q算法的命中率要高于LRU。</p>
+<p>【复杂度】</p>
+<p>需要两个队列，但两个队列本身都比较简单。</p>
+<p>【代价】</p>
+<p>FIFO和LRU的代价之和。</p>
+<p>2Q算法和LRU-2算法命中率类似，内存消耗也比较接近，但对于最后缓存的数据来说，2Q会减少一次从原始存储读取数据或者计算数据的操作。</p>
+<p>Multi Queue（MQ）<br>4.1. 原理<br>MQ算法根据访问频率将数据划分为多个队列，不同的队列具有不同的访问优先级，其核心思想是：优先缓存访问次数多的数据。</p>
+<p>4.2. 实现<br>MQ算法将缓存划分为多个LRU队列，每个队列对应不同的访问优先级。访问优先级是根据访问次数计算出来的，例如</p>
+<p>详细的算法结构图如下，Q0，Q1….Qk代表不同的优先级队列，Q-history代表从缓存中淘汰数据，但记录了数据的索引和引用次数的队列：</p>
+<p>如上图，算法详细描述如下：</p>
+<ol>
+<li><p>新插入的数据放入Q0；</p>
+</li>
+<li><p>每个队列按照LRU管理数据；</p>
+</li>
+<li><p>当数据的访问次数达到一定次数，需要提升优先级时，将数据从当前队列删除，加入到高一级队列的头部；</p>
+</li>
+<li><p>为了防止高优先级数据永远不被淘汰，当数据在指定的时间里访问没有被访问时，需要降低优先级，将数据从当前队列删除，加入到低一级的队列头部；</p>
+</li>
+<li><p>需要淘汰数据时，从最低一级队列开始按照LRU淘汰；每个队列淘汰数据时，将数据从缓存中删除，将数据索引加入Q-history头部；</p>
+</li>
+<li><p>如果数据在Q-history中被重新访问，则重新计算其优先级，移到目标队列的头部；</p>
+</li>
+<li><p>Q-history按照LRU淘汰数据的索引。</p>
+</li>
+</ol>
+<p>4.3. 分析<br>【命中率】</p>
+<p>MQ降低了“缓存污染”带来的问题，命中率比LRU要高。</p>
+<p>【复杂度】</p>
+<p>MQ需要维护多个队列，且需要维护每个数据的访问时间，复杂度比LRU高。</p>
+<p>【代价】</p>
+<p>MQ需要记录每个数据的访问时间，需要定时扫描所有队列，代价比LRU要高。</p>
+<p>注：虽然MQ的队列看起来数量比较多，但由于所有队列之和受限于缓存容量的大小，因此这里多个队列长度之和和一个LRU队列是一样的，因此队列扫描性能也相近。</p>
+<p>LRU类算法对比<br>由于不同的访问模型导致命中率变化较大，此处对比仅基于理论定性分析，不做定量分析。</p>
+<p>对比点</p>
+<p>对比</p>
+<p>命中率</p>
+<p>LRU-2 &gt; MQ(2) &gt; 2Q &gt; LRU</p>
+<p>复杂度</p>
+<p>LRU-2 &gt; MQ(2) &gt; 2Q &gt; LRU</p>
+<p>代价</p>
+<p>LRU-2  &gt; MQ(2) &gt; 2Q &gt; LRU</p>
+<p>实际应用中需要根据业务的需求和对数据的访问情况进行选择，并不是命中率越高越好。例如：虽然LRU看起来命中率会低一些，且存在”缓存污染“的问题，但由于其简单和代价小，实际应用中反而应用更多。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://kuangai.github.io/2020/07/28/%E5%BB%BA%E7%AB%8B%E7%B4%A2%E5%BC%95%E7%9A%84%E5%8E%9F%E5%88%99%E6%80%BB%E7%BB%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="wsc">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="study">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/07/28/%E5%BB%BA%E7%AB%8B%E7%B4%A2%E5%BC%95%E7%9A%84%E5%8E%9F%E5%88%99%E6%80%BB%E7%BB%93/" itemprop="url">建立索引的原则总结</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-07-28T21:09:00+08:00">
+                2020-07-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/mysql/" itemprop="url" rel="index">
+                    <span itemprop="name">mysql</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>数据库建立索引的原则 </p>
+<p>1，确定针对该表的操作是大量的查询操作还是大量的增删改操作。 </p>
+<p>2，尝试建立索引来帮助特定的查询。检查自己的sql语句，为那些频繁在where子句中出现的字段建立索引。 </p>
+<p>3，尝试建立复合索引来进一步提高系统性能。修改复合索引将消耗更长时间，同时，复合索引也占磁盘空间。 </p>
+<p>4，对于小型的表，建立索引可能会影响性能 </p>
+<p>5，应该避免对具有较少值的字段进行索引。 </p>
+<p>6，避免选择大型数据类型的列作为索引。 </p>
+<p>索引建立的原则 </p>
+<p>索引查询是数据库中重要的记录查询方法，要不要进入索引以及在那些字段上建立索引都要和实际数据库系统的查询要求结合来考虑，下面给出实际中的一些通用的原则： </p>
+<ol>
+<li><p>在经常用作过滤器的字段上建立索引； </p>
+</li>
+<li><p>在SQL语句中经常进行GROUP BY、ORDER BY的字段上建立索引； </p>
+</li>
+<li><p>在不同值较少的字段上不必要建立索引，如性别字段； </p>
+</li>
+<li><p>对于经常存取的列避免建立索引； </p>
+</li>
+<li><p>用于联接的列（主健/外健）上建立索引； </p>
+</li>
+<li><p>在经常存取的多个列上建立复合索引，但要注意复合索引的建立顺序要按照使用的频度来确定； </p>
+</li>
+<li><p>缺省情况下建立的是非簇集索引，但在以下情况下最好考虑簇集索引，如：含有有限数目（不是很少）唯一的列；进行大范围的查询；充分的利用索引可以减少表扫描I/0的次数，有效的避免对整表的搜索。当然合理的索引要建立在对各种查询的分析和预测中，也取决于DBA的所设计的数据库结构。 </p>
+</li>
+</ol>
+<p>oracle 索引建立的若干原则 </p>
+<pre><code>我们首先要考虑的是数据量，数据量级别的不同，要考虑的问题有很大区别。几千条记录建不建索引其实都无所谓了，差个几豪秒也感觉不出来，但数据量一旦要增长到百万， 千万级别，索引的重要性就体现出来了。没有索引一个查询可能要几个小时甚至几天才能出来，对数据库的影响不仅仅是查询速度的降低， 在io 上的花费和对数据库连接资源的占用甚至会拖跨数据库。那么怎样建立索引，建立什么类型的索引呢，应该按照几个方面来考虑。 </code></pre><p>1． 先要了解业务需求，总结出应用会按照哪几个字段来进行查询。例如一个人员查询系统可能会按照（姓名，身份证件号码，性别，住址，民族等），当然可能是几个字段的组合查询。 </p>
+<p>2． 确定了第一步后要估计数据的分布。相同值有多少，是不是均匀。如姓名字段就会有大量的重复情况；性别可能只有两个值（1，2 分别代表男，女），民族会有56 个。 </p>
+<p>3． 确定索引的类型。选择性高的字段建立B- 树索引最好，如果数据量太大，可考虑把索引分区，在并发情况下通常会表现很好。相当于把一棵很大的B树拆开成了多棵小树。只有几个值的字段如性别并且数据分布比较均匀，查询的平均命中率要是非常高就不需要建立索引，否则可以建立位图索引（但会影响并发）。 </p>
+<p>oracle建立索引原则 </p>
+<p>索引需要平衡query和DML的需要，常用于(子)查询的表应建立索引；<br>把索引建到不同的表空间中；<br>用统一的extent大小:<br>五个block的倍数或者tablespace指定的MINIMUM EXTENT的倍数；<br>创建索引考虑用NOLOGGING参数，重建索引的时候也一样；<br>创建索引时INITRANS值应该比相应的table的值高一些；<br>对常用SQL语句的where条件中的列建立唯一索引或组合索引，组合条件查询中相应的组合索引更有效；<br>对于组合索引，根据列的唯一值概率，安排索引顺序；<br>如果一个列具有很低的数据基数，并且或者可具有空值，不应作为索引列；<br>如果where语句中不得不对查询列采用函数查询，如upper函数，最好建立相应函数索引；<br>对于低基数集的列，并包含OR等逻辑运算，考虑用Bitmap索引，对于从大量行的表中返回大量的行时也可以考虑Bitmap索引；<br>避免在有大量并发DML运算的表中使用Bitmap索引</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://kuangai.github.io/2020/07/27/char%E3%80%81varchar%E3%80%81text%E5%AF%B9%E6%AF%94/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="wsc">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="study">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/07/27/char%E3%80%81varchar%E3%80%81text%E5%AF%B9%E6%AF%94/" itemprop="url">char、varchar、text对比</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-07-27T23:04:00+08:00">
+                2020-07-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/mysql/" itemprop="url" rel="index">
+                    <span itemprop="name">mysql</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>char的总结：<br>      char最大长度是255字符，注意是字符数和字符集没关系。可以有默认值，尾部有空格会被截断。<br>varchar的总结：<br>      varchar的最大长度65535是指能存储的字节数，其实最多只能存储65532个字节，还有3个字节用于存储长度。注意是字节数这个和字符集有关系。一个汉字字符用utf8占用3字节，用gbk占用2字节。可以有默认值，尾部有空格不会截断。<br>text的总结：<br>      text和varchar基本相同。text会忽略指定的大小这和varchar有所不同，text不能有默认值。尾部有空格不会被截断。text使用额外的2个字节来存储数据的大小，varchar根据存储数据的大小选择用几个字节来存储。text的65535字节全部用来存储数据，varchar则会占用1－3个字节去存储数据大小。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://kuangai.github.io/2020/07/27/Union%E5%92%8CUnion-all%E7%9A%84%E5%8C%BA%E5%88%AB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="wsc">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="study">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/07/27/Union%E5%92%8CUnion-all%E7%9A%84%E5%8C%BA%E5%88%AB/" itemprop="url">Union和Union all的区别</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-07-27T22:56:00+08:00">
+                2020-07-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/mysql/" itemprop="url" rel="index">
+                    <span itemprop="name">mysql</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>union去重并排序，union all直接返回合并的结果，不去重也不排序；<br>union all比union性能好；</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://kuangai.github.io/2020/07/27/%E4%B8%89%E8%8C%83%E5%BC%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="wsc">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="study">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/07/27/%E4%B8%89%E8%8C%83%E5%BC%8F/" itemprop="url">三范式</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-07-27T21:55:00+08:00">
+                2020-07-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/mysql/" itemprop="url" rel="index">
+                    <span itemprop="name">mysql</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>三范式<br>满足第三范式（3NF）必须先满足第二范式（2NF）<br>满足第二范式（2NF）必须先满足第一范式（1NF）<br>1NF:字段不可分;<br>2NF:有主键，非主键字段依赖主键;<br>3NF:非主键字段不能相互依赖; </p>
+<p>解释:<br>1NF:原子性 字段不可再分,否则就不是关系数据库;<br>2NF:唯一性 一个表只说明一个事物;<br>3NF:每列都与主键有直接关系，不存在传递依赖; </p>
+<p>反三范式<br>没有冗余的数据库未必是最好的数据库，有时为了提高运行效率，提高读性能，就必须降低范式标准，适当保留冗余数据。具体做法是： 在概念数据模型设计时遵守第三范式，降低范式标准的工作放到物理数据模型设计时考虑。降低范式就是增加字段，减少了查询时的关联，提高查询效率，因为在数据库的操作中查询的比例要远远大于DML的比例。但是反范式化一定要适度，并且在原本已满足三范式的基础上再做调整的。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://kuangai.github.io/2020/07/27/drop%E3%80%81truncate%E5%92%8Cdelete%E7%9A%84%E5%8C%BA%E5%88%AB/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -440,1477 +2149,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://kuangai.github.io/2020/05/17/%E5%AD%A6%E4%B9%A0%E5%BF%83%E5%BE%97/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="wsc">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="study">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/05/17/%E5%AD%A6%E4%B9%A0%E5%BF%83%E5%BE%97/" itemprop="url">学习心得</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-05-17T20:37:00+08:00">
-                2020-05-17
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%AD%A6%E4%B9%A0%E5%BF%83%E5%BE%97/" itemprop="url" rel="index">
-                    <span itemprop="name">学习心得</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <ol>
-<li>看一件事，不能直接陷入细节，应该先鸟瞰全貌，这样能从高纬度理解问题，思路更清晰。</li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://kuangai.github.io/2020/05/16/Untitled/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="wsc">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="study">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/05/16/Untitled/" itemprop="url">ArrayList foreach删除元素报错分析</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-05-16T22:21:00+08:00">
-                2020-05-16
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/java/" itemprop="url" rel="index">
-                    <span itemprop="name">java</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="ArrayList-foreach删除元素报错分析"><a href="#ArrayList-foreach删除元素报错分析" class="headerlink" title="ArrayList foreach删除元素报错分析"></a>ArrayList foreach删除元素报错分析</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; a = <span class="keyword">new</span> ArrayList&lt;String&gt;(); </span><br><span class="line">	a.add(<span class="string">"1"</span>);</span><br><span class="line">	a.add(<span class="string">"2"</span>);</span><br><span class="line">	<span class="keyword">for</span> (String temp : a) &#123; </span><br><span class="line">		<span class="keyword">if</span>(<span class="string">"1"</span>.equals(temp))&#123;</span><br><span class="line">			a.remove(temp); </span><br><span class="line">	&#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>以上代码对应class文件如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">List a = <span class="keyword">new</span> ArrayList();</span><br><span class="line">a.add(<span class="string">"1"</span>);</span><br><span class="line">a.add(<span class="string">"2"</span>);</span><br><span class="line">Iterator i$ = a.iterator();</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(!i$.hasNext())</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    String temp = (String)i$.next();</span><br><span class="line">    <span class="keyword">if</span>(<span class="string">"1"</span>.equals(temp))</span><br><span class="line">        a.remove(temp);</span><br><span class="line">&#125; <span class="keyword">while</span>(<span class="keyword">true</span>);</span><br></pre></td></tr></table></figure>
-
-<h2 id="场景一"><a href="#场景一" class="headerlink" title="场景一"></a>场景一</h2><pre><code>List&lt;String&gt; a = new ArrayList&lt;String&gt;(); 
-a.add(&quot;1&quot;);
-a.add(&quot;2&quot;);
-for (String temp : a) { 
-   if(&quot;1&quot;.equals(temp)){
-        a.remove(temp); 
-    } 
-} </code></pre><h2 id="执行结果"><a href="#执行结果" class="headerlink" title="执行结果"></a>执行结果</h2><p>删除不会报错，但是循环只走了一次就结束了。</p>
-<h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><p>for循环实际相当于使用迭代器遍历，在第一次循环时，执行完next（）方法后游标置为1，即如下代码中第9行 cursor = 1</p>
-<pre><code>public E next() {
-    checkForComodification();
-    int i = cursor;
-    if (i &gt;= size)
-    throw new NoSuchElementException();
-    Object[] elementData = ArrayList.this.elementData;
-    if (i &gt;= elementData.length)
-    throw new ConcurrentModificationException();
-    cursor = i + 1;
-    return (E) elementData[lastRet = i];
-}</code></pre><p>接着执行remove（），执行成功后 size-1。<br>进行下次循环时执行hasNext（）判断是否存在下一个元素时 满足cursor!=size 为true<br>，因此循环结束，代码如下：</p>
-<pre><code>public boolean hasNext() {
-    return cursor != size;
-}</code></pre><h2 id="场景二"><a href="#场景二" class="headerlink" title="场景二"></a>场景二</h2><pre><code>List&lt;String&gt; a = new ArrayList&lt;String&gt;(); 
-a.add(&quot;1&quot;);
-a.add(&quot;2&quot;);
-for (String temp : a) { 
-   if(&quot;2&quot;.equals(temp)){
-        a.remove(temp); 
-    } 
-} </code></pre><h3 id="执行结果-1"><a href="#执行结果-1" class="headerlink" title="执行结果"></a>执行结果</h3><p>删除之后，报错。</p>
-<h3 id="原因-1"><a href="#原因-1" class="headerlink" title="原因"></a>原因</h3><p>for 在第二次循环中，执行完remove（），size=1,此时因为循环执行过两次，因此 此时cursor = 2，在进行第三次循环前 会执行 hasNext（），此时size ！= cursor 成立，导致 hasNext() 结果为true ，进入循环，然后执行next（）方法。<br>next（）方法会判断修改次数与预期修改次数是否相等，因为直接调用ArrayList的remove方法修改了modCount（+1）但不会修改得迭代器中的 <strong>expectedModCount</strong>的值，因此 出现<br><strong>ConcurrentModificationException</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">final</span> <span class="keyword">void</span> <span class="title">checkForComodification</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (modCount != expectedModCount)</span><br><span class="line">		<span class="keyword">throw</span> <span class="keyword">new</span> ConcurrentModificationException();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://kuangai.github.io/2020/05/16/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E4%BD%8D%E8%BF%90%E7%AE%97-%E5%BC%82%E6%88%96/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="wsc">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="study">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/05/16/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E4%BD%8D%E8%BF%90%E7%AE%97-%E5%BC%82%E6%88%96/" itemprop="url">基础知识位运算-异或</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-05-16T18:22:00+08:00">
-                2020-05-16
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" itemprop="url" rel="index">
-                    <span itemprop="name">基础知识</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="异或运算"><a href="#异或运算" class="headerlink" title="异或运算"></a>异或运算</h2><h4 id="运算规则"><a href="#运算规则" class="headerlink" title="运算规则"></a>运算规则</h4><blockquote>
-<p>参与运算的两个值，如果两个相应bit位相同，则结果为0，否则为1。</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">0</span>^<span class="number">0</span> = <span class="number">0</span>，</span><br><span class="line"><span class="number">1</span>^<span class="number">0</span> = <span class="number">1</span>，</span><br><span class="line"><span class="number">0</span>^<span class="number">1</span> = <span class="number">1</span>，</span><br><span class="line"><span class="number">1</span>^<span class="number">1</span> = <span class="number">0</span></span><br></pre></td></tr></table></figure>
-<h4 id="3个特点："><a href="#3个特点：" class="headerlink" title="3个特点："></a>3个特点：</h4><p>（1） 0^0=0，0^1=1 0异或任何数＝任何数<br>（2） 1^0=1，1^1=0 1异或任何数－任何数取反<br>（3） 任何数异或自己＝把自己置0</p>
-<h4 id="常见用途"><a href="#常见用途" class="headerlink" title="常见用途"></a>常见用途</h4><p>（1） 使某些特定的位翻转（1-&gt;0,0-&gt;1）</p>
-<blockquote>
-<p>将特定的位异或1即可。<br>例如对数10100001的第2位和第3位翻转，则可以将该数与00000110进行按位异或运算。<br>10100001^00000110 = 10100111</p>
-</blockquote>
-<p>（2） 实现两个值的交换，而不必使用临时变量。</p>
-<blockquote>
-<p>例如交换两个整数a=10100001，b=00000110的值，可通过下列语句实现：</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a = a^b； 　　<span class="comment">//a=10100111</span></span><br><span class="line">b = b^a； 　　<span class="comment">//b=10100001</span></span><br><span class="line">a = a^b； 　　<span class="comment">//a=00000110</span></span><br></pre></td></tr></table></figure>
-
-<p>（3） 将变量置零：</p>
-<blockquote>
-<p>异或自己</p>
-</blockquote>
-<p>（4） 快速判断两个值是否相等</p>
-<blockquote>
-<p>举例：</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">return</span> （（a ^ b） == <span class="number">0</span>）</span><br></pre></td></tr></table></figure>
-
-<p>(5)  加密</p>
-<blockquote>
-<p>加密 : 逐个字符跟secret字符异或运算。<br>  解密 : 密文再跟同一个字符异或运算</p>
-</blockquote>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://kuangai.github.io/2020/05/16/HashMap/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="wsc">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="study">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/05/16/HashMap/" itemprop="url">HashMap</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-05-16T08:52:00+08:00">
-                2020-05-16
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/java/" itemprop="url" rel="index">
-                    <span itemprop="name">java</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>原理讲解参考：<br><a href="https://blog.csdn.net/zhengwangzw/article/details/104889549" target="_blank" rel="noopener">https://blog.csdn.net/zhengwangzw/article/details/104889549</a><br><a href="https://segmentfault.com/a/1190000015812438?utm_source=tag-newest" target="_blank" rel="noopener">https://segmentfault.com/a/1190000015812438?utm_source=tag-newest</a><br><a href="https://www.javadoop.com/post/hashmap#toc_9" target="_blank" rel="noopener">https://www.javadoop.com/post/hashmap#toc_9</a></p>
-<h1 id="put-大致步骤"><a href="#put-大致步骤" class="headerlink" title="put 大致步骤"></a>put 大致步骤</h1><ol>
-<li><p>初始化</p>
-</li>
-<li><p>计算下标</p>
-</li>
-<li><p>判断下表第一个元素是否是待处理节点</p>
-</li>
-<li><p>判断是否是树节点</p>
-</li>
-<li><p>遍历链表获取待处理节点</p>
-</li>
-<li><p>处理待处理节点，并判断是否转换为树</p>
-</li>
-<li><p>size++,modCount++, –&gt;resize();</p>
-</li>
-</ol>
-<h1 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h1><ol>
-<li>存储元素的table数组第一次初始化是在<strong>第一次put</strong></li>
-<li>链表转换红黑树，需要满足链表长度<strong>大于8且元素个数大于64</strong>否则不是转换为树，而是扩容</li>
-<li>计算hash值时，高16位异或低16位，目的是** 混合原始哈希码的高位和低位，以此来加大低位随机性**</li>
-</ol>
-<h1 id="1-7与1-8中区别"><a href="#1-7与1-8中区别" class="headerlink" title="1.7与1.8中区别"></a>1.7与1.8中区别</h1><ol>
-<li><p>hash函数</p>
-</li>
-<li><p>7 四次异或</p>
-</li>
-<li><p>8 一次异或</p>
-</li>
-<li><p>hash冲突后存储结构</p>
-</li>
-<li><p>7 链表</p>
-</li>
-<li><p>8 链表+红黑树</p>
-</li>
-<li><p>扩容</p>
-</li>
-<li><p>7 对所有元素重新hash</p>
-</li>
-<li><p>8 通过 对<strong>hash &amp; oldCap</strong> 判断最高位是否为0，确定元素插入<strong>原始位置</strong>还是<strong>原始位置+oldCap</strong></p>
-</li>
-<li><p>链表插入</p>
-</li>
-<li><p>7 头插法 即新增元素hash冲突时，插入链表头部</p>
-</li>
-<li><p>8 尾插法 即新增元素hash冲突时，插入链表尾部</p>
-</li>
-<li><p>扩容时机</p>
-</li>
-<li><p>7 插入新元素前扩容</p>
-</li>
-<li><p>8 插入新元素后扩容</p>
-</li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://kuangai.github.io/2020/05/05/%E4%BD%8D%E8%BF%90%E7%AE%97/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="wsc">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="study">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/05/05/%E4%BD%8D%E8%BF%90%E7%AE%97/" itemprop="url">基础知识位运算</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-05-05T15:13:00+08:00">
-                2020-05-05
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" itemprop="url" rel="index">
-                    <span itemprop="name">基础知识</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="基础知识位运算【-amp-】"><a href="#基础知识位运算【-amp-】" class="headerlink" title="基础知识位运算【|&amp;~】"></a>基础知识位运算【|&amp;~】</h2><h1 id="or-或"><a href="#or-或" class="headerlink" title="| or  或"></a>| or  或</h1><p>应用场景:<br>当需要点亮某一个值的时候,可以将1移位到那个地方,然后用原值与这个移位的1使用|操作,这样原值的其他所有位的值都得以保留,而且新的位置上面不管以前是0还是1,都会变成1</p>
-<h1 id="amp-and-与"><a href="#amp-and-与" class="headerlink" title="&amp; and 与"></a>&amp; and 与</h1><p>应用场景:<br>如何判断一个数的某一个bit是不是1呢?</p>
-<p>设置a = 1,然后将这个1移位到相应的bit位上面,这个时候a除了当前的bit位是1,其他的位都是0,然后让a与原值进行&amp;操作.结果就是,所有其他的bit位都被忽略,只有这个需要的bit位的值被提取出来,如果这一位是0,结果==0;如果这一位是1,那么结果 !=0 (因为考虑到负数的存在,所以这个值是有可能小于0的).</p>
-<h1 id="not-非"><a href="#not-非" class="headerlink" title="~ not 非"></a>~ not 非</h1><p>应用场景:<br>假设你需要清空某一位,但是需要保留其他所有位的值,就可以将1移到需要清空的位置上,反转.这个时候,这个原来是1的bit为就变成0,而其他所有的bit位都是1了.再将这个数与其他值进行 &amp; 操作,就可以保证在<strong>清空这一位数的同时,其他所有bit位的值得以保留</strong>.</p>
-<p>上述基础操作可应用于使用byte数组实现布隆过滤器<br>具体实现参考：</p>
-<p><a href="https://blog.csdn.net/zimu666/article/details/8284906?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1" target="_blank" rel="noopener">https://blog.csdn.net/zimu666/article/details/8284906?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1</a></p>
-<p><a href="https://blog.csdn.net/zimu666/article/details/8295724" target="_blank" rel="noopener">https://blog.csdn.net/zimu666/article/details/8295724</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://kuangai.github.io/2020/05/05/%E5%8F%8D%E5%B0%84/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="wsc">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="study">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/05/05/%E5%8F%8D%E5%B0%84/" itemprop="url">反射</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-05-05T11:14:00+08:00">
-                2020-05-05
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/java/" itemprop="url" rel="index">
-                    <span itemprop="name">java</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>在运行状态中，对于任意一个类，都能够知道这个类的所有属性和方法；对于任意一个对象，都能够调用它的任意一个方法和属性；这种动态获取的信息以及动态调用对象的方法的功能称为java语言的反射机制。</p>
-<p>反射原理<br><a href="https://www.jianshu.com/p/3ea4a6b57f87" target="_blank" rel="noopener">https://www.jianshu.com/p/3ea4a6b57f87</a></p>
-<h3 id="基本应用"><a href="#基本应用" class="headerlink" title="基本应用"></a>基本应用</h3><h4 id="获取类对象-（有3种方式）"><a href="#获取类对象-（有3种方式）" class="headerlink" title="获取类对象 （有3种方式）"></a>获取类对象 （有3种方式）</h4><p>Class.forName（）（常用）<br>Hero.class （需要导入类的包）<br>new Hero().getClass()</p>
-<h4 id="利用反射机制创建对象"><a href="#利用反射机制创建对象" class="headerlink" title="利用反射机制创建对象"></a>利用反射机制创建对象</h4><p>基本步骤<br>  与传统的通过new 来获取对象的方式不同反射机制，反射会先拿到Hero的“类对象”,然后通过类对象获取“构造器对象”再通过构造器对象创建一个对象，具体步骤：<br>1.获取类对象 Class class = Class.forName(“pojo.Hero”);<br>2.获取构造器对象 Constructor con = clazz.getConstructor(形参.class);<br>3 获取对象 Hero hero =con.newInstance(实参);</p>
-<h4 id="获取构造器对象方法："><a href="#获取构造器对象方法：" class="headerlink" title="获取构造器对象方法："></a>获取构造器对象方法：</h4><p>  1).批量的方法：<br>public Constructor[] getConstructors()：所有”公有的”构造方法<br>public Constructor[] getDeclaredConstructors()：获取所有的构造方法(包括私有、受保护、默认、公有)<br>  2).获取单个的方法:<br>public Constructor getConstructor(Class… parameterTypes): 获取单个的”公有的”构造方法<br>public Constructor getDeclaredConstructor(Class…parameterTypes)：获取”某个构造方法”可以是私有的，或受保护、默认、公有；</p>
-<h4 id="获取成员变量并使用"><a href="#获取成员变量并使用" class="headerlink" title="获取成员变量并使用"></a>获取成员变量并使用</h4><p>1.获取类的对象<br>2. 获取属性 Field f1 = 对象.getDeclaredField(“属性名”)<br>3. 修改属性 f1.set(h，实参)，注意这里的h是对象，不是类对象</p>
-<h4 id="getField和getDeclaredField的区别"><a href="#getField和getDeclaredField的区别" class="headerlink" title="getField和getDeclaredField的区别"></a>getField和getDeclaredField的区别</h4><p>   getField 只能获取public的，包括从父类继承来的字段。<br>   getDeclaredField 可以获取本类所有的字段，包括private的，但是 不能获取继承来的字段。 (注： 这里只能获取到private的字段，但并不能访问该private字段的值,除非加上setAccessible(true))；</p>
-<h4 id="获取成员方法并使用"><a href="#获取成员方法并使用" class="headerlink" title="获取成员方法并使用"></a>获取成员方法并使用</h4><p>先获取类的对象<br>再获取成员方法：<br>public Method getMethod(String name ，Class<?>… parameterTypes):获取"公有方法"；（包含了父类的方法也包含Object类）
-public Method getDeclaredMethods(String name ，Class<?>… parameterTypes) :获取成员方法，包括私有的(不包括继承的)<br>参数解释：<br>  name : 方法名；<br>  Class … : 形参的Class类型对象<br>调用方法<br>Method –&gt; public Object invoke(Object obj,Object… args):<br>参数说明：<br>  obj : 要调用方法的对象；<br>  args:调用方式时所传递的实参</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://kuangai.github.io/2020/05/05/%E7%BC%93%E5%AD%98%E9%9B%AA%E5%B4%A9%EF%BC%8C%E7%BC%93%E5%AD%98%E7%A9%BF%E9%80%8F%EF%BC%8C%E7%BC%93%E5%AD%98%E5%87%BB%E7%A9%BF/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="wsc">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="study">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/05/05/%E7%BC%93%E5%AD%98%E9%9B%AA%E5%B4%A9%EF%BC%8C%E7%BC%93%E5%AD%98%E7%A9%BF%E9%80%8F%EF%BC%8C%E7%BC%93%E5%AD%98%E5%87%BB%E7%A9%BF/" itemprop="url">缓存雪崩，缓存穿透，缓存击穿</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-05-05T09:20:00+08:00">
-                2020-05-05
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%BC%93%E5%AD%98/" itemprop="url" rel="index">
-                    <span itemprop="name">缓存</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="缓存穿透"><a href="#缓存穿透" class="headerlink" title="缓存穿透"></a>缓存穿透</h2><blockquote>
-<p>不断请求缓存和数据库中都不存在的数据。不断请求数据库，导致数据压力过大</p>
-</blockquote>
-<h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><ul>
-<li>布隆过滤器<br>将查询数据的全集存储到布隆过滤器中，请求之前执行过滤。</li>
-<li>cache null<br>查询数据库后发现没有对应数据，<strong>将空结果缓存</strong>，并设置过期时间（<strong>不能过长</strong>，以免影响正常数据），避免短时间内大量请求增加数据库压力。<br>大量空请求时浪费缓存资源</li>
-</ul>
-<h2 id="缓存击穿"><a href="#缓存击穿" class="headerlink" title="缓存击穿"></a>缓存击穿</h2><blockquote>
-<p>大量请求数据库中存在但缓存中不存在的某一热点数据（一般是缓存过期），不断请求数据库，导致数据压力过大</p>
-</blockquote>
-<h3 id="解决方案-1"><a href="#解决方案-1" class="headerlink" title="解决方案"></a>解决方案</h3><ul>
-<li>请求加锁</li>
-<li>缓存续期</li>
-<li>设置永不过期</li>
-</ul>
-<h2 id="缓存雪崩"><a href="#缓存雪崩" class="headerlink" title="缓存雪崩"></a>缓存雪崩</h2><blockquote>
-<p>同一时刻大量缓存失效，不断请求数据库，导致数据压力过大</p>
-</blockquote>
-<h3 id="解决方案-2"><a href="#解决方案-2" class="headerlink" title="解决方案"></a>解决方案</h3><ul>
-<li><p>请求加锁<br>在缓存失效后，通过加锁或者队列来控制读数据库写缓存的线程数量。比如对某个key只允许一个线程查询数据和写缓存，其他线程等待<br>关于加锁的几种方式可参考 <a href="https://www.cnblogs.com/dream-to-pku/p/9153999.html" target="_blank" rel="noopener">https://www.cnblogs.com/dream-to-pku/p/9153999.html</a></p>
-</li>
-<li><p>过期更新<br>缓存数据中保存过期时间，并将实际过期时间设置的更长。每次读取数据后检查是否过期，如果过期，则通知其他线程更新该缓存。当前请求返回旧数据给客户端，后续请求在缓存更新后返回正确的数据。</p>
-</li>
-<li><p>缓存预热<br>预先去更新缓存，在即将发生大并发访问前手动触发加载缓存</p>
-</li>
-<li><p>二级缓存<br>双缓存策略。A1为原始缓存，A2为拷贝缓存，A1失效时，可以访问A2，A1缓存失效时间设置为短期，A2设置为长期。</p>
-</li>
-<li><p>缓存续期<br>读缓存后，更新缓存过期时间，数据变更后，直接更新缓存。</p>
-</li>
-<li><p>定期更新缓存<br>缓存过期时间按设置为30分钟，每29分钟更新一次缓存</p>
-</li>
-<li><p>随即设置过期时间<br>缓存数据的过期时间设置随机，防止同一时间大量数据过期现象发生。</p>
-</li>
-<li><p>设置热点数据永远不过期</p>
-</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://kuangai.github.io/2020/05/05/redis%E5%AE%9E%E7%8E%B0%E5%B8%83%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="wsc">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="study">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/05/05/redis%E5%AE%9E%E7%8E%B0%E5%B8%83%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8/" itemprop="url">redis实现布隆过滤器</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-05-05T07:41:00+08:00">
-                2020-05-05
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/redis/" itemprop="url" rel="index">
-                    <span itemprop="name">redis</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>转自：<a href="https://blog.csdn.net/weixin_38003389/article/details/89918747" target="_blank" rel="noopener">https://blog.csdn.net/weixin_38003389/article/details/89918747</a><br>依赖</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.google.guava<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>guava<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">version</span>&gt;</span>22.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>核心代码</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.config;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> com.google.common.base.Preconditions;</span><br><span class="line"><span class="keyword">import</span> com.google.common.hash.Funnel;</span><br><span class="line"><span class="keyword">import</span> com.google.common.hash.Hashing;</span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Configurable;</span><br><span class="line"> </span><br><span class="line"><span class="meta">@Configurable</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BloomFilterHelper</span>&lt;<span class="title">T</span>&gt; </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> numHashFunctions;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> bitSize;</span><br><span class="line">    <span class="keyword">private</span> Funnel&lt;T&gt; funnel;</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">BloomFilterHelper</span><span class="params">(Funnel&lt;T&gt; funnel, <span class="keyword">int</span> expectedInsertions, <span class="keyword">double</span> fpp)</span> </span>&#123;</span><br><span class="line">        Preconditions.checkArgument(funnel != <span class="keyword">null</span>, <span class="string">"funnel不能为空"</span>);</span><br><span class="line">        <span class="keyword">this</span>.funnel = funnel;</span><br><span class="line">        bitSize = optimalNumOfBits(expectedInsertions, fpp);</span><br><span class="line">        numHashFunctions = optimalNumOfHashFunctions(expectedInsertions, bitSize);</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span>[] murmurHashOffset(T value) &#123;</span><br><span class="line">        <span class="keyword">int</span>[] offset = <span class="keyword">new</span> <span class="keyword">int</span>[numHashFunctions];</span><br><span class="line"> </span><br><span class="line">        <span class="keyword">long</span> hash64 = Hashing.murmur3_128().hashObject(value, funnel).asLong();</span><br><span class="line">        <span class="keyword">int</span> hash1 = (<span class="keyword">int</span>) hash64;</span><br><span class="line">        <span class="keyword">int</span> hash2 = (<span class="keyword">int</span>) (hash64 &gt;&gt;&gt; <span class="number">32</span>);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= numHashFunctions; i++) &#123;</span><br><span class="line">            <span class="keyword">int</span> nextHash = hash1 + i * hash2;</span><br><span class="line">            <span class="keyword">if</span> (nextHash &lt; <span class="number">0</span>) &#123;</span><br><span class="line">                nextHash = ~nextHash;</span><br><span class="line">            &#125;</span><br><span class="line">            offset[i - <span class="number">1</span>] = nextHash % bitSize;</span><br><span class="line">        &#125;</span><br><span class="line"> </span><br><span class="line">        <span class="keyword">return</span> offset;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 计算bit数组长度</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">optimalNumOfBits</span><span class="params">(<span class="keyword">long</span> n, <span class="keyword">double</span> p)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (p == <span class="number">0</span>) &#123;</span><br><span class="line">            p = Double.MIN_VALUE;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> (<span class="keyword">int</span>) (-n * Math.log(p) / (Math.log(<span class="number">2</span>) * Math.log(<span class="number">2</span>)));</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 计算hash方法执行次数</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">optimalNumOfHashFunctions</span><span class="params">(<span class="keyword">long</span> n, <span class="keyword">long</span> m)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> Math.max(<span class="number">1</span>, (<span class="keyword">int</span>) Math.round((<span class="keyword">double</span>) m / n * Math.log(<span class="number">2</span>)));</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.redislock;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> com.config.BloomFilterHelper;</span><br><span class="line"><span class="keyword">import</span> com.google.common.base.Preconditions;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Component;</span><br><span class="line"><span class="keyword">import</span> redis.clients.jedis.JedisCluster;</span><br><span class="line"> </span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RedisBloomFilter</span>&lt;<span class="title">T</span>&gt; </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> JedisCluster cluster;</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">RedisBloomFilter</span><span class="params">(JedisCluster jedisCluster)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.cluster = jedisCluster;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 根据给定的布隆过滤器添加值</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> &lt;T&gt; <span class="function"><span class="keyword">void</span> <span class="title">addByBloomFilter</span><span class="params">(BloomFilterHelper&lt;T&gt; bloomFilterHelper, String key, T value)</span> </span>&#123;</span><br><span class="line">        Preconditions.checkArgument(bloomFilterHelper != <span class="keyword">null</span>, <span class="string">"bloomFilterHelper不能为空"</span>);</span><br><span class="line">        <span class="keyword">int</span>[] offset = bloomFilterHelper.murmurHashOffset(value);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i : offset) &#123;</span><br><span class="line">            <span class="comment">//redisTemplate.opsForValue().setBit(key, i, true);</span></span><br><span class="line">            cluster.setbit(key, i, <span class="keyword">true</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 根据给定的布隆过滤器判断值是否存在</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> &lt;T&gt; <span class="function"><span class="keyword">boolean</span> <span class="title">includeByBloomFilter</span><span class="params">(BloomFilterHelper&lt;T&gt; bloomFilterHelper, String key, T value)</span> </span>&#123;</span><br><span class="line">        Preconditions.checkArgument(bloomFilterHelper != <span class="keyword">null</span>, <span class="string">"bloomFilterHelper不能为空"</span>);</span><br><span class="line">        <span class="keyword">int</span>[] offset = bloomFilterHelper.murmurHashOffset(value);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i : offset) &#123;</span><br><span class="line">            <span class="comment">//if (!redisTemplate.opsForValue().getBit(key, i)) &#123;</span></span><br><span class="line">            <span class="keyword">if</span> (!cluster.getbit(key, i)) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"> </span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>redis配置</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">spring.redis.cluster.nodes=127.0.0.1:7000,127.0.0.1:7001,127.0.0.1:7002,127.0.0.1:7003,127.0.0.1:7004,127.0.0.1:7005</span><br><span class="line">spring.redis.password=</span><br><span class="line">#连接池最大连接数（使用负值表示没有限制）</span><br><span class="line">spring.redis.pool.max-active=8</span><br><span class="line">#连接池最大阻塞等待时间（使用负值表示没有限制）</span><br><span class="line">spring.redis.pool.max-wait=-1</span><br><span class="line">#连接池中的最大空闲连接</span><br><span class="line">spring.redis.pool.max-idle=8</span><br><span class="line">#连接池中的最小空闲连接</span><br><span class="line">spring.redis.pool.min-idle=0</span><br><span class="line">#连接超时时间（毫秒）</span><br><span class="line">spring.redis.timeout=0</span><br><span class="line">spring.redis.commandTimeout=5000</span><br></pre></td></tr></table></figure>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> yanlin</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@version</span> v1.3</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> 2019-04-13 3:50 PM</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> v8.0</span></span><br><span class="line"><span class="comment"> **/</span></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RedisConfig</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Logger logger = LoggerFactory.getLogger(RedisConfig<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line"> </span><br><span class="line">    <span class="meta">@Value</span>(<span class="string">"$&#123;spring.redis.cluster.nodes&#125;"</span>)</span><br><span class="line">    <span class="keyword">private</span> String clusterNodes;</span><br><span class="line">    <span class="meta">@Value</span>(<span class="string">"$&#123;spring.redis.timeout&#125;"</span>)</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> timeout;</span><br><span class="line">    <span class="meta">@Value</span>(<span class="string">"$&#123;spring.redis.pool.max-idle&#125;"</span>)</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> maxIdle;</span><br><span class="line">    <span class="meta">@Value</span>(<span class="string">"$&#123;spring.redis.pool.max-wait&#125;"</span>)</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">long</span> maxWaitMillis;</span><br><span class="line">    <span class="meta">@Value</span>(<span class="string">"$&#123;spring.redis.commandTimeout&#125;"</span>)</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> commandTimeout;</span><br><span class="line"> </span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> JedisCluster <span class="title">getJedisCluster</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        String[] cNodes = clusterNodes.split(<span class="string">","</span>);</span><br><span class="line">        Set&lt;HostAndPort&gt; nodes = <span class="keyword">new</span> HashSet&lt;&gt;();</span><br><span class="line">        <span class="comment">// 分割出集群节点</span></span><br><span class="line">        <span class="keyword">for</span> (String node : cNodes) &#123;</span><br><span class="line">            String[] hp = node.split(<span class="string">":"</span>);</span><br><span class="line">            nodes.add(<span class="keyword">new</span> HostAndPort(hp[<span class="number">0</span>], Integer.parseInt(hp[<span class="number">1</span>])));</span><br><span class="line">        &#125;</span><br><span class="line">        JedisPoolConfig jedisPoolConfig = <span class="keyword">new</span> JedisPoolConfig();</span><br><span class="line">        jedisPoolConfig.setMaxIdle(maxIdle);</span><br><span class="line">        jedisPoolConfig.setMaxWaitMillis(maxWaitMillis);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> JedisCluster(nodes, commandTimeout, jedisPoolConfig);</span><br><span class="line"> </span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * redis序列化</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> connectionFactory</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> RedisTemplate&lt;String, Serializable&gt; <span class="title">redisTemplate</span><span class="params">(LettuceConnectionFactory connectionFactory)</span> </span>&#123;</span><br><span class="line">        RedisTemplate&lt;String, Serializable&gt; redisTemplate = <span class="keyword">new</span> RedisTemplate&lt;&gt;();</span><br><span class="line">        redisTemplate.setKeySerializer(<span class="keyword">new</span> StringRedisSerializer());</span><br><span class="line">        redisTemplate.setValueSerializer(<span class="keyword">new</span> GenericJackson2JsonRedisSerializer());</span><br><span class="line">        redisTemplate.setConnectionFactory(connectionFactory);</span><br><span class="line">        <span class="keyword">return</span> redisTemplate;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>测试类</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"> </span><br><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="meta">@EnableDiscoveryClient</span></span><br><span class="line"><span class="meta">@ComponentScan</span>(value = &#123;<span class="string">"com.annotaion"</span>, <span class="string">"cn.springcloud"</span>, <span class="string">"com.config"</span>, <span class="string">"com.redislock"</span>&#125;)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Ch34EurekaClientApplication</span> <span class="keyword">implements</span> <span class="title">ApplicationRunner</span> </span>&#123;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> BloomFilterHelper&lt;CharSequence&gt; bloomFilterHelper;</span><br><span class="line"> </span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    RedisBloomFilter redisBloomFilter;</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        SpringApplication.run(Ch34EurekaClientApplication<span class="class">.<span class="keyword">class</span>, <span class="title">args</span>)</span>;</span><br><span class="line"> </span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="meta">@PostConstruct</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        bloomFilterHelper = <span class="keyword">new</span> BloomFilterHelper&lt;&gt;(Funnels.stringFunnel(Charset.defaultCharset()), <span class="number">1000</span>, <span class="number">0.1</span>);</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">(ApplicationArguments args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="comment">//******* Redis集群测试布隆方法*********</span></span><br><span class="line">        <span class="keyword">int</span> j = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">100</span>; i++) &#123;</span><br><span class="line">            redisBloomFilter.addByBloomFilter(bloomFilterHelper, <span class="string">"bloom"</span>, i+<span class="string">""</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">1000</span>; i++) &#123;</span><br><span class="line">            <span class="keyword">boolean</span> result = redisBloomFilter.includeByBloomFilter(bloomFilterHelper, <span class="string">"bloom"</span>, i+<span class="string">""</span>);</span><br><span class="line">            <span class="keyword">if</span> (!result) &#123;</span><br><span class="line">                j++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">"漏掉了"</span> + j + <span class="string">"个"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://kuangai.github.io/2020/05/04/%E5%B8%83%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="wsc">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="study">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/05/04/%E5%B8%83%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8/" itemprop="url">布隆过滤器</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-05-04T19:56:00+08:00">
-                2020-05-04
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index">
-                    <span itemprop="name">数据结构</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="Bloom-Filter布隆过滤器"><a href="#Bloom-Filter布隆过滤器" class="headerlink" title="Bloom Filter布隆过滤器"></a>Bloom Filter布隆过滤器</h2><p>是一种  <strong>概率型数据结构</strong> ，特点是<strong>高效地插入和查询</strong>，可以用来告诉你 “<strong>某样东西一定不存在或者可能存在</strong>”。</p>
-<h4 id="实现原理"><a href="#实现原理" class="headerlink" title="实现原理"></a>实现原理</h4><p>创建一个bit数组（就是数组的每个元素都只占用 1 bit 。每个元素只能是 0 或者 1），若干个hash函数。根据给定的值，使用多个不同的哈希函数生成多个哈希值，并对每个生成的哈希值指向的 bit 位置 置为 1。查询时同样使用多个hash函数计算后看对应的哈希值的位置是否全部是1，不是-不可能存在，是-可能存在。</p>
-<blockquote>
-<p> bit数组大小，hash函数个数选取  参考 <a href="https://zhuanlan.zhihu.com/p/43263751" target="_blank" rel="noopener">公式</a></p>
-</blockquote>
-<h4 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h4><p>存储及查询速度快，占用空间小。</p>
-<h4 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h4><p>不支持删除，有一定概率误判（查询结果不一定准确）。</p>
-<h4 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h4><p>可用于存储数据的全量集合，进行判断指定数据在全量集合中是否<strong>不存在</strong>或<strong>可能存在</strong>，如：<br>推荐系统去重<br>请求数据过滤<br>email地址过滤<br>解决缓存穿透的问题<br>爬虫url过滤</p>
-<h4 id="具体实现"><a href="#具体实现" class="headerlink" title="具体实现"></a>具体实现</h4><p>Guava中BloomFilter</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.example.study;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.google.common.hash.BloomFilter;</span><br><span class="line"><span class="keyword">import</span> com.google.common.hash.Funnels;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BloomFilterTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        BloomFilter&lt;Integer&gt; bloomFilter = BloomFilter.create(Funnels.integerFunnel(),<span class="number">1000000</span>,<span class="number">0.1</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">1000000</span>; i++) &#123;</span><br><span class="line">            bloomFilter.put(i);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">1010000</span>; i++)&#123;</span><br><span class="line">            <span class="keyword">if</span> (bloomFilter.mightContain(i)) &#123;</span><br><span class="line">                count++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(count);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="Counting-Bloom-Filter"><a href="#Counting-Bloom-Filter" class="headerlink" title="Counting Bloom Filter"></a>Counting Bloom Filter</h2><p>将标准 Bloom Filter 位数组的每一位扩展为一个小的计数器（Counter），在插入元素时给对应的 k （k 为哈希函数个数）个 Counter 的值分别加 1，删除元素时给对应的 k 个 Counter 的值分别减 1。Counting Bloom Filter 通过多占用几倍的存储空间的代价， 给 Bloom Filter 增加了删除操作。</p>
-<p>参考</p>
-<p><a href="https://www.jianshu.com/p/2104d11ee0a2" target="_blank" rel="noopener">https://www.jianshu.com/p/2104d11ee0a2</a></p>
-<p><a href="https://cloud.tencent.com/developer/article/1136056" target="_blank" rel="noopener">https://cloud.tencent.com/developer/article/1136056</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1961,7 +2199,7 @@ public Method getDeclaredMethods(String name ，Class<?>… parameterTypes) :获
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-count">29</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1972,7 +2210,7 @@ public Method getDeclaredMethods(String name ，Class<?>… parameterTypes) :获
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -1983,7 +2221,7 @@ public Method getDeclaredMethods(String name ，Class<?>… parameterTypes) :获
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-count">32</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
